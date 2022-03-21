@@ -14,6 +14,7 @@ import 'package:ditonton/common/failure.dart';
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
   final MovieLocalDataSource localDataSource;
+  //TODO 6 tambahkan networkinfo pada constructor
   final NetworkInfo networkInfo;
 
   MovieRepositoryImpl({
@@ -24,6 +25,7 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getNowPlayingMovies() async {
+    //TODO 7 panggil networkinfo
     if (await networkInfo.isConnected) {
       try {
         final result = await remoteDataSource.getNowPlayingMovies();

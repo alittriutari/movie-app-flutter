@@ -19,6 +19,7 @@ void main() {
   late MovieRepositoryImpl repository;
   late MockMovieRemoteDataSource mockRemoteDataSource;
   late MockMovieLocalDataSource mockLocalDataSource;
+  //TODO 5 tambahkan deklarasi mocknetworkinfo dan inisialisasi di fungsi setUp
   late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
@@ -38,7 +39,8 @@ void main() {
     genreIds: [14, 28],
     id: 557,
     originalTitle: 'Spider-Man',
-    overview: 'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+    overview:
+        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     popularity: 60.441,
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     releaseDate: '2002-05-01',
@@ -54,7 +56,8 @@ void main() {
     genreIds: [14, 28],
     id: 557,
     originalTitle: 'Spider-Man',
-    overview: 'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+    overview:
+        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     popularity: 60.441,
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     releaseDate: '2002-05-01',
@@ -66,7 +69,8 @@ void main() {
 
   final testMovieCache = MovieTable(
     id: 557,
-    overview: 'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+    overview:
+        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     title: 'Spider-Man',
   );
@@ -75,23 +79,33 @@ void main() {
   final tMovieList = <Movie>[tMovie];
 
   group('Now Playing Movies', () {
+    // TODO 1. buat testing
     setUp(() {
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
     });
 
     test('should check if the device is online', () async {
-      //arrange
+      //arrange menyiapkan objek dan konfigurasi untuk pengujian
+      //mocking, membuat objek palsu atau pengganti
+
+      //stubbing, sama dengan mocking cuma yg dipalsukan perilaku objeknya
+
+      //thenAnswer = ketika fungsi yg di mock asyncronus
+
+      // when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+
       when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       when(mockRemoteDataSource.getNowPlayingMovies()).thenAnswer((_) async => []);
 
-      //act
+      //act, memanggil method yang ingin diuji
       await repository.getNowPlayingMovies();
 
-      //assert
+      //assert, memvalidasi nilai/aksi
       verify(mockNetworkInfo.isConnected);
     });
 
     group('when device is online', () {
+      //TODO 8 buat fungsi setUp untuk mereraokan stubbing di seluruh testing
       setUp(() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
       });
