@@ -21,50 +21,49 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+    Future.microtask(() => Provider.of<MovieListNotifier>(context, listen: false)
+      ..fetchNowPlayingMovies()
+      ..fetchPopularMovies()
+      ..fetchTopRatedMovies());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/circle-g.png'),
-              ),
-              accountName: Text('Ditonton'),
-              accountEmail: Text('ditonton@dicoding.com'),
-            ),
-            ListTile(
-              leading: Icon(Icons.movie),
-              title: Text('Movies'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.save_alt),
-              title: Text('Watchlist'),
-              onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
-              },
-            ),
-            ListTile(
-              onTap: () {
-                Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
-              },
-              leading: Icon(Icons.info_outline),
-              title: Text('About'),
-            ),
-          ],
-        ),
-      ),
+      // drawer: Drawer(
+      // child: Column(
+      //   children: [
+      //     UserAccountsDrawerHeader(
+      //       currentAccountPicture: CircleAvatar(
+      //         backgroundImage: AssetImage('assets/circle-g.png'),
+      //       ),
+      //       accountName: Text('Ditonton'),
+      //       accountEmail: Text('ditonton@dicoding.com'),
+      //     ),
+      //     ListTile(
+      //       leading: Icon(Icons.movie),
+      //       title: Text('Movies'),
+      //       onTap: () {
+      //         Navigator.pop(context);
+      //       },
+      //     ),
+      //     ListTile(
+      //       leading: Icon(Icons.save_alt),
+      //       title: Text('Watchlist'),
+      //       onTap: () {
+      //         Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+      //       },
+      //     ),
+      //     ListTile(
+      //       onTap: () {
+      //         Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+      //       },
+      //       leading: Icon(Icons.info_outline),
+      //       title: Text('About'),
+      //     ),
+      // ],
+      // ),
+      // ),
       appBar: AppBar(
         title: Text('Ditonton'),
         actions: [
@@ -100,8 +99,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               }),
               _buildSubHeading(
                 title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.popularMoviesState;
@@ -117,8 +115,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               }),
               _buildSubHeading(
                 title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
               ),
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedMoviesState;
