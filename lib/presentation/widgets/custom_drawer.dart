@@ -33,6 +33,10 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
             title: Text('Movies'),
           ),
           ListTile(
+            leading: Icon(Icons.tv),
+            title: Text('Tv Series'),
+          ),
+          ListTile(
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist'),
           )

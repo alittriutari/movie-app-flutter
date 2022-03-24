@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 
+import 'presentation/pages/home_page.dart';
+
 void main() {
   di.init();
   runApp(MyApp());
@@ -56,7 +58,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: Material(child: CustomDrawer(content: HomeMoviePage())),
+        // home: Material(child: CustomDrawer(content: HomeMoviePage())),
+        home: Material(child: CustomDrawer(content: HomePage())),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
