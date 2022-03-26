@@ -4,7 +4,7 @@ import 'package:ditonton/features/movies/domain/usecases/get_movie_recommendatio
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetMovieRecommendations usecase;
