@@ -1,17 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
+import 'package:ditonton/features/movies/presentation/pages/popular_movies_page.dart';
+
+import 'package:ditonton/features/movies/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/features/movies/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/widgets/carrousel_movie_widget.dart';
-import 'package:ditonton/presentation/widgets/custom_drawer.dart';
-import 'package:ditonton/presentation/widgets/sub_heading_widget.dart';
+import 'package:ditonton/features/movies/presentation/widgets/carrousel_movie_widget.dart';
+import 'package:ditonton/features/movies/presentation/widgets/custom_drawer.dart';
+import 'package:ditonton/features/movies/presentation/widgets/sub_heading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

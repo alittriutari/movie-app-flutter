@@ -1,6 +1,6 @@
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
+import 'package:ditonton/features/movies/presentation/pages/popular_movies_page.dart';
+import 'package:ditonton/features/movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/sub_heading_widget.dart';

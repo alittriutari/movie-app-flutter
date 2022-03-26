@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/usecases/get_movie_detail.dart';
+import 'package:ditonton/features/movies/domain/usecases/get_movie_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -19,8 +19,7 @@ void main() {
 
   test('should get movie detail from the repository', () async {
     // arrange
-    when(mockMovieRepository.getMovieDetail(tId))
-        .thenAnswer((_) async => Right(testMovieDetail));
+    when(mockMovieRepository.getMovieDetail(tId)).thenAnswer((_) async => Right(testMovieDetail));
     // act
     final result = await usecase.execute(tId);
     // assert

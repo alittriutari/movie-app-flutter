@@ -1,6 +1,6 @@
-import 'package:ditonton/data/models/movie_model.dart';
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/features/movies/data/models/movie_model.dart';
+import 'package:ditonton/features/movies/domain/entities/movie.dart';
+import 'package:ditonton/features/movies/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieTable extends Equatable {

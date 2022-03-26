@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ditonton/data/models/movie_model.dart';
-import 'package:ditonton/data/models/movie_response.dart';
+import 'package:ditonton/features/movies/data/models/movie_model.dart';
+import 'package:ditonton/features/movies/data/models/movie_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../json_reader.dart';
@@ -22,13 +22,11 @@ void main() {
     voteAverage: 1.0,
     voteCount: 1,
   );
-  final tMovieResponseModel =
-      MovieResponse(movieList: <MovieModel>[tMovieModel]);
+  final tMovieResponseModel = MovieResponse(movieList: <MovieModel>[tMovieModel]);
   group('fromJson', () {
     test('should return a valid model from JSON', () async {
       // arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(readJson('dummy_data/now_playing.json'));
+      final Map<String, dynamic> jsonMap = json.decode(readJson('dummy_data/now_playing.json'));
       // act
       final result = MovieResponse.fromJson(jsonMap);
       // assert
