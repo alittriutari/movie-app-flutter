@@ -8,7 +8,7 @@ import 'package:ditonton/features/tv_series/data/models/tv_series_response.dart'
 import 'package:http/http.dart' as http;
 
 abstract class TvSeriesRemoteDataSource {
-  Future<List<TvSeriesModel>> getOnTheAirTvSeries();
+  Future<List<TvSeriesModel>> getonAirTvSeries();
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
@@ -17,8 +17,8 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   TvSeriesRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<TvSeriesModel>> getOnTheAirTvSeries() async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesOnTheAir));
+  Future<List<TvSeriesModel>> getonAirTvSeries() async {
+    final response = await client.get(Uri.parse(ApiUrl.tvSeriesonAir));
 
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;

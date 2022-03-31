@@ -3,8 +3,8 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i6;
-import 'dart:convert' as _i17;
-import 'dart:typed_data' as _i18;
+import 'dart:convert' as _i21;
+import 'dart:typed_data' as _i22;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ditonton/common/failure.dart' as _i7;
@@ -18,6 +18,10 @@ import 'package:ditonton/features/movies/data/models/movie_table.dart' as _i13;
 import 'package:ditonton/features/movies/domain/entities/movie.dart' as _i8;
 import 'package:ditonton/features/movies/domain/entities/movie_detail.dart' as _i9;
 import 'package:ditonton/features/movies/domain/repositories/movie_repository.dart' as _i5;
+import 'package:ditonton/features/tv_series/data/datasources/tv_series_remote_data_source.dart' as _i19;
+import 'package:ditonton/features/tv_series/data/models/tv_series_model.dart' as _i20;
+import 'package:ditonton/features/tv_series/data/repositories/tv_series_repository.dart' as _i17;
+import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart' as _i18;
 import 'package:http/http.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i15;
@@ -205,6 +209,34 @@ class MockNetworkInfo extends _i1.Mock implements _i16.NetworkInfo {
       (super.noSuchMethod(Invocation.getter(#isConnected), returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
 }
 
+/// A class which mocks [TvSeriesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTvSeriesRepository extends _i1.Mock implements _i17.TvSeriesRepository {
+  MockTvSeriesRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<_i2.Either<_i7.Failure, List<_i18.TvSeries>>> getonAirTvSeries() => (super.noSuchMethod(Invocation.method(#getonAirTvSeries, []),
+          returnValue: Future<_i2.Either<_i7.Failure, List<_i18.TvSeries>>>.value(_FakeEither_0<_i7.Failure, List<_i18.TvSeries>>()))
+      as _i6.Future<_i2.Either<_i7.Failure, List<_i18.TvSeries>>>);
+}
+
+/// A class which mocks [TvSeriesRemoteDataSource].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTvSeriesRemoteDataSource extends _i1.Mock implements _i19.TvSeriesRemoteDataSource {
+  MockTvSeriesRemoteDataSource() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i6.Future<List<_i20.TvSeriesModel>> getonAirTvSeries() =>
+      (super.noSuchMethod(Invocation.method(#getonAirTvSeries, []), returnValue: Future<List<_i20.TvSeriesModel>>.value(<_i20.TvSeriesModel>[]))
+          as _i6.Future<List<_i20.TvSeriesModel>>);
+}
+
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -222,28 +254,28 @@ class MockHttpClient extends _i1.Mock implements _i4.Client {
       (super.noSuchMethod(Invocation.method(#get, [url], {#headers: headers}), returnValue: Future<_i4.Response>.value(_FakeResponse_2()))
           as _i6.Future<_i4.Response>);
   @override
-  _i6.Future<_i4.Response> post(Uri? url, {Map<String, String>? headers, Object? body, _i17.Encoding? encoding}) =>
+  _i6.Future<_i4.Response> post(Uri? url, {Map<String, String>? headers, Object? body, _i21.Encoding? encoding}) =>
       (super.noSuchMethod(Invocation.method(#post, [url], {#headers: headers, #body: body, #encoding: encoding}),
           returnValue: Future<_i4.Response>.value(_FakeResponse_2())) as _i6.Future<_i4.Response>);
   @override
-  _i6.Future<_i4.Response> put(Uri? url, {Map<String, String>? headers, Object? body, _i17.Encoding? encoding}) =>
+  _i6.Future<_i4.Response> put(Uri? url, {Map<String, String>? headers, Object? body, _i21.Encoding? encoding}) =>
       (super.noSuchMethod(Invocation.method(#put, [url], {#headers: headers, #body: body, #encoding: encoding}),
           returnValue: Future<_i4.Response>.value(_FakeResponse_2())) as _i6.Future<_i4.Response>);
   @override
-  _i6.Future<_i4.Response> patch(Uri? url, {Map<String, String>? headers, Object? body, _i17.Encoding? encoding}) =>
+  _i6.Future<_i4.Response> patch(Uri? url, {Map<String, String>? headers, Object? body, _i21.Encoding? encoding}) =>
       (super.noSuchMethod(Invocation.method(#patch, [url], {#headers: headers, #body: body, #encoding: encoding}),
           returnValue: Future<_i4.Response>.value(_FakeResponse_2())) as _i6.Future<_i4.Response>);
   @override
-  _i6.Future<_i4.Response> delete(Uri? url, {Map<String, String>? headers, Object? body, _i17.Encoding? encoding}) =>
+  _i6.Future<_i4.Response> delete(Uri? url, {Map<String, String>? headers, Object? body, _i21.Encoding? encoding}) =>
       (super.noSuchMethod(Invocation.method(#delete, [url], {#headers: headers, #body: body, #encoding: encoding}),
           returnValue: Future<_i4.Response>.value(_FakeResponse_2())) as _i6.Future<_i4.Response>);
   @override
   _i6.Future<String> read(Uri? url, {Map<String, String>? headers}) =>
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}), returnValue: Future<String>.value('')) as _i6.Future<String>);
   @override
-  _i6.Future<_i18.Uint8List> readBytes(Uri? url, {Map<String, String>? headers}) =>
-      (super.noSuchMethod(Invocation.method(#readBytes, [url], {#headers: headers}), returnValue: Future<_i18.Uint8List>.value(_i18.Uint8List(0)))
-          as _i6.Future<_i18.Uint8List>);
+  _i6.Future<_i22.Uint8List> readBytes(Uri? url, {Map<String, String>? headers}) =>
+      (super.noSuchMethod(Invocation.method(#readBytes, [url], {#headers: headers}), returnValue: Future<_i22.Uint8List>.value(_i22.Uint8List(0)))
+          as _i6.Future<_i22.Uint8List>);
   @override
   _i6.Future<_i4.StreamedResponse> send(_i4.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]), returnValue: Future<_i4.StreamedResponse>.value(_FakeStreamedResponse_3()))

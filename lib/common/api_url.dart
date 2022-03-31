@@ -3,5 +3,5 @@ class ApiUrl {
   static const BASE_URL = 'https://api.themoviedb.org/3';
 
   //TV SERIES
-  static const String tvSeriesOnTheAir = '$BASE_URL/tv/on_the_air/?$API_KEY';
+  static const String tvSeriesonAir = '$BASE_URL/tv/on_the_air/?$API_KEY';
 }
