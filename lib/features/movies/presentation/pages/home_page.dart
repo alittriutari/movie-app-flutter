@@ -1,6 +1,7 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/features/movies/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/features/movies/presentation/pages/home_tv_series_page.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/home_tv_series_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

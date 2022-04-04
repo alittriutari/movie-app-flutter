@@ -15,6 +15,7 @@ import 'package:ditonton/features/movies/presentation/provider/popular_movies_no
 import 'package:ditonton/features/movies/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/features/movies/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/features/movies/presentation/widgets/custom_drawer.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/tv_series_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,9 +49,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeriesListNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
           primaryColor: kRichBlack,

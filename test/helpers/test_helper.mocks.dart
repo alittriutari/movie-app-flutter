@@ -20,7 +20,7 @@ import 'package:ditonton/features/movies/domain/entities/movie_detail.dart' as _
 import 'package:ditonton/features/movies/domain/repositories/movie_repository.dart' as _i5;
 import 'package:ditonton/features/tv_series/data/datasources/tv_series_remote_data_source.dart' as _i19;
 import 'package:ditonton/features/tv_series/data/models/tv_series_model.dart' as _i20;
-import 'package:ditonton/features/tv_series/data/repositories/tv_series_repository.dart' as _i17;
+import 'package:ditonton/features/tv_series/data/repositories/tv_series_repository_impl.dart' as _i17;
 import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart' as _i18;
 import 'package:http/http.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
