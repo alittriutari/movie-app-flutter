@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 import 'tv_series_model.dart';
 
-class TvSeriesResponse {
+class TvSeriesResponse extends Equatable {
   TvSeriesResponse({
     required this.tvSeriesList,
   });
@@ -14,4 +16,7 @@ class TvSeriesResponse {
   Map<String, dynamic> toJson() => {
         "results": List<dynamic>.from(tvSeriesList.map((x) => x.toJson())),
       };
+
+  @override
+  List<Object?> get props => [tvSeriesList];
 }

@@ -5,6 +5,7 @@ import 'package:ditonton/features/movies/data/datasources/movie_remote_data_sour
 import 'package:ditonton/features/movies/domain/repositories/movie_repository.dart';
 import 'package:ditonton/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
 import 'package:ditonton/features/tv_series/data/repositories/tv_series_repository_impl.dart';
+import 'package:ditonton/features/tv_series/domain/repositories/tv_series_repository.dart';
 import 'package:mockito/annotations.dart';
 import 'package:http/http.dart' as http;
 
