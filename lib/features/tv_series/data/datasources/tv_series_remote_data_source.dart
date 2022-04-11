@@ -3,12 +3,15 @@ import 'dart:io';
 
 import 'package:ditonton/common/api_url.dart';
 import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/features/tv_series/data/models/tv_series_detail_model.dart';
 import 'package:ditonton/features/tv_series/data/models/tv_series_model.dart';
 import 'package:ditonton/features/tv_series/data/models/tv_series_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TvSeriesRemoteDataSource {
-  Future<List<TvSeriesModel>> getonAirTvSeries();
+  Future<List<TvSeriesModel>> getOnAirTvSeries();
+
+  Future<TvSeriesDetailResponse> getTvSeriesDetail(int id);
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
@@ -17,11 +20,21 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
   TvSeriesRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<TvSeriesModel>> getonAirTvSeries() async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesonAir));
+  Future<List<TvSeriesModel>> getOnAirTvSeries() async {
+    final response = await client.get(Uri.parse(ApiUrl.tvSeriesOnAir));
 
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
+    final response = await client.get(Uri.parse(ApiUrl.tvSeriesDetail(id)));
+    if (response.statusCode == 200) {
+      return TvSeriesDetailResponse.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }

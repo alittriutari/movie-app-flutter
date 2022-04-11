@@ -18,18 +18,18 @@ class TvSeries extends Equatable {
   });
 
   String? backdropPath;
-  String firstAirDate;
-  List<int> genreIds;
+  String? firstAirDate;
+  List<int>? genreIds;
   int id;
-  String name;
-  List<String> originCountry;
-  String originalLanguage;
-  String originalName;
-  String overview;
-  double popularity;
+  String? name;
+  List<String>? originCountry;
+  String? originalLanguage;
+  String? originalName;
+  String? overview;
+  double? popularity;
   String? posterPath;
-  double voteAverage;
-  int voteCount;
+  double? voteAverage;
+  int? voteCount;
 
   @override
   List<Object?> get props => [

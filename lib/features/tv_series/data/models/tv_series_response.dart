@@ -7,7 +7,7 @@ class TvSeriesResponse extends Equatable {
     required this.tvSeriesList,
   });
 
-  List<TvSeriesModel> tvSeriesList;
+  final List<TvSeriesModel> tvSeriesList;
 
   factory TvSeriesResponse.fromJson(Map<String, dynamic> json) => TvSeriesResponse(
         tvSeriesList: List<TvSeriesModel>.from(json["results"].map((x) => TvSeriesModel.fromJson(x))),

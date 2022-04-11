@@ -15,6 +15,10 @@ import 'package:ditonton/features/movies/presentation/provider/popular_movies_no
 import 'package:ditonton/features/movies/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/features/movies/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/features/movies/presentation/widgets/custom_drawer.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/tv_series_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +56,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesListNotifier>(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<OnAirTvSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -79,6 +89,15 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
+            case OnAirTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => OnAirTvSeriesPage());
+            case TvSeriesDetailPage.ROUTE_NAME:
+              final id = settings.arguments as int;
+              return CupertinoPageRoute(
+                  builder: (_) => TvSeriesDetailPage(
+                        id: id,
+                      ),
+                  settings: settings);
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => SearchPage());
             case WatchlistMoviesPage.ROUTE_NAME:

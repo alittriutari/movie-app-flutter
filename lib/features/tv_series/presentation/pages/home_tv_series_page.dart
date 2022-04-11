@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/tv_series_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +19,6 @@ class HomeTvSeriesPage extends StatefulWidget {
 class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)..fetchOnAirTvSeries());
   }
@@ -27,12 +28,16 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Text(
-            'Now Playing',
-            style: kHeading6,
-          ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 8),
+        //   child: Text(
+        //     'Now Playing',
+        //     style: kHeading6,
+        //   ),
+        // ),
+        _buildSubHeading(
+          title: 'On Airing',
+          onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
         ),
         Consumer<TvSeriesListNotifier>(
           builder: (context, data, child) {
@@ -48,6 +53,27 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
             }
           },
         )
+      ],
+    );
+  }
+
+  Row _buildSubHeading({required String title, required Function() onTap}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: kHeading6,
+        ),
+        InkWell(
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -70,11 +96,7 @@ class TvSeriesList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   MovieDetailPage.ROUTE_NAME,
-                //   arguments: movie.id,
-                // );
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: series.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),

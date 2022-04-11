@@ -5,6 +5,7 @@ import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
 import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
+import 'package:ditonton/features/tv_series/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/features/tv_series/domain/repositories/tv_series_repository.dart';
 
 class TvSeriesRepositoryImpl implements TvSeriesRepository {
@@ -15,8 +16,20 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   @override
   Future<Either<Failure, List<TvSeries>>> getOnAirTvSeries() async {
     try {
-      final result = await remoteDataSource.getonAirTvSeries();
+      final result = await remoteDataSource.getOnAirTvSeries();
       return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, TvSeriesDetail>> getTvSeriesDetail(int id) async {
+    try {
+      final result = await remoteDataSource.getTvSeriesDetail(id);
+      return Right(result.toEntity());
     } on ServerException {
       return Left(ServerFailure(''));
     } on SocketException {
