@@ -6,4 +6,5 @@ import 'package:ditonton/features/tv_series/domain/entities/tv_series_detail.dar
 abstract class TvSeriesRepository {
   Future<Either<Failure, List<TvSeries>>> getOnAirTvSeries();
   Future<Either<Failure, TvSeriesDetail>> getTvSeriesDetail(int id);
+  Future<Either<Failure, List<TvSeries>>> getTvSeriesRecommendation(int id);
 }

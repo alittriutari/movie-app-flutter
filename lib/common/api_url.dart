@@ -7,5 +7,5 @@ class ApiUrl {
 
   static String tvSeriesDetail(int id) => '$BASE_URL/tv/$id?$API_KEY';
 
-// https://api.themoviedb.org/3/tv/{tv_id}?api_key=<<api_key>>&language=en-US
+  static String tvSeriesRecommendation(int id) => '$BASE_URL/tv/$id/recommendations?$API_KEY';
 }

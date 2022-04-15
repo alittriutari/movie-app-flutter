@@ -24,18 +24,18 @@ void main() {
     final tOnAirTvSeriesList = TvSeriesResponse.fromJson(jsonDecode(readJson('dummy_data/on_air_now_tv_series.json'))).tvSeriesList;
 
     test('should return list of Tv Series Model when the response code is 200', () async {
-      when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesonAir)))
+      when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesOnAir)))
           .thenAnswer((_) async => http.Response(readJson('dummy_data/on_air_now_tv_series.json'), 200));
 
-      final result = await dataSource.getonAirTvSeries();
+      final result = await dataSource.getOnAirTvSeries();
 
       expect(result, equals(tOnAirTvSeriesList));
     });
 
     test('should throw Server Exception when the response code is 404 or other', () async {
-      when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesonAir))).thenAnswer((_) async => http.Response('Not found', 404));
+      when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesOnAir))).thenAnswer((_) async => http.Response('Not found', 404));
 
-      final call = dataSource.getonAirTvSeries();
+      final call = dataSource.getOnAirTvSeries();
 
       expect(() => call, throwsA(isA<ServerException>()));
     });
