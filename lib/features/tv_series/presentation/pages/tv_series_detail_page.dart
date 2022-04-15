@@ -96,7 +96,7 @@ class DetailTvSeriesContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              tvSeries.title,
+                              tvSeries.name,
                               style: kHeading5,
                             ),
                             ElevatedButton(
@@ -112,9 +112,9 @@ class DetailTvSeriesContent extends StatelessWidget {
                             Text(
                               _showGenres(tvSeries.genres),
                             ),
-                            Text(
-                              _showDuration(tvSeries.runtime),
-                            ),
+                            // Text(
+                            //   _showDuration(tvSeries.runtime),
+                            // ),
                             Row(
                               children: [
                                 RatingBarIndicator(

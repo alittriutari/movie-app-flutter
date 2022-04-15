@@ -21,6 +21,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
     _tvSeriesState = RequestState.Loading;
     notifyListeners();
     final detailResult = await getTvSeriesDetail.execute(id);
+    print(detailResult);
     detailResult.fold((failure) {
       _tvSeriesState = RequestState.Error;
       _message = failure.message;
