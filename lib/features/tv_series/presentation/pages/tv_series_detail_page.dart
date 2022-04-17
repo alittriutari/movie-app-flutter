@@ -22,12 +22,8 @@ class TvSeriesDetailPage extends StatefulWidget {
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    print(widget.id);
-    Future.microtask(() =>
-        Provider.of<TvSeriesDetailNotifier>(context, listen: false)
-            .fetchTvSeriesDetail(widget.id));
+    Future.microtask(() => Provider.of<TvSeriesDetailNotifier>(context, listen: false).fetchTvSeriesDetail(widget.id));
   }
 
   @override
@@ -61,8 +57,7 @@ class DetailTvSeriesContent extends StatelessWidget {
   final TvSeriesDetail tvSeries;
   final List<TvSeries> recommendations;
 
-  DetailTvSeriesContent(
-      {required this.tvSeries, required this.recommendations});
+  DetailTvSeriesContent({required this.tvSeries, required this.recommendations});
 
   @override
   Widget build(BuildContext context) {
@@ -149,15 +144,11 @@ class DetailTvSeriesContent extends StatelessWidget {
                             ),
                             Consumer<TvSeriesDetailNotifier>(
                               builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.Loading) {
-                                  return Center(
-                                      child: CircularProgressIndicator());
-                                } else if (data.recommendationState ==
-                                    RequestState.Error) {
+                                if (data.recommendationState == RequestState.Loading) {
+                                  return Center(child: CircularProgressIndicator());
+                                } else if (data.recommendationState == RequestState.Error) {
                                   return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.Loaded) {
+                                } else if (data.recommendationState == RequestState.Loaded) {
                                   return Container(
                                     height: 150,
                                     child: ListView.builder(
@@ -170,19 +161,13 @@ class DetailTvSeriesContent extends StatelessWidget {
                                             child: InkWell(
                                               onTap: () {},
                                               child: ClipRRect(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8)),
+                                                borderRadius: BorderRadius.all(Radius.circular(8)),
                                                 child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      'https://image.tmdb.org/t/p/w500${tvSeries[index].posterPath}',
-                                                  placeholder: (context, url) =>
-                                                      Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
+                                                  imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries[index].posterPath}',
+                                                  placeholder: (context, url) => Center(
+                                                    child: CircularProgressIndicator(),
                                                   ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Icon(Icons.error),
+                                                  errorWidget: (context, url, error) => Icon(Icons.error),
                                                 ),
                                               ),
                                             ));

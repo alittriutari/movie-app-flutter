@@ -95,6 +95,8 @@ class MyApp extends StatelessWidget {
               );
             case OnAirTvSeriesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => OnAirTvSeriesPage());
+            case PopularMoviesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TvSeriesDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return CupertinoPageRoute(
