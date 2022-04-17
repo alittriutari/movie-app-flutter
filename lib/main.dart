@@ -16,6 +16,7 @@ import 'package:ditonton/features/movies/presentation/provider/top_rated_movies_
 import 'package:ditonton/features/movies/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/features/movies/presentation/widgets/custom_drawer.dart';
 import 'package:ditonton/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/popular_tv_series_page.dart';
 import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
@@ -95,8 +96,8 @@ class MyApp extends StatelessWidget {
               );
             case OnAirTvSeriesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => OnAirTvSeriesPage());
-            case PopularMoviesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
+            case PopularTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
             case TvSeriesDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return CupertinoPageRoute(
