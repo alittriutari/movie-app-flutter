@@ -8,7 +8,8 @@ import '../../domain/entities/movie.dart';
 class CarrouselMovieWidget extends StatelessWidget {
   final List<Movie> movies;
 
-  const CarrouselMovieWidget({Key? key, required this.movies}) : super(key: key);
+  const CarrouselMovieWidget({Key? key, required this.movies})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,9 @@ class CarrouselMovieWidget extends StatelessWidget {
                     child: Container(
                         padding: EdgeInsets.all(8),
                         alignment: Alignment.bottomCenter,
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: Colors.redAccent),
                         child: Text('Now Playing')))
               ],
             ),

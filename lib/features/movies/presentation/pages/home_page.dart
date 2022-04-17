@@ -30,7 +30,9 @@ class _HomePageState extends State<HomePage> {
           bottom: TabBar(
               isScrollable: true,
               indicatorColor: kMikadoYellow,
-              indicator: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color(0xffFCA311)),
+              indicator: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50),
+                  color: Color(0xffFCA311)),
               tabs: [
                 Container(
                   padding: EdgeInsets.all(8),
@@ -46,7 +48,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
         ),
-        body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), Text('hahahah')]),
+        body: TabBarView(
+            children: [HomeMoviePage(), HomeTvSeriesPage(), Text('hahahah')]),
       ),
     );
   }

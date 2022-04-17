@@ -8,13 +8,15 @@ class CustomDrawer extends StatefulWidget {
   State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
-class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderStateMixin {
+class _CustomDrawerState extends State<CustomDrawer>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 250));
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 250));
   }
 
   Widget _buildDrawer() {
@@ -25,7 +27,8 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
             accountName: Text('Movie App'),
             accountEmail: Text('movie@gmail.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage('https://raw.githubusercontent.com/dicodingacademy/assets/main/flutter_expert_academy/dicoding-icon.png'),
+              backgroundImage: NetworkImage(
+                  'https://raw.githubusercontent.com/dicodingacademy/assets/main/flutter_expert_academy/dicoding-icon.png'),
             ),
           ),
           ListTile(
@@ -45,7 +48,9 @@ class _CustomDrawerState extends State<CustomDrawer> with SingleTickerProviderSt
     );
   }
 
-  void toggle() => _animationController.isDismissed ? _animationController.forward() : _animationController.reverse();
+  void toggle() => _animationController.isDismissed
+      ? _animationController.forward()
+      : _animationController.reverse();
 
   @override
   Widget build(BuildContext context) {

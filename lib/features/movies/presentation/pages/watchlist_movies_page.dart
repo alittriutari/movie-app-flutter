@@ -12,11 +12,14 @@ class WatchlistMoviesPage extends StatefulWidget {
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAware {
+class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+    with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies());
+    Future.microtask(() =>
+        Provider.of<WatchlistMovieNotifier>(context, listen: false)
+            .fetchWatchlistMovies());
   }
 
   @override
@@ -26,7 +29,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
   }
 
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies();
+    Provider.of<WatchlistMovieNotifier>(context, listen: false)
+        .fetchWatchlistMovies();
   }
 
   @override

@@ -21,7 +21,8 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                Provider.of<MovieSearchNotifier>(context, listen: false).fetchMovieSearch(query);
+                Provider.of<MovieSearchNotifier>(context, listen: false)
+                    .fetchMovieSearch(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',

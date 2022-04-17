@@ -18,8 +18,9 @@ import 'package:ditonton/features/movies/presentation/widgets/custom_drawer.dart
 import 'package:ditonton/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
 import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/tv_series_notifier.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +59,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<OnAirTvSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<PopularTvSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesDetailNotifier>(),

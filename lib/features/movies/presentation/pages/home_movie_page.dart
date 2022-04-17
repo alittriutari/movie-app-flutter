@@ -20,10 +20,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<MovieListNotifier>(context, listen: false)
-      ..fetchNowPlayingMovies()
-      ..fetchPopularMovies()
-      ..fetchTopRatedMovies());
+    Future.microtask(
+        () => Provider.of<MovieListNotifier>(context, listen: false)
+          ..fetchNowPlayingMovies()
+          ..fetchPopularMovies()
+          ..fetchTopRatedMovies());
   }
 
   @override
@@ -51,7 +52,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                       return Text('Failed');
                     }
                   }),
-                  SubHeadingWidget(title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME)),
+                  SubHeadingWidget(
+                      title: 'Popular',
+                      onTap: () => Navigator.pushNamed(
+                          context, PopularMoviesPage.ROUTE_NAME)),
                   Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.popularMoviesState;
                     if (state == RequestState.Loading) {
@@ -64,7 +68,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                       return Text('Failed');
                     }
                   }),
-                  SubHeadingWidget(title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME)),
+                  SubHeadingWidget(
+                      title: 'Top Rated',
+                      onTap: () => Navigator.pushNamed(
+                          context, TopRatedMoviesPage.ROUTE_NAME)),
                   Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.topRatedMoviesState;
                     if (state == RequestState.Loading) {

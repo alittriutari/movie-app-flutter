@@ -25,11 +25,13 @@ import 'package:ditonton/features/tv_series/data/datasources/tv_series_remote_da
 import 'package:ditonton/features/tv_series/data/repositories/tv_series_repository_impl.dart';
 import 'package:ditonton/features/tv_series/domain/repositories/tv_series_repository.dart';
 import 'package:ditonton/features/tv_series/domain/usecases/get_on_the_air_tv_series.dart';
+import 'package:ditonton/features/tv_series/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/features/tv_series/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/tv_series_notifier.dart';
+import 'package:ditonton/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
@@ -75,8 +77,7 @@ void init() {
   );
   locator.registerFactory(
     () => TvSeriesListNotifier(
-      getOnAirTvSeries: locator(),
-    ),
+        getOnAirTvSeries: locator(), getPopularTvSeries: locator()),
   );
 
   locator.registerFactory(
@@ -86,7 +87,14 @@ void init() {
   );
 
   locator.registerFactory(
-    () => TvSeriesDetailNotifier(getTvSeriesDetail: locator(), getTvSeriesRecommendation: locator()),
+    () => PopularTvSeriesNotifier(
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => TvSeriesDetailNotifier(
+        getTvSeriesDetail: locator(), getTvSeriesRecommendation: locator()),
   );
 
   // use case
@@ -103,10 +111,14 @@ void init() {
   locator.registerLazySingleton(() => GetOnAirTvSeries(locator()));
   locator.registerLazySingleton(() => GetTvSeriesDetail(locator()));
   locator.registerLazySingleton(() => GetTvSeriesRecommendation(locator()));
+  locator.registerLazySingleton(() => GetPopularTvSeries(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(remoteDataSource: locator(), localDataSource: locator(), networkInfo: locator()),
+    () => MovieRepositoryImpl(
+        remoteDataSource: locator(),
+        localDataSource: locator(),
+        networkInfo: locator()),
   );
   locator.registerLazySingleton<TvSeriesRepository>(
     () => TvSeriesRepositoryImpl(
@@ -115,9 +127,12 @@ void init() {
   );
 
   // data sources
-  locator.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(client: locator()));
-  locator.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<TvSeriesRemoteDataSource>(() => TvSeriesRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<MovieLocalDataSource>(
+      () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<TvSeriesRemoteDataSource>(
+      () => TvSeriesRemoteDataSourceImpl(client: locator()));
 
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());

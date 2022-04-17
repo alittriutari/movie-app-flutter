@@ -49,11 +49,13 @@ class MovieDetailResponse extends Equatable {
   final double voteAverage;
   final int voteCount;
 
-  factory MovieDetailResponse.fromJson(Map<String, dynamic> json) => MovieDetailResponse(
+  factory MovieDetailResponse.fromJson(Map<String, dynamic> json) =>
+      MovieDetailResponse(
         adult: json["adult"],
         backdropPath: json["backdrop_path"],
         budget: json["budget"],
-        genres: List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
+        genres: List<GenreModel>.from(
+            json["genres"].map((x) => GenreModel.fromJson(x))),
         homepage: json["homepage"],
         id: json["id"],
         imdbId: json["imdb_id"],
@@ -115,7 +117,6 @@ class MovieDetailResponse extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         adult,
         backdropPath,
