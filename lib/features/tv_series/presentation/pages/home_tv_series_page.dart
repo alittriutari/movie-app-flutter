@@ -1,9 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/features/movies/presentation/widgets/carrousel_movie_widget.dart';
 import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
 import 'package:ditonton/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
 import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:ditonton/features/tv_series/presentation/providers/tv_series_notifier.dart';
+import 'package:ditonton/features/tv_series/presentation/widget/carrousel_tv_series_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,35 +27,40 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Padding(
-        //   padding: const EdgeInsets.symmetric(vertical: 8),
-        //   child: Text(
-        //     'Now Playing',
-        //     style: kHeading6,
-        //   ),
-        // ),
-        _buildSubHeading(
-          title: 'On Airing',
-          onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // // Padding(
+            // //   padding: const EdgeInsets.symmetric(vertical: 8),
+            // //   child: Text(
+            // //     'Now Playing',
+            // //     style: kHeading6,
+            // //   ),
+            // // ),
+            // _buildSubHeading(
+            //   title: 'On Airing',
+            //   onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
+            // ),
+            Consumer<TvSeriesListNotifier>(
+              builder: (context, data, child) {
+                final state = data.onAirState;
+                if (state == RequestState.Loading) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return CarrouselTvSeriesWidget(tvSeries: data.onAirTvSeries);
+                } else {
+                  return Text('Failed');
+                }
+              },
+            )
+          ],
         ),
-        Consumer<TvSeriesListNotifier>(
-          builder: (context, data, child) {
-            final state = data.onAirState;
-            if (state == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state == RequestState.Loaded) {
-              return TvSeriesList(data.onAirTvSeries);
-            } else {
-              return Text('Failed');
-            }
-          },
-        )
-      ],
+      ),
     );
   }
 

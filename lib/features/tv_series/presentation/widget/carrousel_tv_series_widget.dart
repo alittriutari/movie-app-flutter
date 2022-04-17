@@ -1,14 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/movies/presentation/pages/movie_detail_page.dart';
+import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
+import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:flutter/material.dart';
-import '../../domain/entities/movie.dart';
 
-class CarrouselMovieWidget extends StatelessWidget {
-  final List<Movie> movies;
+class CarrouselTvSeriesWidget extends StatelessWidget {
+  final List<TvSeries> tvSeries;
 
-  const CarrouselMovieWidget({Key? key, required this.movies}) : super(key: key);
+  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class CarrouselMovieWidget extends StatelessWidget {
         autoplayDelay: 5000,
         duration: 1000,
         itemBuilder: (BuildContext context, int index) {
-          final movie = movies[index];
+          final tv = tvSeries[index];
           return GestureDetector(
             onTap: () {
               Navigator.pushNamed(
                 context,
-                MovieDetailPage.ROUTE_NAME,
-                arguments: movie.id,
+                TvSeriesDetailPage.ROUTE_NAME,
+                arguments: tv.id,
               );
             },
             child: Stack(
@@ -35,7 +35,7 @@ class CarrouselMovieWidget extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: CachedNetworkImage(
-                    imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                    imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
                     placeholder: (context, url) => Center(
                       child: CircularProgressIndicator(),
                     ),
@@ -48,7 +48,7 @@ class CarrouselMovieWidget extends StatelessWidget {
                         padding: EdgeInsets.all(8),
                         alignment: Alignment.bottomCenter,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
-                        child: Text('Now Playing')))
+                        child: Text('On Airing')))
               ],
             ),
           );

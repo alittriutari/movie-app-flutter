@@ -68,23 +68,13 @@ class DetailTvSeriesContent extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        ShaderMask(
-          shaderCallback: (rect) {
-            return LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [Colors.black, Colors.transparent],
-            ).createShader(Rect.fromLTRB(0, 0, rect.width, rect.height));
-          },
-          blendMode: BlendMode.dstIn,
-          child: CachedNetworkImage(
-            imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
-            width: screenWidth,
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(),
-            ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+        CachedNetworkImage(
+          imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
+          width: screenWidth,
+          placeholder: (context, url) => Center(
+            child: CircularProgressIndicator(),
           ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),

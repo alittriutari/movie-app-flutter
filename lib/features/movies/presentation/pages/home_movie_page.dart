@@ -37,13 +37,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(vertical: 8),
-                  //   child: Text(
-                  //     'Now Playing',
-                  //     style: kHeading6,
-                  //   ),
-                  // ),
                   Consumer<MovieListNotifier>(builder: (context, data, child) {
                     final state = data.nowPlayingState;
                     if (state == RequestState.Loading) {
@@ -51,7 +44,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                         child: CircularProgressIndicator(),
                       );
                     } else if (state == RequestState.Loaded) {
-                      // return MovieList(data.nowPlayingMovies);
                       return CarrouselMovieWidget(
                         movies: data.nowPlayingMovies,
                       );
