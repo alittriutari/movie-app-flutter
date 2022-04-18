@@ -8,13 +8,12 @@ import 'package:flutter/material.dart';
 class CarrouselTvSeriesWidget extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries})
-      : super(key: key);
+  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 320,
+      height: 500,
       child: Swiper(
         loop: true,
         autoplay: true,
@@ -30,35 +29,82 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
                 arguments: tv.id,
               );
             },
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: CachedNetworkImage(
-                    imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
-                    placeholder: (context, url) => Center(
-                      child: CircularProgressIndicator(),
+            child: Stack(alignment: Alignment.center, children: [
+              Container(
+                height: 500,
+                child: CachedNetworkImage(
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  imageBuilder: (context, imageProvider) => Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
+              ),
+              Container(
+                height: 500,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.black, Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
                   ),
                 ),
-                Positioned(
-                    bottom: 0,
-                    child: Container(
-                        padding: EdgeInsets.all(8),
-                        alignment: Alignment.bottomCenter,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: Colors.redAccent),
-                        child: Text('On Airing')))
-              ],
-            ),
+              ),
+              Positioned(
+                bottom: 90,
+                child: SizedBox(
+                    width: 250,
+                    child: Text(
+                      tv.name ?? '',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+              ),
+              Positioned(
+                bottom: 40,
+                child: Container(
+                    width: 100,
+                    padding: EdgeInsets.all(8),
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+                    child: Text('On Airing')),
+              )
+            ]),
+            // child: Stack(
+            //   alignment: Alignment.center,
+            //   children: [
+            //     ClipRRect(
+            //       borderRadius: BorderRadius.circular(20),
+            //       child: CachedNetworkImage(
+            //         imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+            //         placeholder: (context, url) => Center(
+            //           child: CircularProgressIndicator(),
+            //         ),
+            //         errorWidget: (context, url, error) => Icon(Icons.error),
+            //       ),
+            //     ),
+            //     Positioned(
+            //         bottom: 0,
+            //         child: Container(
+            //             padding: EdgeInsets.all(8),
+            //             alignment: Alignment.bottomCenter,
+            //             decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+            //             child: Text('On Airing')))
+            //   ],
+            // ),
           );
         },
-        itemCount: 3,
-        viewportFraction: 0.62,
-        scale: 0.8,
+        itemCount: 10,
       ),
     );
   }

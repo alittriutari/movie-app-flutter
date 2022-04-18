@@ -8,7 +8,10 @@ import '../../domain/entities/movie.dart';
 class CarrouselMovieWidget extends StatelessWidget {
   final List<Movie> movies;
 
-  const CarrouselMovieWidget({Key? key, required this.movies}) : super(key: key);
+  const CarrouselMovieWidget({
+    Key? key,
+    required this.movies,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class CarrouselMovieWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  placeholder: (context, url) => CircularProgressIndicator(),
+                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
               ),

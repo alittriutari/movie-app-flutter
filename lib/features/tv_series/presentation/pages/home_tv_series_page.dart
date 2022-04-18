@@ -19,68 +19,131 @@ class HomeTvSeriesPage extends StatefulWidget {
 }
 
 class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
+  double _scrollOffset = 0.0;
+  ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
+
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => Provider.of<TvSeriesListNotifier>(context, listen: false)
-          ..fetchOnAirTvSeries()
-          ..fetchPopularTvSeries());
+    _controller = ScrollController()
+      ..addListener(() {
+        _scrollOffset = _controller.offset;
+      });
+
+    Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)
+      ..fetchOnAirTvSeries()
+      ..fetchPopularTvSeries());
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // // Padding(
-            // //   padding: const EdgeInsets.symmetric(vertical: 8),
-            // //   child: Text(
-            // //     'Now Playing',
-            // //     style: kHeading6,
-            // //   ),
-            // // ),
-            // _buildSubHeading(
-            //   title: 'On Airing',
-            //   onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
-            // ),
-            Consumer<TvSeriesListNotifier>(
-              builder: (context, data, child) {
-                final state = data.onAirState;
+    return CustomScrollView(controller: _controller, slivers: [
+      SliverToBoxAdapter(
+        child: Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+          final state = data.onAirState;
+          if (state == RequestState.Loading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state == RequestState.Loaded) {
+            return CarrouselTvSeriesWidget(
+              tvSeries: data.onAirTvSeries,
+            );
+          } else {
+            return Text('Failed');
+          }
+        }),
+      ),
+      SliverToBoxAdapter(
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              SubHeadingWidget(title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+                final state = data.popularTvSeriesState;
                 if (state == RequestState.Loading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return CarrouselTvSeriesWidget(tvSeries: data.onAirTvSeries);
+                  return TvSeriesList(data.popularTvSeries);
                 } else {
                   return Text('Failed');
                 }
-              },
-            ),
-            SubHeadingWidget(
-                title: 'Popular',
-                onTap: () => Navigator.pushNamed(
-                    context, PopularTvSeriesPage.ROUTE_NAME)),
-            Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.popularTvSeriesState;
-              if (state == RequestState.Loading) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state == RequestState.Loaded) {
-                return TvSeriesList(data.popularTvSeries);
-              } else {
-                return Text('Failed');
-              }
-            }),
-          ],
+              }),
+              // SubHeadingWidget(title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME)),
+              // Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+              //   final state = data.topRatedMoviesState;
+              //   if (state == RequestState.Loading) {
+              //     return Center(
+              //       child: CircularProgressIndicator(),
+              //     );
+              //   } else if (state == RequestState.Loaded) {
+              //     return MovieList(data.topRatedMovies);
+              //   } else {
+              //     return Text('Failed');
+              //   }
+              // }),
+            ],
+          ),
         ),
       ),
-    );
+    ]);
+    // return Padding(
+    //   padding: const EdgeInsets.all(8.0),
+    //   child: SingleChildScrollView(
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         // // Padding(
+    //         // //   padding: const EdgeInsets.symmetric(vertical: 8),
+    //         // //   child: Text(
+    //         // //     'Now Playing',
+    //         // //     style: kHeading6,
+    //         // //   ),
+    //         // // ),
+    //         // _buildSubHeading(
+    //         //   title: 'On Airing',
+    //         //   onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
+    //         // ),
+    //         Consumer<TvSeriesListNotifier>(
+    //           builder: (context, data, child) {
+    //             final state = data.onAirState;
+    //             if (state == RequestState.Loading) {
+    //               return Center(
+    //                 child: CircularProgressIndicator(),
+    //               );
+    //             } else if (state == RequestState.Loaded) {
+    //               return CarrouselTvSeriesWidget(tvSeries: data.onAirTvSeries);
+    //             } else {
+    //               return Text('Failed');
+    //             }
+    //           },
+    //         ),
+    //         SubHeadingWidget(title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+    //         Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+    //           final state = data.popularTvSeriesState;
+    //           if (state == RequestState.Loading) {
+    //             return Center(
+    //               child: CircularProgressIndicator(),
+    //             );
+    //           } else if (state == RequestState.Loaded) {
+    //             return TvSeriesList(data.popularTvSeries);
+    //           } else {
+    //             return Text('Failed');
+    //           }
+    //         }),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
 
@@ -92,7 +155,7 @@ class TvSeriesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
+      height: 150,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -101,8 +164,7 @@ class TvSeriesList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME,
-                    arguments: series.id);
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: series.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
