@@ -2,6 +2,7 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/features/movies/presentation/pages/about_page.dart';
 import 'package:ditonton/features/movies/presentation/pages/home_page.dart';
+import 'package:ditonton/features/movies/presentation/pages/home_page_old.dart';
 import 'package:ditonton/features/movies/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/features/movies/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/features/movies/presentation/pages/popular_movies_page.dart';
@@ -78,12 +79,12 @@ class MyApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         // home: Material(child: CustomDrawer(content: HomeMoviePage())),
-        home: Material(child: CustomDrawer(content: HomePage())),
+        home: Material(child: CustomDrawer(content: HomeScreen())),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
-              return MaterialPageRoute(builder: (_) => HomeMoviePage());
+              return MaterialPageRoute(builder: (_) => HomeScreen());
             case PopularMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:

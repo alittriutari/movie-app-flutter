@@ -1,56 +1,135 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/movies/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/home_tv_series_page.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
+  double _scrollOffset = 0.0;
+  ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController()
+      ..addListener(() {
+        _scrollOffset = _controller.offset;
+      });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: Row(
-            children: [
-              Text('Movie App'),
-              SizedBox(
-                width: 5,
-              ),
-              Icon(Icons.camera_outdoor)
-            ],
+    final Size screenSize = MediaQuery.of(context).size;
+    return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: PreferredSize(
+          preferredSize: Size(screenSize.width, 100),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            child: Container(
+                color: Colors.black.withOpacity((_scrollOffset / 350).clamp(0, 1)),
+                child: SafeArea(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text('Movie App'),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(Icons.camera_outdoor),
+                          Expanded(child: SizedBox()),
+                          IconButton(onPressed: () {}, icon: Icon(Icons.search))
+                        ],
+                      ),
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [Text('Tv Series'), Text('Tv Series')],
+                      )
+                    ],
+                  ),
+                )),
           ),
-          bottom: TabBar(
-              isScrollable: true,
-              indicatorColor: kMikadoYellow,
-              indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Color(0xffFCA311)),
-              tabs: [
-                Container(
-                  padding: EdgeInsets.all(8),
-                  child: Text('Movies'),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  child: Text('Tv Series'),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  child: Text('Watch List'),
-                ),
-              ]),
         ),
-        body: TabBarView(
-            children: [HomeMoviePage(), HomeTvSeriesPage(), Text('hahahah')]),
-      ),
-    );
+        body: CustomScrollView(
+          controller: _controller,
+          slivers: [
+            SliverToBoxAdapter(
+                child: Stack(alignment: Alignment.center, children: [
+              Container(
+                  height: 500,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: NetworkImage('http://www.impawards.com/2022/posters/uncharted_ver2.jpg'), fit: BoxFit.cover))),
+              Container(
+                height: 500,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.black, Colors.transparent],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 80,
+                child: SizedBox(
+                    width: 250,
+                    child: Text(
+                      'uncharted',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+              ),
+              Positioned(
+                bottom: 40,
+                child: Container(
+                    width: 100,
+                    padding: EdgeInsets.all(8),
+                    alignment: Alignment.bottomCenter,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+                    child: Text('Now Playing')),
+              )
+            ])),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    Text('top rated'),
+                    Container(
+                      height: 200,
+                      child: ListView.builder(
+                        itemCount: 2,
+                        // shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: 100,
+                            margin: EdgeInsets.all(8),
+                            child: Image.network('https://lumiere-a.akamaihd.net/v1/images/p_aladdin2019_17638_d53b09e6.jpeg'),
+                          );
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
