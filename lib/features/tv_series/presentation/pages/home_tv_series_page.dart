@@ -22,9 +22,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)
-      ..fetchOnAirTvSeries()
-      ..fetchPopularTvSeries());
+    Future.microtask(
+        () => Provider.of<TvSeriesListNotifier>(context, listen: false)
+          ..fetchOnAirTvSeries()
+          ..fetchPopularTvSeries());
   }
 
   @override
@@ -60,7 +61,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                 }
               },
             ),
-            SubHeadingWidget(title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+            SubHeadingWidget(
+                title: 'Popular',
+                onTap: () => Navigator.pushNamed(
+                    context, PopularTvSeriesPage.ROUTE_NAME)),
             Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
               final state = data.popularTvSeriesState;
               if (state == RequestState.Loading) {
@@ -97,7 +101,8 @@ class TvSeriesList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: series.id);
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME,
+                    arguments: series.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
