@@ -9,6 +9,5 @@ class ApiUrl {
 
   static String tvSeriesDetail(int id) => '$BASE_URL/tv/$id?$API_KEY';
 
-  static String tvSeriesRecommendation(int id) =>
-      '$BASE_URL/tv/$id/recommendations?$API_KEY';
+  static String tvSeriesRecommendation(int id) => '$BASE_URL/tv/$id/recommendations?$API_KEY';
 }

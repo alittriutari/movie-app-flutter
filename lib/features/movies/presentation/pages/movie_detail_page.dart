@@ -24,10 +24,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .fetchMovieDetail(widget.id);
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
+      Provider.of<MovieDetailNotifier>(context, listen: false).fetchMovieDetail(widget.id);
+      Provider.of<MovieDetailNotifier>(context, listen: false).loadWatchlistStatus(widget.id);
     });
   }
 
@@ -67,214 +65,201 @@ class DetailContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    return Stack(
-      children: [
-        CachedNetworkImage(
-          // height: screenHeight / 1.8,
-          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-          width: screenWidth,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 38 + 8),
-          child: DraggableScrollableSheet(
-            builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: kRichBlack,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-                ),
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  right: 16,
-                ),
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              movie.title,
-                              style: kHeading5,
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                if (!isAddedWatchlist) {
-                                  await Provider.of<MovieDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .addWatchlist(movie);
-                                } else {
-                                  await Provider.of<MovieDetailNotifier>(
-                                          context,
-                                          listen: false)
-                                      .removeFromWatchlist(movie);
-                                }
-
-                                final message =
-                                    Provider.of<MovieDetailNotifier>(context,
-                                            listen: false)
-                                        .watchlistMessage;
-
-                                if (message ==
-                                        MovieDetailNotifier
-                                            .watchlistAddSuccessMessage ||
-                                    message ==
-                                        MovieDetailNotifier
-                                            .watchlistRemoveSuccessMessage) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text(message)));
-                                } else {
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Text(message),
-                                        );
-                                      });
-                                }
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  isAddedWatchlist
-                                      ? Icon(Icons.check)
-                                      : Icon(Icons.add),
-                                  Text('Watchlist'),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              _showGenres(movie.genres),
-                            ),
-                            Text(
-                              _showDuration(movie.runtime),
-                            ),
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: movie.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
-                                ),
-                                Text('${movie.voteAverage}')
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Overview',
-                              style: kHeading6,
-                            ),
-                            Text(
-                              movie.overview,
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Recommendations',
-                              style: kHeading6,
-                            ),
-                            Consumer<MovieDetailNotifier>(
-                              builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.Loading) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (data.recommendationState ==
-                                    RequestState.Error) {
-                                  return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.Loaded) {
-                                  return Container(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final movie = recommendations[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                MovieDetailPage.ROUTE_NAME,
-                                                arguments: movie.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                    'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      itemCount: recommendations.length,
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            ),
-                          ],
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 400,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 400,
+                  child: CachedNetworkImage(
+                    imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                    imageBuilder: (context, imageProvider) => Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        color: Colors.white,
-                        height: 4,
-                        width: 48,
+                    placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                ),
+                Container(
+                  height: 400,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.black, Colors.transparent],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 100,
+                  child: SizedBox(
+                      width: 250,
+                      child: Text(
+                        movie.title,
+                        textAlign: TextAlign.center,
+                        style: kHeading5,
+                      )),
+                ),
+                Positioned(
+                  bottom: 75,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Text(
+                      _showGenres(movie.genres),
+                    ),
+                  ),
+                ),
+                Positioned(
+                    bottom: 20,
+                    right: 0,
+                    left: 0,
+                    child: GestureDetector(
+                      onTap: () async {
+                        if (!isAddedWatchlist) {
+                          await Provider.of<MovieDetailNotifier>(context, listen: false).addWatchlist(movie);
+                        } else {
+                          await Provider.of<MovieDetailNotifier>(context, listen: false).removeFromWatchlist(movie);
+                        }
+
+                        final message = Provider.of<MovieDetailNotifier>(context, listen: false).watchlistMessage;
+
+                        if (message == MovieDetailNotifier.watchlistAddSuccessMessage ||
+                            message == MovieDetailNotifier.watchlistRemoveSuccessMessage) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(message),
+                                );
+                              });
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                          Text(
+                            'Watchlist',
+                            style: kBodyText,
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        RatingBarIndicator(
+                          rating: movie.voteAverage / 2,
+                          itemCount: 5,
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: kMikadoYellow,
+                          ),
+                          itemSize: 24,
+                        ),
+                        Text('${movie.voteAverage}')
+                      ],
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      color: kDavysGrey,
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        _showDuration(movie.runtime),
                       ),
                     ),
                   ],
                 ),
-              );
-            },
-            // initialChildSize: 0.5,
-            minChildSize: 0.25,
-            // maxChildSize: 1.0,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: kRichBlack,
-            foregroundColor: Colors.white,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+                SizedBox(height: 16),
+                Text(
+                  'Overview',
+                  style: kHeading6,
+                ),
+                Text(
+                  movie.overview,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Recommendations',
+                  style: kHeading6,
+                ),
+                Consumer<MovieDetailNotifier>(
+                  builder: (context, data, child) {
+                    if (data.recommendationState == RequestState.Loading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (data.recommendationState == RequestState.Error) {
+                      return Text(data.message);
+                    } else if (data.recommendationState == RequestState.Loaded) {
+                      return Container(
+                        height: 150,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            final movie = recommendations[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    MovieDetailPage.ROUTE_NAME,
+                                    arguments: movie.id,
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8),
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                    placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                    errorWidget: (context, url, error) => Icon(Icons.error),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: recommendations.length,
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         )
