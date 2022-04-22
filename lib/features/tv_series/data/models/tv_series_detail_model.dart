@@ -29,10 +29,12 @@ class TvSeriesDetailResponse extends Equatable {
   final double voteAverage;
   final int voteCount;
 
-  factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) => TvSeriesDetailResponse(
+  factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
+      TvSeriesDetailResponse(
         backdropPath: json["backdrop_path"],
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        genres: List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
+        genres: List<GenreModel>.from(
+            json["genres"].map((x) => GenreModel.fromJson(x))),
         id: json["id"],
         name: json["name"],
         numberOfSeasons: json["number_of_seasons"],

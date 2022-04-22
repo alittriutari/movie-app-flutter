@@ -15,7 +15,9 @@ class _OnAirTvSeriesPageState extends State<OnAirTvSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<OnAirTvSeriesNotifier>(context, listen: false).fetchOnAiringTvSeries());
+    Future.microtask(() =>
+        Provider.of<OnAirTvSeriesNotifier>(context, listen: false)
+            .fetchOnAiringTvSeries());
   }
 
   @override

@@ -21,7 +21,7 @@ import 'package:movie_app/features/search/domain/usecases/search_tv_series.dart'
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
 import 'package:movie_app/features/tv_series/data/repositories/tv_series_repository_impl.dart';

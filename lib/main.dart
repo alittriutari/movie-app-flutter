@@ -6,13 +6,13 @@ import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.d
 import 'package:movie_app/features/movies/presentation/pages/popular_movies_page.dart';
 import 'package:movie_app/features/search/presentation/pages/search_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
-import 'package:movie_app/features/movies/presentation/pages/watchlist_movies_page.dart';
+import 'package:movie_app/features/watchlist/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_drawer.dart';
 import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/on_air_tv_series_page.dart';

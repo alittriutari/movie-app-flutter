@@ -1,6 +1,7 @@
 import 'package:movie_app/features/movies/presentation/pages/home_movie_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/home_tv_series_page.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/features/watchlist/presentation/pages/watchlist_movies_page.dart';
 
 import '../../../search/presentation/pages/search_page.dart';
 
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), Text('hahah')]),
+          body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistMoviesPage()]),
         );
       }),
     );

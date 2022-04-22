@@ -5,7 +5,13 @@ class CustomCacheImage extends StatelessWidget {
   final String imageUrl;
   final double height, width;
   final BoxFit? boxFit;
-  const CustomCacheImage({Key? key, required this.imageUrl, this.height = 0.0, this.width = 0.0, this.boxFit}) : super(key: key);
+  const CustomCacheImage(
+      {Key? key,
+      required this.imageUrl,
+      this.height = 0.0,
+      this.width = 0.0,
+      this.boxFit})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

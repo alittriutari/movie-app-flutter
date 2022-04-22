@@ -28,10 +28,12 @@ class SearchPage extends StatelessWidget {
               onSubmitted: (query) {
                 switch (index) {
                   case 0:
-                    Provider.of<SearchMovieNotifier>(context, listen: false).fetchMovieSearch(query);
+                    Provider.of<SearchMovieNotifier>(context, listen: false)
+                        .fetchMovieSearch(query);
                     break;
                   case 1:
-                    Provider.of<SearchTvSeriesNotifier>(context, listen: false).fetchTvSeriesSearch(query);
+                    Provider.of<SearchTvSeriesNotifier>(context, listen: false)
+                        .fetchTvSeriesSearch(query);
                     break;
                   default:
                 }

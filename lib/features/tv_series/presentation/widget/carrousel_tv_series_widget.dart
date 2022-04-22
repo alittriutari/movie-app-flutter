@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 class CarrouselTvSeriesWidget extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries}) : super(key: key);
+  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +71,9 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
                     width: 100,
                     padding: EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.redAccent),
                     child: Text('On Airing')),
               )
             ]),

@@ -8,7 +8,9 @@ import 'package:flutter/cupertino.dart';
 class TvSeriesDetailNotifier extends ChangeNotifier {
   final GetTvSeriesDetail getTvSeriesDetail;
   final GetTvSeriesRecommendation getTvSeriesRecommendation;
-  TvSeriesDetailNotifier({required this.getTvSeriesDetail, required this.getTvSeriesRecommendation});
+  TvSeriesDetailNotifier(
+      {required this.getTvSeriesDetail,
+      required this.getTvSeriesRecommendation});
 
   late TvSeriesDetail _tvSerie;
   TvSeriesDetail get tvSeries => _tvSerie;
