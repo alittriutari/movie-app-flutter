@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/movies/domain/entities/genre.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series_detail.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/domain/entities/genre.dart';
+import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series_detail.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +24,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<TvSeriesDetailNotifier>(context, listen: false)
-            .fetchTvSeriesDetail(widget.id));
+    Future.microtask(() => Provider.of<TvSeriesDetailNotifier>(context, listen: false).fetchTvSeriesDetail(widget.id));
   }
 
   @override
@@ -59,21 +58,16 @@ class DetailTvSeriesContent extends StatelessWidget {
   final TvSeriesDetail tvSeries;
   final List<TvSeries> recommendations;
 
-  DetailTvSeriesContent(
-      {required this.tvSeries, required this.recommendations});
+  DetailTvSeriesContent({required this.tvSeries, required this.recommendations});
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        CachedNetworkImage(
+        CustomCacheImage(
           imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
@@ -147,15 +141,11 @@ class DetailTvSeriesContent extends StatelessWidget {
                             ),
                             Consumer<TvSeriesDetailNotifier>(
                               builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.Loading) {
-                                  return Center(
-                                      child: CircularProgressIndicator());
-                                } else if (data.recommendationState ==
-                                    RequestState.Error) {
+                                if (data.recommendationState == RequestState.Loading) {
+                                  return Center(child: CircularProgressIndicator());
+                                } else if (data.recommendationState == RequestState.Error) {
                                   return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.Loaded) {
+                                } else if (data.recommendationState == RequestState.Loaded) {
                                   return Container(
                                     height: 150,
                                     child: ListView.builder(
@@ -168,20 +158,8 @@ class DetailTvSeriesContent extends StatelessWidget {
                                             child: InkWell(
                                               onTap: () {},
                                               child: ClipRRect(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(8)),
-                                                child: CachedNetworkImage(
-                                                  imageUrl:
-                                                      'https://image.tmdb.org/t/p/w500${tvSeries[index].posterPath}',
-                                                  placeholder: (context, url) =>
-                                                      Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  ),
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Icon(Icons.error),
-                                                ),
+                                                borderRadius: BorderRadius.all(Radius.circular(8)),
+                                                child: CustomCacheImage(imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries[index].posterPath}'),
                                               ),
                                             ));
                                       },

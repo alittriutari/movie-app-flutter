@@ -1,5 +1,5 @@
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/features/movies/data/models/movie_table.dart';
+import 'package:movie_app/common/exception.dart';
+import 'package:movie_app/features/movies/data/models/movie_table.dart';
 
 import 'db/database_helper.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ditonton/features/movies/data/models/movie_table.dart';
+import 'package:movie_app/features/movies/data/models/movie_table.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
@@ -25,7 +25,7 @@ class DatabaseHelper {
 
   Future<Database> _initDb() async {
     final path = await getDatabasesPath();
-    final databasePath = '$path/ditonton.db';
+    final databasePath = '$path/movie_app.db';
 
     var db = await openDatabase(databasePath, version: 1, onCreate: _onCreate);
     return db;
@@ -52,8 +52,7 @@ class DatabaseHelper {
       ''');
   }
 
-  Future<void> insertCacheTransaction(
-      List<MovieTable> movies, String category) async {
+  Future<void> insertCacheTransaction(List<MovieTable> movies, String category) async {
     final db = await database;
     db!.transaction((txn) async {
       for (final movie in movies) {
@@ -66,8 +65,7 @@ class DatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getCacheMovies(String category) async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!
-        .query(_tblCache, where: 'category = ?', whereArgs: [category]);
+    final List<Map<String, dynamic>> results = await db!.query(_tblCache, where: 'category = ?', whereArgs: [category]);
     return results;
   }
 

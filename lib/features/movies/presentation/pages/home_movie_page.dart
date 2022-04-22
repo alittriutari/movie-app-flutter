@@ -1,10 +1,10 @@
-import 'package:ditonton/features/movies/presentation/pages/popular_movies_page.dart';
+import 'package:movie_app/features/movies/presentation/pages/popular_movies_page.dart';
 
-import 'package:ditonton/features/movies/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/features/movies/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/movies/presentation/widgets/carrousel_movie_widget.dart';
-import 'package:ditonton/features/movies/presentation/widgets/sub_heading_widget.dart';
+import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
+import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/presentation/widgets/carrousel_movie_widget.dart';
+import 'package:movie_app/features/movies/presentation/widgets/sub_heading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

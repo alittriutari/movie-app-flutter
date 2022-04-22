@@ -1,6 +1,6 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/widget/tv_series_card_list.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/widget/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +15,7 @@ class _OnAirTvSeriesPageState extends State<OnAirTvSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<OnAirTvSeriesNotifier>(context, listen: false)
-            .fetchOnAiringTvSeries());
+    Future.microtask(() => Provider.of<OnAirTvSeriesNotifier>(context, listen: false).fetchOnAiringTvSeries());
   }
 
   @override

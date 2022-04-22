@@ -1,4 +1,4 @@
-package com.dicoding.ditonton
+package com.dicoding.movie_app
 
 import io.flutter.embedding.android.FlutterActivity
 

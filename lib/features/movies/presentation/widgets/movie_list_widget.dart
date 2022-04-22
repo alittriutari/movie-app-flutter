@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/movies/domain/entities/movie.dart';
-import 'package:ditonton/features/movies/presentation/pages/movie_detail_page.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/features/movies/domain/entities/movie.dart';
+import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
@@ -29,13 +30,7 @@ class MovieList extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
+                child: CustomCacheImage(imageUrl: '$BASE_IMAGE_URL${movie.posterPath}'),
               ),
             ),
           );

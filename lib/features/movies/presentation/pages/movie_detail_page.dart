@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/movies/domain/entities/genre.dart';
-import 'package:ditonton/features/movies/domain/entities/movie.dart';
-import 'package:ditonton/features/movies/domain/entities/movie_detail.dart';
-import 'package:ditonton/features/movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/features/movies/domain/entities/genre.dart';
+import 'package:movie_app/features/movies/domain/entities/movie.dart';
+import 'package:movie_app/features/movies/domain/entities/movie_detail.dart';
+import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
+import 'package:movie_app/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetailPage extends StatefulWidget {
@@ -75,18 +76,11 @@ class DetailContent extends StatelessWidget {
               children: [
                 Container(
                   height: 400,
-                  child: CachedNetworkImage(
+                  child: CustomCacheImage(
                     imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    height: 400,
+                    boxFit: BoxFit.cover,
+                    width: double.infinity,
                   ),
                 ),
                 Container(
@@ -240,12 +234,8 @@ class DetailContent extends StatelessWidget {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(8),
                                   ),
-                                  child: CachedNetworkImage(
+                                  child: CustomCacheImage(
                                     imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                                    placeholder: (context, url) => Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                    errorWidget: (context, url, error) => Icon(Icons.error),
                                   ),
                                 ),
                               ),

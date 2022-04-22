@@ -1,6 +1,6 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/movies/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/features/movies/presentation/widgets/movie_card_list.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
+import 'package:movie_app/features/movies/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +15,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularMoviesNotifier>(context, listen: false)
-            .fetchPopularMovies());
+    Future.microtask(() => Provider.of<PopularMoviesNotifier>(context, listen: false).fetchPopularMovies());
   }
 
   @override

@@ -1,6 +1,6 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/movies/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/home_tv_series_page.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/features/movies/presentation/pages/home_movie_page.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/home_tv_series_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,9 +30,7 @@ class _HomePageState extends State<HomePage> {
           bottom: TabBar(
               isScrollable: true,
               indicatorColor: kMikadoYellow,
-              indicator: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Color(0xffFCA311)),
+              indicator: BoxDecoration(borderRadius: BorderRadius.circular(50), color: Color(0xffFCA311)),
               tabs: [
                 Container(
                   padding: EdgeInsets.all(8),
@@ -48,8 +46,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
         ),
-        body: TabBarView(
-            children: [HomeMoviePage(), HomeTvSeriesPage(), Text('hahahah')]),
+        body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), Text('hahahah')]),
       ),
     );
   }

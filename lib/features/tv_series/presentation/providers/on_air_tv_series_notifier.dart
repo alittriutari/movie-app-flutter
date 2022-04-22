@@ -1,6 +1,6 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/features/tv_series/domain/usecases/get_on_the_air_tv_series.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_on_the_air_tv_series.dart';
 import 'package:flutter/cupertino.dart';
 
 class OnAirTvSeriesNotifier extends ChangeNotifier {

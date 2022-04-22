@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
 import 'package:flutter/material.dart';
 
 class TvSeriesCard extends StatelessWidget {
@@ -55,13 +56,9 @@ class TvSeriesCard extends StatelessWidget {
                 bottom: 16,
               ),
               child: ClipRRect(
-                child: CachedNetworkImage(
+                child: CustomCacheImage(
                   imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
                   width: 80,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),

@@ -1,16 +1,14 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series_detail.dart';
-import 'package:ditonton/features/tv_series/domain/usecases/get_tv_series_detail.dart';
-import 'package:ditonton/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series_detail.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
 import 'package:flutter/cupertino.dart';
 
 class TvSeriesDetailNotifier extends ChangeNotifier {
   final GetTvSeriesDetail getTvSeriesDetail;
   final GetTvSeriesRecommendation getTvSeriesRecommendation;
-  TvSeriesDetailNotifier(
-      {required this.getTvSeriesDetail,
-      required this.getTvSeriesRecommendation});
+  TvSeriesDetailNotifier({required this.getTvSeriesDetail, required this.getTvSeriesRecommendation});
 
   late TvSeriesDetail _tvSerie;
   TvSeriesDetail get tvSeries => _tvSerie;

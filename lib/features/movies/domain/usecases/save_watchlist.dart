@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/features/movies/domain/entities/movie_detail.dart';
-import 'package:ditonton/features/movies/domain/repositories/movie_repository.dart';
+import 'package:movie_app/common/failure.dart';
+import 'package:movie_app/features/movies/domain/entities/movie_detail.dart';
+import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart';
 
 class SaveWatchlist {
   final MovieRepository repository;

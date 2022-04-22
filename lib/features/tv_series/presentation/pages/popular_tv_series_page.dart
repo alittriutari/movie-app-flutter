@@ -1,6 +1,6 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/widget/tv_series_card_list.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/widget/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +15,7 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularTvSeriesNotifier>(context, listen: false)
-            .fetchPopularTvSeries());
+    Future.microtask(() => Provider.of<PopularTvSeriesNotifier>(context, listen: false).fetchPopularTvSeries());
   }
 
   @override

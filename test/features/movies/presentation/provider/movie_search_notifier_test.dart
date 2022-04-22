@@ -1,25 +1,25 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/movies/domain/entities/movie.dart';
-import 'package:ditonton/features/movies/domain/usecases/search_movies.dart';
-import 'package:ditonton/features/movies/presentation/provider/movie_search_notifier.dart';
+import 'package:movie_app/common/failure.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/domain/entities/movie.dart';
+import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
+import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import 'movie_search_notifier_test.mocks.dart';
 
-@GenerateMocks([SearchMovies])
+@GenerateMocks([Search])
 void main() {
-  late MovieSearchNotifier provider;
+  late SearchNotifier provider;
   late MockSearchMovies mockSearchMovies;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockSearchMovies = MockSearchMovies();
-    provider = MovieSearchNotifier(searchMovies: mockSearchMovies)
+    provider = SearchNotifier(searchMovies: mockSearchMovies)
       ..addListener(() {
         listenerCallCount += 1;
       });

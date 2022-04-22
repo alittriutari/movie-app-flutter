@@ -1,7 +1,7 @@
-import 'package:ditonton/features/movies/data/models/movie_table.dart';
-import 'package:ditonton/features/movies/domain/entities/genre.dart';
-import 'package:ditonton/features/movies/domain/entities/movie.dart';
-import 'package:ditonton/features/movies/domain/entities/movie_detail.dart';
+import 'package:movie_app/features/movies/data/models/movie_table.dart';
+import 'package:movie_app/features/movies/domain/entities/genre.dart';
+import 'package:movie_app/features/movies/domain/entities/movie.dart';
+import 'package:movie_app/features/movies/domain/entities/movie_detail.dart';
 
 final testMovie = Movie(
   adult: false,

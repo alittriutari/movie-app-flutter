@@ -1,11 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/movies/presentation/widgets/sub_heading_widget.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/popular_tv_series_page.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/widget/carrousel_tv_series_widget.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
+import 'package:movie_app/features/movies/presentation/widgets/sub_heading_widget.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/popular_tv_series_page.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/widget/carrousel_tv_series_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -168,13 +169,7 @@ class TvSeriesList extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${series.posterPath}',
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
+                child: CustomCacheImage(imageUrl: '$BASE_IMAGE_URL${series.posterPath}'),
               ),
             ),
           );

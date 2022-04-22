@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/common/failure.dart';
-import 'package:ditonton/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series.dart';
-import 'package:ditonton/features/tv_series/domain/entities/tv_series_detail.dart';
-import 'package:ditonton/features/tv_series/domain/repositories/tv_series_repository.dart';
+import 'package:movie_app/common/exception.dart';
+import 'package:movie_app/common/failure.dart';
+import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/entities/tv_series_detail.dart';
+import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repository.dart';
 
 class TvSeriesRepositoryImpl implements TvSeriesRepository {
   final TvSeriesRemoteDataSource remoteDataSource;
@@ -38,8 +38,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> getTvSeriesRecommendation(
-      int id) async {
+  Future<Either<Failure, List<TvSeries>>> getTvSeriesRecommendation(int id) async {
     try {
       final result = await remoteDataSource.getTvSeriesRecommendation(id);
       return Right(result.map((model) => model.toEntity()).toList());
@@ -54,6 +53,18 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   Future<Either<Failure, List<TvSeries>>> getPopularTvSeries() async {
     try {
       final result = await remoteDataSource.getPopularTvSeries();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TvSeries>>> searchTvSeries(String query) async {
+    try {
+      final result = await remoteDataSource.searchTvSeries(query);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));

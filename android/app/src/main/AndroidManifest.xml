@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dicoding.ditonton">
+    package="com.dicoding.movie_app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="ditonton"
+        android:label="movie_app"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

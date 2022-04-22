@@ -1,32 +1,31 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/features/movies/presentation/pages/about_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/home_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/home_page_old.dart';
-import 'package:ditonton/features/movies/presentation/pages/movie_detail_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/popular_movies_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/search_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/top_rated_movies_page.dart';
-import 'package:ditonton/features/movies/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/features/movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/features/movies/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/features/movies/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/features/movies/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/features/movies/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/features/movies/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/features/movies/presentation/widgets/custom_drawer.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/popular_tv_series_page.dart';
-import 'package:ditonton/features/tv_series/presentation/pages/tv_series_detail_page.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
-import 'package:ditonton/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/common/utils.dart';
+import 'package:movie_app/features/movies/presentation/pages/about_page.dart';
+import 'package:movie_app/features/movies/presentation/pages/home_page.dart';
+import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
+import 'package:movie_app/features/movies/presentation/pages/popular_movies_page.dart';
+import 'package:movie_app/features/search/presentation/pages/search_page.dart';
+import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
+import 'package:movie_app/features/movies/presentation/pages/watchlist_movies_page.dart';
+import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
+import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
+import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
+import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
+import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:movie_app/features/movies/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:movie_app/features/movies/presentation/widgets/custom_drawer.dart';
+import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/popular_tv_series_page.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ditonton/injection.dart' as di;
+import 'package:movie_app/injection.dart' as di;
 
 void main() {
   di.init();
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<MovieDetailNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
+          create: (_) => di.locator<SearchMovieNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedMoviesNotifier>(),
@@ -67,6 +66,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesDetailNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<SearchTvSeriesNotifier>(),
         ),
       ],
       child: MaterialApp(
@@ -107,7 +109,13 @@ class MyApp extends StatelessWidget {
                       ),
                   settings: settings);
             case SearchPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => SearchPage());
+              // return CupertinoPageRoute(builder: (_) => SearchPage());
+              final index = settings.arguments as int;
+              return CupertinoPageRoute(
+                  builder: (_) => SearchPage(
+                        index: index,
+                      ),
+                  settings: settings);
             case WatchlistMoviesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             case AboutPage.ROUTE_NAME:

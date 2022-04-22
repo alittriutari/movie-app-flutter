@@ -1,12 +1,12 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/features/movies/domain/entities/movie.dart';
-import 'package:ditonton/features/movies/domain/usecases/search_movies.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/domain/entities/movie.dart';
+import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
 import 'package:flutter/foundation.dart';
 
-class MovieSearchNotifier extends ChangeNotifier {
+class SearchMovieNotifier extends ChangeNotifier {
   final SearchMovies searchMovies;
 
-  MovieSearchNotifier({required this.searchMovies});
+  SearchMovieNotifier({required this.searchMovies});
 
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;

@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/features/movies/presentation/pages/movie_detail_page.dart';
+import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
 import '../../domain/entities/movie.dart';
+import 'custom_cache_image.dart';
 
 class CarrouselMovieWidget extends StatelessWidget {
   final List<Movie> movies;
@@ -34,21 +35,13 @@ class CarrouselMovieWidget extends StatelessWidget {
             },
             child: Stack(alignment: Alignment.center, children: [
               Container(
-                height: 500,
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  imageBuilder: (context, imageProvider) => Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  placeholder: (context, url) => Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-              ),
+                  height: 500,
+                  child: CustomCacheImage(
+                    imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                    height: 500,
+                    boxFit: BoxFit.cover,
+                    width: double.infinity,
+                  )),
               Container(
                 height: 500,
                 decoration: const BoxDecoration(

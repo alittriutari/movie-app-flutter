@@ -1,4 +1,4 @@
-import 'package:ditonton/common/constants.dart';
+import 'package:movie_app/common/constants.dart';
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatelessWidget {
