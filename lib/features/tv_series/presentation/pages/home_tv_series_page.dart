@@ -169,7 +169,10 @@ class TvSeriesList extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
-                child: CustomCacheImage(imageUrl: '$BASE_IMAGE_URL${series.posterPath}'),
+                child: CustomCacheImage(
+                  imageUrl: '$BASE_IMAGE_URL${series.posterPath}',
+                  width: 90,
+                ),
               ),
             ),
           );

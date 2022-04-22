@@ -58,7 +58,8 @@ class TvSeriesCard extends StatelessWidget {
               child: ClipRRect(
                 child: CustomCacheImage(
                   imageUrl: '$BASE_IMAGE_URL${tvSeries.posterPath}',
-                  width: 80,
+                  width: 90,
+                  height: 120,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),

@@ -236,6 +236,7 @@ class DetailContent extends StatelessWidget {
                                   ),
                                   child: CustomCacheImage(
                                     imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                    width: 90,
                                   ),
                                 ),
                               ),

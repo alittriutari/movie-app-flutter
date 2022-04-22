@@ -61,6 +61,7 @@ class MovieCard extends StatelessWidget {
                 child: CustomCacheImage(
                   imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
                   width: 80,
+                  height: 120,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
