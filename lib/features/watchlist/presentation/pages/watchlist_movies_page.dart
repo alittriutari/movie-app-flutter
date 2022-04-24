@@ -1,4 +1,3 @@
-import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/common/utils.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';

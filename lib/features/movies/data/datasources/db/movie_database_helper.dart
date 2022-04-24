@@ -9,7 +9,8 @@ class MovieDatabaseHelper {
     _databaseHelper = this;
   }
 
-  factory MovieDatabaseHelper() => _databaseHelper ?? MovieDatabaseHelper._instance();
+  factory MovieDatabaseHelper() =>
+      _databaseHelper ?? MovieDatabaseHelper._instance();
 
   static Database? _database;
 
@@ -52,7 +53,8 @@ class MovieDatabaseHelper {
       ''');
   }
 
-  Future<void> insertCacheTransaction(List<MovieTable> movies, String category) async {
+  Future<void> insertCacheTransaction(
+      List<MovieTable> movies, String category) async {
     final db = await database;
     db!.transaction((txn) async {
       for (final movie in movies) {
@@ -65,7 +67,8 @@ class MovieDatabaseHelper {
 
   Future<List<Map<String, dynamic>>> getCacheMovies(String category) async {
     final db = await database;
-    final List<Map<String, dynamic>> results = await db!.query(_tblCache, where: 'category = ?', whereArgs: [category]);
+    final List<Map<String, dynamic>> results = await db!
+        .query(_tblCache, where: 'category = ?', whereArgs: [category]);
     return results;
   }
 

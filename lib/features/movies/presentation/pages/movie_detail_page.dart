@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/domain/entities/genre.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';

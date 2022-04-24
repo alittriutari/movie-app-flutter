@@ -8,7 +8,7 @@ import 'package:dartz/dartz.dart' as _i3;
 import 'package:movie_app/common/failure.dart' as _i6;
 import 'package:movie_app/features/movies/domain/entities/movie.dart' as _i7;
 import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart' as _i2;
-import 'package:movie_app/features/movies/domain/usecases/search_movies.dart' as _i4;
+import 'package:movie_app/features/search/domain/usecases/search_movies.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint

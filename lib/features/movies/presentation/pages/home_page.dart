@@ -23,7 +23,8 @@ class HomeScreen extends StatelessWidget {
               color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
                     children: [
                       Row(
@@ -39,21 +40,30 @@ class HomeScreen extends StatelessWidget {
                                 Navigator.pushNamed(
                                   context,
                                   SearchPage.ROUTE_NAME,
-                                  arguments: DefaultTabController.of(context)!.index,
+                                  arguments:
+                                      DefaultTabController.of(context)!.index,
                                 );
                               },
                               icon: Icon(Icons.search))
                         ],
                       ),
                       Spacer(),
-                      TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
+                      TabBar(indicatorColor: Colors.transparent, tabs: [
+                        Text('Movie'),
+                        Text('Tv Series'),
+                        Text('Watchlist')
+                      ])
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistMoviesPage()]),
+          body: TabBarView(children: [
+            HomeMoviePage(),
+            HomeTvSeriesPage(),
+            WatchlistMoviesPage()
+          ]),
         );
       }),
     );

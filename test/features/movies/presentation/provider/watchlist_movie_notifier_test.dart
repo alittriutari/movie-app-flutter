@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/common/state_enum.dart';
-import 'package:movie_app/features/movies/domain/usecases/get_watchlist_movies.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

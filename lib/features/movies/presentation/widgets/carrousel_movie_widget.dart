@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
@@ -72,9 +71,7 @@ class CarrouselMovieWidget extends StatelessWidget {
                     width: 100,
                     padding: EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.redAccent),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
                     child: Text('Now Playing')),
               )
             ]),
