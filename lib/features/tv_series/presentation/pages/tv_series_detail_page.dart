@@ -42,6 +42,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
               child: DetailTvSeriesContent(
                 tvSeries: tvSeries,
                 recommendations: recommendation,
+                isAddedWatchlist: provider.isAddedToWatchlist,
               ),
             );
           } else {
@@ -56,150 +57,196 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 class DetailTvSeriesContent extends StatelessWidget {
   final TvSeriesDetail tvSeries;
   final List<TvSeries> recommendations;
+  final bool isAddedWatchlist;
 
-  DetailTvSeriesContent({required this.tvSeries, required this.recommendations});
+  DetailTvSeriesContent({required this.tvSeries, required this.recommendations, required this.isAddedWatchlist});
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    return Stack(
-      children: [
-        CustomCacheImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
-          width: screenWidth,
-        ),
-        Container(
-          margin: const EdgeInsets.only(top: 48 + 8),
-          child: DraggableScrollableSheet(
-            builder: (context, scrollController) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: kRichBlack,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 400,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  height: 400,
+                  child: CustomCacheImage(
+                    imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
+                    height: 400,
+                    boxFit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
                 ),
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  right: 16,
-                ),
-                child: Stack(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 16),
-                      child: SingleChildScrollView(
-                        controller: scrollController,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              tvSeries.name,
-                              style: kHeading5,
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {},
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(Icons.add),
-                                  Text('Watchlist'),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              _showGenres(tvSeries.genres),
-                            ),
-                            // Text(
-                            //   _showDuration(tvSeries.runtime),
-                            // ),
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: tvSeries.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
-                                ),
-                                Text('${tvSeries.voteAverage}')
-                              ],
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Overview',
-                              style: kHeading6,
-                            ),
-                            Text(
-                              tvSeries.overview,
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Recommendations',
-                              style: kHeading6,
-                            ),
-                            Consumer<TvSeriesDetailNotifier>(
-                              builder: (context, data, child) {
-                                if (data.recommendationState == RequestState.Loading) {
-                                  return Center(child: CircularProgressIndicator());
-                                } else if (data.recommendationState == RequestState.Error) {
-                                  return Text(data.message);
-                                } else if (data.recommendationState == RequestState.Loaded) {
-                                  return Container(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      itemCount: recommendations.length,
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final tvSeries = recommendations;
-                                        return Padding(
-                                            padding: EdgeInsets.all(4.0),
-                                            child: InkWell(
-                                              onTap: () {},
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.all(Radius.circular(8)),
-                                                child: CustomCacheImage(imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries[index].posterPath}'),
-                                              ),
-                                            ));
-                                      },
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+                Container(
+                  height: 400,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.black, Colors.transparent],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
                     ),
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        color: Colors.white,
-                        height: 4,
-                        width: 48,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              );
-            },
-            // initialChildSize: 0.5,
-            minChildSize: 0.25,
-            // maxChildSize: 1.0,
+                Positioned(
+                  bottom: 100,
+                  child: SizedBox(
+                      width: 250,
+                      child: Text(
+                        tvSeries.name,
+                        textAlign: TextAlign.center,
+                        style: kHeading5,
+                      )),
+                ),
+                Positioned(
+                  bottom: 75,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Text(
+                      _showGenres(tvSeries.genres),
+                    ),
+                  ),
+                ),
+                Positioned(
+                    bottom: 20,
+                    right: 0,
+                    left: 0,
+                    child: GestureDetector(
+                      onTap: () async {
+                        if (!isAddedWatchlist) {
+                          await Provider.of<TvSeriesDetailNotifier>(context, listen: false).addWatchList(tvSeries);
+                        } else {
+                          await Provider.of<TvSeriesDetailNotifier>(context, listen: false).removeFromWatchlist(tvSeries);
+                        }
+
+                        final message = Provider.of<TvSeriesDetailNotifier>(context, listen: false).watchlistMessage;
+
+                        if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: Text(message),
+                                );
+                              });
+                        }
+                      },
+                      child: Column(
+                        children: [
+                          isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                          Text(
+                            'Watchlist',
+                            style: kBodyText,
+                          )
+                        ],
+                      ),
+                    ))
+              ],
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(
-            backgroundColor: kRichBlack,
-            foregroundColor: Colors.white,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+        SliverToBoxAdapter(
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 20,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        RatingBarIndicator(
+                          rating: tvSeries.voteAverage / 2,
+                          itemCount: 5,
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
+                            color: kMikadoYellow,
+                          ),
+                          itemSize: 24,
+                        ),
+                        Text('${tvSeries.voteAverage}')
+                      ],
+                    ),
+                    // SizedBox(
+                    //   width: 20,
+                    // ),
+                    // Container(
+                    //   color: kDavysGrey,
+                    //   padding: EdgeInsets.all(5),
+                    //   child: Text(
+                    //     _showDuration(tvSeries.),
+                    //   ),
+                    // ),
+                  ],
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Overview',
+                  style: kHeading6,
+                ),
+                Text(
+                  tvSeries.overview,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Recommendations',
+                  style: kHeading6,
+                ),
+                Consumer<TvSeriesDetailNotifier>(
+                  builder: (context, data, child) {
+                    if (data.recommendationState == RequestState.Loading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (data.recommendationState == RequestState.Error) {
+                      return Text(data.message);
+                    } else if (data.recommendationState == RequestState.Loaded) {
+                      return Container(
+                        height: 150,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            final tv = recommendations[index];
+                            return Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    TvSeriesDetailPage.ROUTE_NAME,
+                                    arguments: tvSeries.id,
+                                  );
+                                },
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(8),
+                                  ),
+                                  child: CustomCacheImage(
+                                    imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
+                                    width: 90,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          itemCount: recommendations.length,
+                        ),
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
+                ),
+              ],
             ),
           ),
         )

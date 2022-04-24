@@ -10,9 +10,6 @@ import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.da
 import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
 
 class MovieDetailNotifier extends ChangeNotifier {
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
-
   final GetMovieDetail getMovieDetail;
   final GetMovieRecommendations getMovieRecommendations;
   final GetWatchListStatus getWatchListStatus;

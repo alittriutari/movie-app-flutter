@@ -34,7 +34,7 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
   Future<String> insertWatchlist(TvSeriesTable tvSeries) async {
     try {
       databaseHelper.insertWatchlist(tvSeries);
-      return 'Added to watchlist';
+      return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
     }
@@ -44,7 +44,7 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
   Future<String> removeWatchlist(TvSeriesTable tvSeries) async {
     try {
       await databaseHelper.removeWatchlist(tvSeries);
-      return 'Removed from watchlist';
+      return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
     }

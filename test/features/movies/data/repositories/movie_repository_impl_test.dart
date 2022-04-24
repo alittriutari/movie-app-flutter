@@ -387,11 +387,11 @@ void main() {
   group('remove watchlist', () {
     test('should return success message when remove successful', () async {
       // arrange
-      when(mockLocalDataSource.removeWatchlist(testMovieTable)).thenAnswer((_) async => 'Removed from watchlist');
+      when(mockLocalDataSource.removeWatchlist(testMovieTable)).thenAnswer((_) async => 'Removed from Watchlist');
       // act
       final result = await repository.removeWatchlist(testMovieDetail);
       // assert
-      expect(result, Right('Removed from watchlist'));
+      expect(result, Right('Removed from Watchlist'));
     });
 
     test('should return DatabaseFailure when remove unsuccessful', () async {

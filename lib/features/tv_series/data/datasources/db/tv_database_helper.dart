@@ -32,7 +32,7 @@ class TvDatabaseHelper {
     await db.execute('''
       CREATE TABLE  $_tblTvWatchlist (
         id INTEGER PRIMARY KEY,
-        title TEXT,
+        name TEXT,
         overview TEXT,
         posterPath TEXT
       );
