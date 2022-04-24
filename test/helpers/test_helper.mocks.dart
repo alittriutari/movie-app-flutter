@@ -9,7 +9,7 @@ import 'dart:typed_data' as _i22;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:movie_app/common/failure.dart' as _i7;
 import 'package:movie_app/common/network_info.dart' as _i16;
-import 'package:movie_app/features/movies/data/datasources/db/database_helper.dart' as _i14;
+import 'package:movie_app/features/movies/data/datasources/db/movie_database_helper.dart' as _i14;
 import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart' as _i12;
 import 'package:movie_app/features/movies/data/datasources/movie_remote_data_source.dart' as _i10;
 import 'package:movie_app/features/movies/data/models/movie_detail_model.dart' as _i3;
@@ -159,11 +159,11 @@ class MockMovieLocalDataSource extends _i1.Mock implements _i12.MovieLocalDataSo
           as _i6.Future<List<_i13.MovieTable>>);
 }
 
-/// A class which mocks [DatabaseHelper].
+/// A class which mocks [MovieDatabaseHelper].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockDatabaseHelper extends _i1.Mock implements _i14.DatabaseHelper {
-  MockDatabaseHelper() {
+class MockMovieDatabaseHelper extends _i1.Mock implements _i14.MovieDatabaseHelper {
+  MockMovieDatabaseHelper() {
     _i1.throwOnMissingStub(this);
   }
 

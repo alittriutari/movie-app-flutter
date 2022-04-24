@@ -1,5 +1,5 @@
 import 'package:movie_app/common/network_info.dart';
-import 'package:movie_app/features/movies/data/datasources/db/database_helper.dart';
+import 'package:movie_app/features/movies/data/datasources/db/movie_database_helper.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_remote_data_source.dart';
 import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart';
@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
   MovieRepository,
   MovieRemoteDataSource,
   MovieLocalDataSource,
-  DatabaseHelper,
+  MovieDatabaseHelper,
   NetworkInfo,
   TvSeriesRepository,
   TvSeriesRemoteDataSource,

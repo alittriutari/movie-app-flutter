@@ -1,6 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:movie_app/common/network_info.dart';
-import 'package:movie_app/features/movies/data/datasources/db/database_helper.dart';
+import 'package:movie_app/features/movies/data/datasources/db/movie_database_helper.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_remote_data_source.dart';
 import 'package:movie_app/features/movies/data/repositories/movie_repository_impl.dart';
@@ -10,10 +10,6 @@ import 'package:movie_app/features/movies/domain/usecases/get_movie_recommendati
 import 'package:movie_app/features/movies/domain/usecases/get_now_playing_movies.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_top_rated_movies.dart';
-import 'package:movie_app/features/movies/domain/usecases/get_watchlist_movies.dart';
-import 'package:movie_app/features/movies/domain/usecases/get_watchlist_status.dart';
-import 'package:movie_app/features/movies/domain/usecases/remove_watchlist.dart';
-import 'package:movie_app/features/movies/domain/usecases/save_watchlist.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
 import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
@@ -21,6 +17,10 @@ import 'package:movie_app/features/search/domain/usecases/search_tv_series.dart'
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
@@ -134,7 +134,7 @@ void init() {
   locator.registerLazySingleton<TvSeriesRemoteDataSource>(() => TvSeriesRemoteDataSourceImpl(client: locator()));
 
   // helper
-  locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
+  locator.registerLazySingleton<MovieDatabaseHelper>(() => MovieDatabaseHelper());
 
   //network info
   locator.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(locator()));
