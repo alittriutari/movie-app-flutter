@@ -23,7 +23,9 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<TvSeriesDetailNotifier>(context, listen: false).fetchTvSeriesDetail(widget.id));
+    Future.microtask(() =>
+        Provider.of<TvSeriesDetailNotifier>(context, listen: false)
+            .fetchTvSeriesDetail(widget.id));
   }
 
   @override
@@ -59,7 +61,10 @@ class DetailTvSeriesContent extends StatelessWidget {
   final List<TvSeries> recommendations;
   final bool isAddedWatchlist;
 
-  DetailTvSeriesContent({required this.tvSeries, required this.recommendations, required this.isAddedWatchlist});
+  DetailTvSeriesContent(
+      {required this.tvSeries,
+      required this.recommendations,
+      required this.isAddedWatchlist});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +79,8 @@ class DetailTvSeriesContent extends StatelessWidget {
                 Container(
                   height: 400,
                   child: CustomCacheImage(
-                    imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
+                    imageUrl:
+                        'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
                     height: 400,
                     boxFit: BoxFit.cover,
                     width: double.infinity,
@@ -117,15 +123,24 @@ class DetailTvSeriesContent extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         if (!isAddedWatchlist) {
-                          await Provider.of<TvSeriesDetailNotifier>(context, listen: false).addWatchList(tvSeries);
+                          await Provider.of<TvSeriesDetailNotifier>(context,
+                                  listen: false)
+                              .addWatchList(tvSeries);
                         } else {
-                          await Provider.of<TvSeriesDetailNotifier>(context, listen: false).removeFromWatchlist(tvSeries);
+                          await Provider.of<TvSeriesDetailNotifier>(context,
+                                  listen: false)
+                              .removeFromWatchlist(tvSeries);
                         }
 
-                        final message = Provider.of<TvSeriesDetailNotifier>(context, listen: false).watchlistMessage;
+                        final message = Provider.of<TvSeriesDetailNotifier>(
+                                context,
+                                listen: false)
+                            .watchlistMessage;
 
-                        if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                        if (message == watchlistAddSuccessMessage ||
+                            message == watchlistRemoveSuccessMessage) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text(message)));
                         } else {
                           showDialog(
                               context: context,
@@ -138,7 +153,9 @@ class DetailTvSeriesContent extends StatelessWidget {
                       },
                       child: Column(
                         children: [
-                          isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                          isAddedWatchlist
+                              ? Icon(Icons.check)
+                              : Icon(Icons.add),
                           Text(
                             'Watchlist',
                             style: kBodyText,
@@ -209,7 +226,8 @@ class DetailTvSeriesContent extends StatelessWidget {
                       );
                     } else if (data.recommendationState == RequestState.Error) {
                       return Text(data.message);
-                    } else if (data.recommendationState == RequestState.Loaded) {
+                    } else if (data.recommendationState ==
+                        RequestState.Loaded) {
                       return Container(
                         height: 150,
                         child: ListView.builder(
@@ -231,7 +249,8 @@ class DetailTvSeriesContent extends StatelessWidget {
                                     Radius.circular(8),
                                   ),
                                   child: CustomCacheImage(
-                                    imageUrl: 'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
+                                    imageUrl:
+                                        'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
                                     width: 90,
                                   ),
                                 ),

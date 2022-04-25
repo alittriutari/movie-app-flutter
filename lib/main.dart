@@ -24,6 +24,7 @@ import 'package:movie_app/features/tv_series/presentation/providers/tv_series_de
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:movie_app/injection.dart' as di;
 
@@ -69,6 +70,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<SearchTvSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<WatchlistTvNotifier>(),
         ),
       ],
       child: MaterialApp(
@@ -116,8 +120,7 @@ class MyApp extends StatelessWidget {
                         index: index,
                       ),
                   settings: settings);
-            case WatchlistMoviesPage.ROUTE_NAME:
-              return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
+
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
