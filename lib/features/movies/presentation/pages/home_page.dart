@@ -1,7 +1,6 @@
 import 'package:movie_app/features/movies/presentation/pages/home_movie_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/home_tv_series_page.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/features/watchlist/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie_app/features/watchlist/presentation/pages/watchlist_page.dart';
 
 import '../../../search/presentation/pages/search_page.dart';
@@ -24,12 +23,16 @@ class HomeScreen extends StatelessWidget {
               color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
               child: SafeArea(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
                   child: Column(
                     children: [
                       Row(
                         children: [
+                          IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
+                          SizedBox(
+                            width: 10,
+                          ),
                           Text('Movie App'),
                           SizedBox(
                             width: 5,
@@ -41,27 +44,21 @@ class HomeScreen extends StatelessWidget {
                                 Navigator.pushNamed(
                                   context,
                                   SearchPage.ROUTE_NAME,
-                                  arguments:
-                                      DefaultTabController.of(context)!.index,
+                                  arguments: DefaultTabController.of(context)!.index,
                                 );
                               },
                               icon: Icon(Icons.search))
                         ],
                       ),
                       Spacer(),
-                      TabBar(indicatorColor: Colors.transparent, tabs: [
-                        Text('Movie'),
-                        Text('Tv Series'),
-                        Text('Watchlist')
-                      ])
+                      TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          body: TabBarView(
-              children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
+          body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
         );
       }),
     );

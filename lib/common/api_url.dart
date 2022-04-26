@@ -3,15 +3,13 @@ class ApiUrl {
   static const BASE_URL = 'https://api.themoviedb.org/3';
 
   //TV SERIES
-  static const String tvSeriesOnAir = '$BASE_URL/tv/on_the_air?$API_KEY';
+  static const String tvSeriesOnAir = '$BASE_URL/tv/on_the_air?$API_KEY&with_networks=213';
 
-  static const String tvSeriesPopular = '$BASE_URL/tv/popular?$API_KEY';
+  static const String tvSeriesPopular = '$BASE_URL/tv/popular?$API_KEY&with_networks=213';
 
   static String tvSeriesDetail(int id) => '$BASE_URL/tv/$id?$API_KEY';
 
-  static String tvSeriesRecommendation(int id) =>
-      '$BASE_URL/tv/$id/recommendations?$API_KEY';
+  static String tvSeriesRecommendation(int id) => '$BASE_URL/tv/$id/recommendations?$API_KEY&with_networks=213';
 
-  static String searchTvSeries(String query) =>
-      '$BASE_URL/search/tv?$API_KEY&query=$query';
+  static String searchTvSeries(String query) => '$BASE_URL/search/tv?$API_KEY&query=$query';
 }

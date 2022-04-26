@@ -24,10 +24,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .fetchMovieDetail(widget.id);
-      Provider.of<MovieDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
+      Provider.of<MovieDetailNotifier>(context, listen: false).fetchMovieDetail(widget.id);
+      Provider.of<MovieDetailNotifier>(context, listen: false).loadWatchlistStatus(widget.id);
     });
   }
 
@@ -78,8 +76,7 @@ class DetailContent extends StatelessWidget {
                 Container(
                   height: 400,
                   child: CustomCacheImage(
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                    imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                     height: 400,
                     boxFit: BoxFit.cover,
                     width: double.infinity,
@@ -122,24 +119,15 @@ class DetailContent extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () async {
                         if (!isAddedWatchlist) {
-                          await Provider.of<MovieDetailNotifier>(context,
-                                  listen: false)
-                              .addWatchlist(movie);
+                          await Provider.of<MovieDetailNotifier>(context, listen: false).addWatchlist(movie);
                         } else {
-                          await Provider.of<MovieDetailNotifier>(context,
-                                  listen: false)
-                              .removeFromWatchlist(movie);
+                          await Provider.of<MovieDetailNotifier>(context, listen: false).removeFromWatchlist(movie);
                         }
 
-                        final message = Provider.of<MovieDetailNotifier>(
-                                context,
-                                listen: false)
-                            .watchlistMessage;
+                        final message = Provider.of<MovieDetailNotifier>(context, listen: false).watchlistMessage;
 
-                        if (message == watchlistAddSuccessMessage ||
-                            message == watchlistRemoveSuccessMessage) {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text(message)));
+                        if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
                         } else {
                           showDialog(
                               context: context,
@@ -152,9 +140,7 @@ class DetailContent extends StatelessWidget {
                       },
                       child: Column(
                         children: [
-                          isAddedWatchlist
-                              ? Icon(Icons.check)
-                              : Icon(Icons.add),
+                          isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
                           Text(
                             'Watchlist',
                             style: kBodyText,
@@ -225,8 +211,7 @@ class DetailContent extends StatelessWidget {
                       );
                     } else if (data.recommendationState == RequestState.Error) {
                       return Text(data.message);
-                    } else if (data.recommendationState ==
-                        RequestState.Loaded) {
+                    } else if (data.recommendationState == RequestState.Loaded) {
                       return Container(
                         height: 150,
                         child: ListView.builder(
@@ -248,8 +233,7 @@ class DetailContent extends StatelessWidget {
                                     Radius.circular(8),
                                   ),
                                   child: CustomCacheImage(
-                                    imageUrl:
-                                        'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                    imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                                     width: 90,
                                   ),
                                 ),
