@@ -10,7 +10,7 @@ class TvSeriesDetailResponse extends Equatable {
     required this.genres,
     required this.id,
     required this.name,
-    required this.numberOfSeasons,
+    required this.numberOfEpisode,
     required this.overview,
     required this.posterPath,
     required this.voteAverage,
@@ -23,21 +23,19 @@ class TvSeriesDetailResponse extends Equatable {
   final List<GenreModel> genres;
   final int id;
   final String name;
-  final int numberOfSeasons;
+  final int numberOfEpisode;
   final String overview;
   final String? posterPath;
   final double voteAverage;
   final int voteCount;
 
-  factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) =>
-      TvSeriesDetailResponse(
+  factory TvSeriesDetailResponse.fromJson(Map<String, dynamic> json) => TvSeriesDetailResponse(
         backdropPath: json["backdrop_path"],
         episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
-        genres: List<GenreModel>.from(
-            json["genres"].map((x) => GenreModel.fromJson(x))),
+        genres: List<GenreModel>.from(json["genres"].map((x) => GenreModel.fromJson(x))),
         id: json["id"],
         name: json["name"],
-        numberOfSeasons: json["number_of_seasons"],
+        numberOfEpisode: json["number_of_seasons"],
         overview: json["overview"],
         posterPath: json["poster_path"],
         voteAverage: json["vote_average"].toDouble(),
@@ -51,7 +49,7 @@ class TvSeriesDetailResponse extends Equatable {
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "id": id,
         "name": name,
-        "number_of_seasons": numberOfSeasons,
+        "number_of_seasons": numberOfEpisode,
         "overview": overview,
         "poster_path": posterPath,
         "vote_average": voteAverage,
@@ -64,7 +62,7 @@ class TvSeriesDetailResponse extends Equatable {
         genres: genres.map((genre) => genre.toEntity()).toList(),
         id: id,
         name: name,
-        numberOfSeasons: numberOfSeasons,
+        numberOfEpisode: numberOfEpisode,
         overview: overview,
         posterPath: posterPath,
         voteAverage: voteAverage,
@@ -79,7 +77,7 @@ class TvSeriesDetailResponse extends Equatable {
         genres,
         id,
         name,
-        numberOfSeasons,
+        numberOfEpisode,
         overview,
         posterPath,
         voteAverage,

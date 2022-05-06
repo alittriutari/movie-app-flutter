@@ -23,7 +23,6 @@ class HomeScreen extends StatelessWidget {
               color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
               child: SafeArea(
                 child: Padding(
-                  // padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
                   child: Column(
                     children: [

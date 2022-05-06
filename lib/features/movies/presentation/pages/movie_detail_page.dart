@@ -244,7 +244,7 @@ class DetailContent extends StatelessWidget {
                         ),
                       );
                     } else {
-                      return Container();
+                      return Center(child: Text('Data not found'));
                     }
                   },
                 ),

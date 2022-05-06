@@ -9,7 +9,7 @@ class TvSeriesDetail extends Equatable {
     required this.genres,
     required this.id,
     required this.name,
-    required this.numberOfSeasons,
+    required this.numberOfEpisode,
     required this.overview,
     required this.posterPath,
     required this.voteAverage,
@@ -22,7 +22,7 @@ class TvSeriesDetail extends Equatable {
   final List<Genre> genres;
   final int id;
   final String name;
-  final int numberOfSeasons;
+  final int numberOfEpisode;
   final String overview;
   final String? posterPath;
   final double voteAverage;
@@ -36,7 +36,7 @@ class TvSeriesDetail extends Equatable {
         genres,
         id,
         name,
-        numberOfSeasons,
+        numberOfEpisode,
         overview,
         posterPath,
         voteAverage,
