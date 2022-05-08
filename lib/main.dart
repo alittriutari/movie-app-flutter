@@ -7,7 +7,6 @@ import 'package:movie_app/features/movies/presentation/pages/popular_movies_page
 import 'package:movie_app/features/search/presentation/pages/search_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
-import 'package:movie_app/features/watchlist/presentation/pages/watchlist_movies_page.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';

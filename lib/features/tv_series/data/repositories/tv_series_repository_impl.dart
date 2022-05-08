@@ -81,6 +81,7 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   Future<Either<Failure, List<Episode>>> getTvEpisode(int id, int seasonNumber) async {
     try {
       final result = await remoteDataSource.getTvEpisode(id, seasonNumber);
+
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));

@@ -5,11 +5,13 @@
 import 'dart:async' as _i5;
 
 import 'package:dartz/dartz.dart' as _i3;
+import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_app/common/failure.dart' as _i6;
 import 'package:movie_app/features/movies/domain/entities/movie.dart' as _i7;
-import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart' as _i2;
-import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dart' as _i4;
-import 'package:mockito/mockito.dart' as _i1;
+import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart'
+    as _i2;
+import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -35,9 +37,12 @@ class MockGetPopularMovies extends _i1.Mock implements _i4.GetPopularMovies {
 
   @override
   _i2.MovieRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository), returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
+      (super.noSuchMethod(Invocation.getter(#repository),
+          returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
   @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> execute() => (super.noSuchMethod(Invocation.method(#execute, []),
-          returnValue: Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>.value(_FakeEither_1<_i6.Failure, List<_i7.Movie>>()))
-      as _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
+  _i5.Future<_i3.Either<_i6.Failure, List<_i7.Movie>>> execute() =>
+      (super.noSuchMethod(Invocation.method(#execute, []),
+          returnValue: Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>.value(
+              _FakeEither_1<_i6.Failure, List<_i7.Movie>>())) as _i5
+          .Future<_i3.Either<_i6.Failure, List<_i7.Movie>>>);
 }

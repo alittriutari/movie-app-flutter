@@ -19,7 +19,7 @@ class EpisodeResponse extends Equatable {
   final String name;
   final String overview;
   final int episodeId;
-  final String posterPath;
+  final String? posterPath;
   final int seasonNumber;
 
   factory EpisodeResponse.fromJson(Map<String, dynamic> json) => EpisodeResponse(

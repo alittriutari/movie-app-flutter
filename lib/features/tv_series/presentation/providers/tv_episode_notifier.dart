@@ -20,14 +20,14 @@ class TvEpisodeNotifier extends ChangeNotifier {
   Future<void> fetchEpisode(int id, int seasonNumber) async {
     _episodeState = RequestState.Loading;
     notifyListeners();
-
     final episodeResult = await getTvEpisode.execute(id, seasonNumber);
+
     episodeResult.fold((failure) {
       _episodeState = RequestState.Error;
       _message = failure.message;
       notifyListeners();
     }, (eps) {
-      _episodeState = RequestState.Loading;
+      _episodeState = RequestState.Loaded;
       _episode = eps;
       notifyListeners();
     });
