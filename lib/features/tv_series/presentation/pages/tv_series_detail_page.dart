@@ -72,12 +72,14 @@ class DetailTvSeriesContent extends StatefulWidget {
   State<DetailTvSeriesContent> createState() => _DetailTvSeriesContentState();
 }
 
-class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> {
+class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
   final List<int> _seasonList = [];
   int currentSeason = 1;
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 2, vsync: this);
     for (var i = 1; i <= widget.seasons; i++) {
       _seasonList.add(i);
     }
@@ -87,88 +89,92 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 400,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: 400,
-                  child: CustomCacheImage(
-                    imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
+        SliverAppBar(
+          expandedHeight: 400,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            background: SizedBox(
+              height: 400,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
                     height: 400,
-                    boxFit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
-                ),
-                Container(
-                  height: 400,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.black, Colors.transparent],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
+                    child: CustomCacheImage(
+                      imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
+                      height: 400,
+                      boxFit: BoxFit.cover,
+                      width: double.infinity,
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 100,
-                  child: SizedBox(
-                      width: 250,
-                      child: Text(
-                        widget.tvSeries.name,
-                        textAlign: TextAlign.center,
-                        style: kHeading5,
-                      )),
-                ),
-                Positioned(
-                  bottom: 75,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: Text(
-                      _showGenres(widget.tvSeries.genres),
-                    ),
-                  ),
-                ),
-                Positioned(
-                    bottom: 20,
-                    right: 0,
-                    left: 0,
-                    child: GestureDetector(
-                      onTap: () async {
-                        if (!widget.isAddedWatchlist) {
-                          await Provider.of<TvSeriesDetailNotifier>(context, listen: false).addWatchList(widget.tvSeries);
-                        } else {
-                          await Provider.of<TvSeriesDetailNotifier>(context, listen: false).removeFromWatchlist(widget.tvSeries);
-                        }
-
-                        final message = Provider.of<TvSeriesDetailNotifier>(context, listen: false).watchlistMessage;
-
-                        if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  content: Text(message),
-                                );
-                              });
-                        }
-                      },
-                      child: Column(
-                        children: [
-                          widget.isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
-                          Text(
-                            'Watchlist',
-                            style: kBodyText,
-                          )
-                        ],
+                  Container(
+                    height: 400,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.black, Colors.transparent],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
                       ),
-                    ))
-              ],
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 100,
+                    child: SizedBox(
+                        width: 250,
+                        child: Text(
+                          widget.tvSeries.name,
+                          textAlign: TextAlign.center,
+                          style: kHeading5,
+                        )),
+                  ),
+                  Positioned(
+                    bottom: 75,
+                    left: 0,
+                    right: 0,
+                    child: Center(
+                      child: Text(
+                        _showGenres(widget.tvSeries.genres),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                      bottom: 20,
+                      right: 0,
+                      left: 0,
+                      child: GestureDetector(
+                        onTap: () async {
+                          if (!widget.isAddedWatchlist) {
+                            await Provider.of<TvSeriesDetailNotifier>(context, listen: false).addWatchList(widget.tvSeries);
+                          } else {
+                            await Provider.of<TvSeriesDetailNotifier>(context, listen: false).removeFromWatchlist(widget.tvSeries);
+                          }
+
+                          final message = Provider.of<TvSeriesDetailNotifier>(context, listen: false).watchlistMessage;
+
+                          if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: Text(message),
+                                  );
+                                });
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            widget.isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                            Text(
+                              'Watchlist',
+                              style: kBodyText,
+                            )
+                          ],
+                        ),
+                      ))
+                ],
+              ),
             ),
           ),
         ),
@@ -198,16 +204,6 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> {
                         Text('${widget.tvSeries.voteAverage}')
                       ],
                     ),
-                    // SizedBox(
-                    //   width: 20,
-                    // ),
-                    // Container(
-                    //   color: kDavysGrey,
-                    //   padding: EdgeInsets.all(5),
-                    //   child: Text(
-                    //     _showDuration(tvSeries.),
-                    //   ),
-                    // ),
                   ],
                 ),
                 SizedBox(height: 16),
@@ -218,54 +214,35 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> {
                 Text(
                   widget.tvSeries.overview,
                 ),
-                SizedBox(height: 16),
-                DefaultTabController(
-                  length: 2,
-                  child: Column(
-                    children: [
-                      Container(
-                        child: TabBar(
-                            labelStyle: kBodyText,
-                            indicatorColor: kMikadoYellow,
-                            unselectedLabelColor: Colors.white.withOpacity(0.5),
-                            indicatorWeight: 3,
-                            tabs: [
-                              Tab(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text('Recommendations'.toUpperCase()),
-                                ),
-                              ),
-                              Tab(
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'Episode'.toUpperCase(),
-                                  ),
-                                ),
-                              ),
-                            ]),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.25,
-                        child: TabBarView(
-                          children: [
-                            _recommendationTvSeries(),
-                            _episodeTvSeries(context),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                // Text(
-                //   'Recommendations',
-                //   style: kHeading6,
-                // ),
               ],
             ),
           ),
-        )
+        ),
+        SliverToBoxAdapter(
+          child: TabBar(
+              controller: _tabController,
+              labelStyle: kBodyText,
+              indicatorColor: kMikadoYellow,
+              unselectedLabelColor: Colors.white.withOpacity(0.5),
+              indicatorWeight: 3,
+              tabs: [
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text('Recommendations'.toUpperCase()),
+                  ),
+                ),
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Episode'.toUpperCase(),
+                    ),
+                  ),
+                ),
+              ]),
+        ),
+        SliverFillRemaining(child: TabBarView(controller: _tabController, children: [_recommendationTvSeries(), _episodeTvSeries(context)]))
       ],
     );
   }
@@ -321,6 +298,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> {
 
   Widget _episodeTvSeries(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         Container(
           height: MediaQuery.of(context).size.height * 0.06,
@@ -355,12 +333,20 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> {
                 return Container(height: 50, child: Center(child: Text('Not Available')));
               } else {
                 return Container(
-                  height: 20,
+                  // height: 20,
                   child: ListView.builder(
                     shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return Text('${data.episode[index].episodeNumber} + ${data.episode[index].name}');
+                      return Row(
+                        children: [
+                          CustomCacheImage(
+                            imageUrl: BASE_IMAGE_URL + data.episode[index].stillPath,
+                            height: 80,
+                            width: 100,
+                          ),
+                          Text('${data.episode[index].episodeNumber} + ${data.episode[index].name}'),
+                        ],
+                      );
                     },
                     itemCount: data.episode.length,
                   ),
