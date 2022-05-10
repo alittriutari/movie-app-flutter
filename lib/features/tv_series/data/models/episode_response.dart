@@ -22,10 +22,12 @@ class EpisodeResponse extends Equatable {
   final String? posterPath;
   final int seasonNumber;
 
-  factory EpisodeResponse.fromJson(Map<String, dynamic> json) => EpisodeResponse(
+  factory EpisodeResponse.fromJson(Map<String, dynamic> json) =>
+      EpisodeResponse(
         id: json["_id"],
         airDate: json["air_date"],
-        episodes: List<EpisodeModel>.from(json["episodes"].map((x) => EpisodeModel.fromJson(x))),
+        episodes: List<EpisodeModel>.from(
+            json["episodes"].map((x) => EpisodeModel.fromJson(x))),
         name: json["name"],
         overview: json["overview"],
         episodeId: json["id"],

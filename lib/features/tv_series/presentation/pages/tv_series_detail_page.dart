@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/domain/entities/genre.dart';
@@ -25,8 +26,10 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      Provider.of<TvSeriesDetailNotifier>(context, listen: false).fetchTvSeriesDetail(widget.id);
-      Provider.of<TvEpisodeNotifier>(context, listen: false).fetchEpisode(widget.id, 1);
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
+          .fetchTvSeriesDetail(widget.id);
+      Provider.of<TvEpisodeNotifier>(context, listen: false)
+          .fetchEpisode(widget.id, 1);
     });
   }
 
@@ -66,16 +69,22 @@ class DetailTvSeriesContent extends StatefulWidget {
   final int seasons;
   final bool isAddedWatchlist;
 
-  DetailTvSeriesContent({required this.tvSeries, required this.recommendations, required this.isAddedWatchlist, required this.seasons});
+  DetailTvSeriesContent(
+      {required this.tvSeries,
+      required this.recommendations,
+      required this.isAddedWatchlist,
+      required this.seasons});
 
   @override
   State<DetailTvSeriesContent> createState() => _DetailTvSeriesContentState();
 }
 
-class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with SingleTickerProviderStateMixin {
+class _DetailTvSeriesContentState extends State<DetailTvSeriesContent>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final List<int> _seasonList = [];
   int currentSeason = 1;
+  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -88,20 +97,22 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           expandedHeight: 400,
           pinned: true,
           flexibleSpace: FlexibleSpaceBar(
             background: SizedBox(
-              height: 400,
+              // height: 400,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Container(
                     height: 400,
                     child: CustomCacheImage(
-                      imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
+                      imageUrl:
+                          'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
                       height: 400,
                       boxFit: BoxFit.cover,
                       width: double.infinity,
@@ -144,15 +155,24 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                       child: GestureDetector(
                         onTap: () async {
                           if (!widget.isAddedWatchlist) {
-                            await Provider.of<TvSeriesDetailNotifier>(context, listen: false).addWatchList(widget.tvSeries);
+                            await Provider.of<TvSeriesDetailNotifier>(context,
+                                    listen: false)
+                                .addWatchList(widget.tvSeries);
                           } else {
-                            await Provider.of<TvSeriesDetailNotifier>(context, listen: false).removeFromWatchlist(widget.tvSeries);
+                            await Provider.of<TvSeriesDetailNotifier>(context,
+                                    listen: false)
+                                .removeFromWatchlist(widget.tvSeries);
                           }
 
-                          final message = Provider.of<TvSeriesDetailNotifier>(context, listen: false).watchlistMessage;
+                          final message = Provider.of<TvSeriesDetailNotifier>(
+                                  context,
+                                  listen: false)
+                              .watchlistMessage;
 
-                          if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                          if (message == watchlistAddSuccessMessage ||
+                              message == watchlistRemoveSuccessMessage) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text(message)));
                           } else {
                             showDialog(
                                 context: context,
@@ -165,7 +185,9 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                         },
                         child: Column(
                           children: [
-                            widget.isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                            widget.isAddedWatchlist
+                                ? Icon(Icons.check)
+                                : Icon(Icons.add),
                             Text(
                               'Watchlist',
                               style: kBodyText,
@@ -187,21 +209,34 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    RatingBarIndicator(
+                      rating: widget.tvSeries.voteAverage / 2,
+                      itemCount: 5,
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: kMikadoYellow,
+                      ),
+                      itemSize: 20,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       children: [
-                        RatingBarIndicator(
-                          rating: widget.tvSeries.voteAverage / 2,
-                          itemCount: 5,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
-                            color: kMikadoYellow,
-                          ),
-                          itemSize: 24,
+                        Text('${widget.tvSeries.numberOfSeasons} Season'),
+                        SizedBox(
+                          width: 10,
                         ),
-                        Text('${widget.tvSeries.voteAverage}')
+                        Container(
+                            color: kDavysGrey,
+                            padding: EdgeInsets.all(5),
+                            child: Text(
+                              _showDuration(
+                                  widget.tvSeries.episodeRunTime.first),
+                            ))
                       ],
                     ),
                   ],
@@ -220,11 +255,9 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
         ),
         SliverToBoxAdapter(
           child: TabBar(
-              controller: _tabController,
-              labelStyle: kBodyText,
-              indicatorColor: kMikadoYellow,
-              unselectedLabelColor: Colors.white.withOpacity(0.5),
               indicatorWeight: 3,
+              indicatorColor: kMikadoYellow,
+              controller: _tabController,
               tabs: [
                 Tab(
                   child: Align(
@@ -242,7 +275,18 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                 ),
               ]),
         ),
-        SliverFillRemaining(child: TabBarView(controller: _tabController, children: [_recommendationTvSeries(), _episodeTvSeries(context)]))
+        Builder(builder: (context) {
+          _tabController.addListener(() {
+            if (!_tabController.indexIsChanging) {
+              setState(() {
+                _selectedIndex = _tabController.index;
+              });
+            }
+          });
+          return _selectedIndex == 0
+              ? SliverToBoxAdapter(child: _recommendationTvSeries())
+              : SliverToBoxAdapter(child: _episodeTvSeries(context));
+        }),
       ],
     );
   }
@@ -259,6 +303,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
         } else if (data.recommendationState == RequestState.Loaded) {
           return Container(
             height: 150,
+            margin: const EdgeInsets.fromLTRB(16, 25, 16, 16),
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -279,7 +324,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                         Radius.circular(8),
                       ),
                       child: CustomCacheImage(
-                        imageUrl: 'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                        imageUrl:
+                            'https://image.tmdb.org/t/p/w500${tv.posterPath}',
                         width: 90,
                       ),
                     ),
@@ -297,67 +343,100 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
   }
 
   Widget _episodeTvSeries(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        Container(
-          height: MediaQuery.of(context).size.height * 0.06,
-          width: double.infinity,
-          margin: EdgeInsets.symmetric(vertical: 16),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-          decoration: BoxDecoration(color: kDavysGrey, borderRadius: BorderRadius.circular(10)),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<int>(
-                hint: Text('Select season'),
-                isExpanded: true,
-                items: _seasonList
-                    .map((e) => DropdownMenuItem<int>(
-                          value: e,
-                          child: Text('Season ' + e.toString()),
-                        ))
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    currentSeason = value!;
-                  });
-                  Provider.of<TvEpisodeNotifier>(context, listen: false).fetchEpisode(widget.tvSeries.id, currentSeason);
-                }),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.06,
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+            decoration: BoxDecoration(
+                color: kDavysGrey, borderRadius: BorderRadius.circular(10)),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<int>(
+                  value: currentSeason,
+                  hint: Text('Select season'),
+                  isExpanded: true,
+                  items: _seasonList
+                      .map((e) => DropdownMenuItem<int>(
+                            value: e,
+                            child: Text('Season ' + e.toString()),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      currentSeason = value!;
+                    });
+                    Provider.of<TvEpisodeNotifier>(context, listen: false)
+                        .fetchEpisode(widget.tvSeries.id, currentSeason);
+                  }),
+            ),
           ),
-        ),
-        Consumer<TvEpisodeNotifier>(
-          builder: (context, data, child) {
-            if (data.episodeState == RequestState.Error) {
-              return Text(data.message);
-            } else if (data.episodeState == RequestState.Loaded) {
-              if (data.episode.isEmpty) {
-                return Container(height: 50, child: Center(child: Text('Not Available')));
-              } else {
-                return Container(
-                  // height: 20,
-                  child: ListView.builder(
+          Consumer<TvEpisodeNotifier>(
+            builder: (context, data, child) {
+              if (data.episodeState == RequestState.Error) {
+                return Text(data.message);
+              } else if (data.episodeState == RequestState.Loaded) {
+                if (data.episode.isEmpty) {
+                  return Container(
+                      height: 50, child: Center(child: Text('Not Available')));
+                } else {
+                  return ListView.separated(
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 8,
+                    ),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Row(
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CustomCacheImage(
-                            imageUrl: BASE_IMAGE_URL + data.episode[index].stillPath,
-                            height: 80,
-                            width: 100,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CustomCacheImage(
+                                imageUrl: BASE_IMAGE_URL +
+                                    data.episode[index].stillPath,
+                                height: 80,
+                                width: 100,
+                              ),
+                              SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(data.episode[index].name),
+                                  SizedBox(
+                                    height: 5,
+                                  ),
+                                  Container(
+                                      padding: EdgeInsets.all(5),
+                                      color: kDavysGrey,
+                                      child: Text(data
+                                          .episode[index].voteAverage
+                                          .toString())),
+                                ],
+                              ),
+                            ],
                           ),
-                          Text('${data.episode[index].episodeNumber} + ${data.episode[index].name}'),
+                          Text(
+                            data.episode[index].overview,
+                            style: description,
+                          ),
                         ],
                       );
                     },
                     itemCount: data.episode.length,
-                  ),
-                );
+                  );
+                }
+              } else {
+                return Center(child: CircularProgressIndicator());
               }
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          },
-        ),
-      ],
+            },
+          ),
+        ],
+      ),
     );
   }
 

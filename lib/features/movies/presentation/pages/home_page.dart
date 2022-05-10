@@ -43,21 +43,27 @@ class HomeScreen extends StatelessWidget {
                                 Navigator.pushNamed(
                                   context,
                                   SearchPage.ROUTE_NAME,
-                                  arguments: DefaultTabController.of(context)!.index,
+                                  arguments:
+                                      DefaultTabController.of(context)!.index,
                                 );
                               },
                               icon: Icon(Icons.search))
                         ],
                       ),
                       Spacer(),
-                      TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
+                      TabBar(indicatorColor: Colors.transparent, tabs: [
+                        Text('Movie'),
+                        Text('Tv Series'),
+                        Text('Watchlist')
+                      ])
                     ],
                   ),
                 ),
               ),
             ),
           ),
-          body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
+          body: TabBarView(
+              children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
         );
       }),
     );

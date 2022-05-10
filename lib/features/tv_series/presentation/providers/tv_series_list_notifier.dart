@@ -20,7 +20,8 @@ class TvSeriesListNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  TvSeriesListNotifier({required this.getOnAirTvSeries, required this.getPopularTvSeries});
+  TvSeriesListNotifier(
+      {required this.getOnAirTvSeries, required this.getPopularTvSeries});
 
   final GetOnAirTvSeries getOnAirTvSeries;
   final GetPopularTvSeries getPopularTvSeries;
