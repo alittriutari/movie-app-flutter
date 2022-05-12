@@ -1,0 +1,30 @@
+{
+    
+    "poster_path": "/izIMqapegdEZj0YVDyFATPR8adh.jpg",
+    "backdrop_path": "/k47JEUTQsSMN532HRg6RCzZKBdB.jpg",
+    "episode_run_time": [
+        51
+    ],
+    "first_air_date": "2022-02-25",
+    "genres": [
+        {
+            "id": 10759,
+            "name": "Action & Adventure"
+        },
+        {
+            "id": 18,
+            "name": "Drama"
+        },
+        {
+            "id": 10768,
+            "name": "War & Politics"
+        }
+    ],
+    "id": 116135,
+    "name": "Vikings: Valhalla",
+    "number_of_episodes": 8,
+    "number_of_seasons": 3,
+    "overview": "In this sequel to \"Vikings,\" a hundred years have passed and a new generation of legendary heroes arises to forge its own destiny — and make history.",
+    "vote_average": 8.1,
+    "vote_count": 182
+}
