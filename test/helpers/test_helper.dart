@@ -3,6 +3,7 @@ import 'package:movie_app/features/movies/data/datasources/db/movie_database_hel
 import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_remote_data_source.dart';
 import 'package:movie_app/features/movies/domain/repositories/movie_repository.dart';
+import 'package:movie_app/features/tv_series/data/datasources/tv_series_local_data_source.dart';
 import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
 import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repository.dart';
 import 'package:mockito/annotations.dart';
@@ -19,6 +20,7 @@ import 'package:http/http.dart' as http;
   NetworkInfo,
   TvSeriesRepository,
   TvSeriesRemoteDataSource,
+  TvLocalDataSource
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])
