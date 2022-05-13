@@ -112,3 +112,10 @@ final testTvSeriesTable = TvSeriesTable(
   posterPath: 'posterPath',
   overview: 'overview',
 );
+
+final testTvMap = {
+  'id': 1,
+  'overview': 'overview',
+  'posterPath': 'posterPath',
+  'name': 'name',
+};
