@@ -42,7 +42,7 @@ void main() {
     });
   });
 
-  group('get Popular Movies', () {
+  group('get popular tv series', () {
     final tTvSeriesList = TvSeriesResponse.fromJson(json.decode(readJson('dummy_data/popular_tv.json'))).tvSeriesList;
 
     test('should return list of tv series when response is success (200)', () async {
@@ -92,7 +92,7 @@ void main() {
     final tTvSeriesList = TvSeriesResponse.fromJson(json.decode(readJson('dummy_data/tv_recommendations.json'))).tvSeriesList;
     final tId = 1;
 
-    test('should return list of Movie Model when the response code is 200', () async {
+    test('should return list of tv series model when the response code is 200', () async {
       // arrange
       when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesRecommendation(tId))))
           .thenAnswer((_) async => http.Response(readJson('dummy_data/tv_recommendations.json'), 200));
