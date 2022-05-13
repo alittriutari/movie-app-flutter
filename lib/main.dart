@@ -87,8 +87,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        // home: Material(child: CustomDrawer(content: HomeMoviePage())),
-        home: Material(child: CustomDrawer(content: HomeScreen())),
+        home: Material(child: HomeScreen()),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
@@ -126,6 +125,7 @@ class MyApp extends StatelessWidget {
 
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
+
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

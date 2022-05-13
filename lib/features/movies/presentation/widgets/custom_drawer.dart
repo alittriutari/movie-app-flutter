@@ -1,34 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/common/constants.dart';
 
-class CustomDrawer extends StatefulWidget {
-  final Widget content;
-  const CustomDrawer({Key? key, required this.content}) : super(key: key);
-
-  @override
-  State<CustomDrawer> createState() => _CustomDrawerState();
-}
-
-class _CustomDrawerState extends State<CustomDrawer>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
+class CustomDrawer extends StatelessWidget {
+  const CustomDrawer({Key? key}) : super(key: key);
 
   @override
-  void initState() {
-    super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 250));
-  }
-
-  Widget _buildDrawer() {
+  Widget build(BuildContext context) {
     return Container(
+      color: kDavysGrey,
       child: Column(
         children: [
           UserAccountsDrawerHeader(
             accountName: Text('Movie App'),
-            accountEmail: Text('movie@gmail.com'),
+            accountEmail: Text('movie_app@gmail.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://raw.githubusercontent.com/dicodingacademy/assets/main/flutter_expert_academy/dicoding-icon.png'),
+              backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/29432760?v=4'),
             ),
           ),
           ListTile(
@@ -46,33 +32,6 @@ class _CustomDrawerState extends State<CustomDrawer>
         ],
       ),
     );
-  }
-
-  void toggle() => _animationController.isDismissed
-      ? _animationController.forward()
-      : _animationController.reverse();
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: toggle,
-      child: AnimatedBuilder(
-          animation: _animationController,
-          builder: (context, child) {
-            double slide = 255 * _animationController.value;
-            double scale = 1 - (_animationController.value * 0.3);
-            return Stack(
-              children: [
-                _buildDrawer(),
-                Transform(
-                    transform: Matrix4.identity()
-                      ..scale(scale)
-                      ..translate(slide),
-                    alignment: Alignment.centerLeft,
-                    child: widget.content)
-              ],
-            );
-          }),
-    );
+    ;
   }
 }
