@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/domain/entities/genre.dart';
@@ -6,8 +8,6 @@ import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series_detail.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
@@ -143,8 +143,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                       bottom: 20,
                       right: 0,
                       left: 0,
-                      child: GestureDetector(
-                        onTap: () async {
+                      child: ElevatedButton(
+                        onPressed: () async {
                           if (!widget.isAddedWatchlist) {
                             await Provider.of<TvSeriesDetailNotifier>(context, listen: false).addWatchList(widget.tvSeries);
                           } else {
