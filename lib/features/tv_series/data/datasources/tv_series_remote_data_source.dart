@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:http/http.dart' as http;
 import 'package:movie_app/common/api_url.dart';
 import 'package:movie_app/common/exception.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_detail_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_response.dart';
-import 'package:http/http.dart' as http;
 
 import '../models/episode_model.dart';
 import '../models/episode_response.dart';
@@ -48,8 +48,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getTvSeriesRecommendation(int id) async {
-    final response =
-        await client.get(Uri.parse(ApiUrl.tvSeriesRecommendation(id)));
+    final response = await client.get(Uri.parse(ApiUrl.tvSeriesRecommendation(id)));
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
     } else {
@@ -80,8 +79,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<EpisodeModel>> getTvEpisode(int id, int seasonNumber) async {
-    final response =
-        await client.get(Uri.parse(ApiUrl.tvSeriesSeason(id, seasonNumber)));
+    final response = await client.get(Uri.parse(ApiUrl.tvSeriesSeason(id, seasonNumber)));
 
     if (response.statusCode == HttpStatus.ok) {
       return EpisodeResponse.fromJson(jsonDecode(response.body)).episodes;

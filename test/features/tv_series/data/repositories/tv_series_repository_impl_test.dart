@@ -5,9 +5,11 @@ import 'package:movie_app/common/exception.dart';
 import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/common/network_info.dart';
 import 'package:movie_app/features/movies/data/models/genre_model.dart';
+import 'package:movie_app/features/tv_series/data/models/episode_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_detail_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_model.dart';
 import 'package:movie_app/features/tv_series/data/repositories/tv_series_repository_impl.dart';
+import 'package:movie_app/features/tv_series/domain/entities/episode.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
@@ -58,9 +60,31 @@ void main() {
       posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
       voteAverage: 8.659,
       voteCount: 601);
+  final tEpisodeModel = EpisodeModel(
+      airDate: 'airDate',
+      episodeNumber: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      seasonNumber: 1,
+      stillPath: 'stillPath',
+      voteAverage: 1.0,
+      voteCount: 1);
+  final tEpisode = Episode(
+      airDate: 'airDate',
+      episodeNumber: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      seasonNumber: 1,
+      stillPath: 'stillPath',
+      voteAverage: 1.0,
+      voteCount: 1);
 
   final tTvModelList = <TvSeriesModel>[tTvModel];
   final tTvSeriesList = <TvSeries>[tTvSeries];
+  final tEpisodeList = <Episode>[tEpisode];
+  final tEpisodeModelList = <EpisodeModel>[tEpisodeModel];
 
   group('on airing tv series', () {
     setUp(() {
@@ -289,6 +313,53 @@ void main() {
       // assert
       final resultList = result.getOrElse(() => []);
       expect(resultList, [testWatchlistTvSeries]);
+    });
+  });
+
+  group('get tv series episode', () {
+    final tId = 1;
+    final tSeasonNumber = 1;
+    setUp(() {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    });
+
+    test('should check if the device is online', () async {
+      //arrange
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(mockRemoteDataSource.getTvEpisode(tId, tSeasonNumber)).thenAnswer((_) async => []);
+
+      //act
+      await repository.getTvEpisode(tId, tSeasonNumber);
+
+      //assert
+      verify(mockNetworkInfo.isConnected);
+    });
+    group('when device is online', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      });
+
+      test('should return remote data when the call to remote data source is successful', () async {
+        // arrange
+        when(mockRemoteDataSource.getTvEpisode(tId, tSeasonNumber)).thenAnswer((_) async => tEpisodeModelList);
+        // act
+        final result = await repository.getTvEpisode(tId, tSeasonNumber);
+        // assert
+        verify(mockRemoteDataSource.getTvEpisode(tId, tSeasonNumber));
+
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, tEpisodeList);
+      });
+
+      test('should return server failure when the call to remote data source is unsuccessful', () async {
+        // arrange
+        when(mockRemoteDataSource.getTvEpisode(tId, tSeasonNumber)).thenThrow(ServerException());
+        // act
+        final result = await repository.getTvEpisode(tId, tSeasonNumber);
+        // assert
+        verify(mockRemoteDataSource.getTvEpisode(tId, tSeasonNumber));
+        expect(result, equals(Left(ServerFailure(''))));
+      });
     });
   });
 }
