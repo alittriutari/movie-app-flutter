@@ -23,6 +23,7 @@ import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_seri
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_status.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
@@ -62,7 +63,8 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   SaveTvWatchlist,
   RemoveTvWatchlist,
   GetWatchListStatus,
-  GetTvWatchlistStatus
+  GetTvWatchlistStatus,
+  GetWatchListTv
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])
