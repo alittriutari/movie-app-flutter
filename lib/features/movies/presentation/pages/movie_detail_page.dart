@@ -1,11 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app/common/constants.dart';
+import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/domain/entities/genre.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
 import 'package:movie_app/features/movies/domain/entities/movie_detail.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:movie_app/common/state_enum.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 import 'package:provider/provider.dart';
 
@@ -151,49 +151,6 @@ class DetailContent extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // child: GestureDetector(
-                    //   onTap: () async {
-                    // if (!isAddedWatchlist) {
-                    //   await Provider.of<MovieDetailNotifier>(context,
-                    //           listen: false)
-                    //       .addWatchlist(movie);
-                    // } else {
-                    //   await Provider.of<MovieDetailNotifier>(context,
-                    //           listen: false)
-                    //       .removeFromWatchlist(movie);
-                    // }
-
-                    // final message = Provider.of<MovieDetailNotifier>(
-                    //         context,
-                    //         listen: false)
-                    //     .watchlistMessage;
-
-                    // if (message == watchlistAddSuccessMessage ||
-                    //     message == watchlistRemoveSuccessMessage) {
-                    //   ScaffoldMessenger.of(context)
-                    //       .showSnackBar(SnackBar(content: Text(message)));
-                    // } else {
-                    //   showDialog(
-                    //       context: context,
-                    //       builder: (context) {
-                    //         return AlertDialog(
-                    //           content: Text(message),
-                    //         );
-                    //       });
-                    // }
-                    //   },
-                    // child: Column(
-                    //   children: [
-                    //     isAddedWatchlist
-                    //         ? Icon(Icons.check)
-                    //         : Icon(Icons.add),
-                    //     Text(
-                    //       'Watchlist',
-                    //       style: kBodyText,
-                    //     )
-                    //   ],
-                    // ),
-                    // )
                   )
                 ],
               ),

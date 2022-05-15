@@ -1,16 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
-import 'package:movie_app/features/movies/domain/usecases/get_top_rated_movies.dart';
 import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
-import 'top_rated_movies_notifier_test.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([GetTopRatedMovies])
 void main() {
   late MockGetTopRatedMovies mockGetTopRatedMovies;
   late TopRatedMoviesNotifier notifier;

@@ -1,16 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 
-import 'movie_search_notifier_test.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([SearchMovies])
 void main() {
   late SearchMovieNotifier provider;
   late MockSearchMovies mockSearchMovies;

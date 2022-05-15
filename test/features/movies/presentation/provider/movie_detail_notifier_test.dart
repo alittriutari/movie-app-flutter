@@ -1,27 +1,14 @@
 import 'package:dartz/dartz.dart';
-import 'package:movie_app/features/movies/domain/entities/movie.dart';
-import 'package:movie_app/features/movies/domain/usecases/get_movie_detail.dart';
-import 'package:movie_app/features/movies/domain/usecases/get_movie_recommendations.dart';
-import 'package:movie_app/common/failure.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
-import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:movie_app/common/state_enum.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movie_app/common/failure.dart';
+import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/movies/domain/entities/movie.dart';
+import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
-import 'movie_detail_notifier_test.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
-@GenerateMocks([
-  GetMovieDetail,
-  GetMovieRecommendations,
-  GetWatchListStatus,
-  SaveWatchlist,
-  RemoveWatchlist,
-])
 void main() {
   late MovieDetailNotifier provider;
   late MockGetMovieDetail mockGetMovieDetail;
@@ -39,12 +26,12 @@ void main() {
     mockSaveWatchlist = MockSaveWatchlist();
     mockRemoveWatchlist = MockRemoveWatchlist();
     provider = MovieDetailNotifier(
-      getMovieDetail: mockGetMovieDetail,
-      getMovieRecommendations: mockGetMovieRecommendations,
-      getWatchListStatus: mockGetWatchlistStatus,
-      saveWatchlist: mockSaveWatchlist,
-      removeWatchlist: mockRemoveWatchlist,
-    )..addListener(() {
+        getMovieDetail: mockGetMovieDetail,
+        getMovieRecommendations: mockGetMovieRecommendations,
+        getWatchListStatus: mockGetWatchlistStatus,
+        saveWatchlist: mockSaveWatchlist,
+        removeWatchlist: mockRemoveWatchlist)
+      ..addListener(() {
         listenerCallCount += 1;
       });
   });
