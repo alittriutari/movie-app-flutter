@@ -86,12 +86,15 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: Material(child: HomeScreen()),
+        home: Material(child: HomeScreen(selectedIndex: 0)),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
-              return MaterialPageRoute(builder: (_) => HomeScreen());
+              return MaterialPageRoute(
+                  builder: (_) => HomeScreen(
+                        selectedIndex: 0,
+                      ));
             case PopularMoviesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
             case TopRatedMoviesPage.ROUTE_NAME:

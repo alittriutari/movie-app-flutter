@@ -1,15 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/presentation/pages/home_movie_page.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_drawer.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/home_tv_series_page.dart';
-import 'package:flutter/material.dart';
 import 'package:movie_app/features/watchlist/presentation/pages/watchlist_page.dart';
 
 import '../../../search/presentation/pages/search_page.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final int selectedIndex;
+  const HomeScreen({Key? key, required this.selectedIndex}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +27,7 @@ class HomeScreen extends StatelessWidget {
       disabledGestures: false,
       drawer: CustomDrawer(),
       child: DefaultTabController(
+        initialIndex: selectedIndex,
         length: 3,
         child: Builder(builder: (context) {
           return Scaffold(
@@ -42,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
+                                key: Key('drawerButton'),
                                 onPressed: () {
                                   _advancedDrawerController.showDrawer();
                                 },

@@ -1,10 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/common/state_enum.dart';
-import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_app/features/movies/presentation/widgets/movie_card_list.dart';
+import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/widget/tv_series_card_list.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatelessWidget {
@@ -28,12 +28,10 @@ class SearchPage extends StatelessWidget {
               onSubmitted: (query) {
                 switch (index) {
                   case 0:
-                    Provider.of<SearchMovieNotifier>(context, listen: false)
-                        .fetchMovieSearch(query);
+                    Provider.of<SearchMovieNotifier>(context, listen: false).fetchMovieSearch(query);
                     break;
                   case 1:
-                    Provider.of<SearchTvSeriesNotifier>(context, listen: false)
-                        .fetchTvSeriesSearch(query);
+                    Provider.of<SearchTvSeriesNotifier>(context, listen: false).fetchTvSeriesSearch(query);
                     break;
                   default:
                 }
