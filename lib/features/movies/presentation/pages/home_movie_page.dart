@@ -1,11 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/presentation/pages/popular_movies_page.dart';
-
 import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
-import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/features/movies/presentation/widgets/carrousel_movie_widget.dart';
 import 'package:movie_app/features/movies/presentation/widgets/sub_heading_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/movie_list_widget.dart';
@@ -67,6 +66,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           child: Column(
             children: [
               SubHeadingWidget(
+                  key: Key('show_popular_movie'),
                   title: 'Popular',
                   onTap: () => Navigator.pushNamed(
                       context, PopularMoviesPage.ROUTE_NAME)),
@@ -83,6 +83,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 }
               }),
               SubHeadingWidget(
+                  key: Key('show_top_rated_movie'),
                   title: 'Top Rated',
                   onTap: () => Navigator.pushNamed(
                       context, TopRatedMoviesPage.ROUTE_NAME)),

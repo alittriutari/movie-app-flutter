@@ -19,20 +19,17 @@ class HomeTvSeriesPage extends StatefulWidget {
 }
 
 class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
-  double _scrollOffset = 0.0;
   ScrollController _controller = ScrollController(initialScrollOffset: 0.0);
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController()
-      ..addListener(() {
-        _scrollOffset = _controller.offset;
-      });
+    _controller = ScrollController();
 
-    Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)
-      ..fetchOnAirTvSeries()
-      ..fetchPopularTvSeries());
+    Future.microtask(
+        () => Provider.of<TvSeriesListNotifier>(context, listen: false)
+          ..fetchOnAirTvSeries()
+          ..fetchPopularTvSeries());
   }
 
   @override
@@ -65,7 +62,11 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+              SubHeadingWidget(
+                  key: Key('show_popular_tv'),
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(
+                      context, PopularTvSeriesPage.ROUTE_NAME)),
               Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.popularTvSeriesState;
                 if (state == RequestState.Loading) {
@@ -102,8 +103,10 @@ class TvSeriesList extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: Key('show_tv_detail'),
               onTap: () {
-                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: series.id);
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME,
+                    arguments: series.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),

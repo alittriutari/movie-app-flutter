@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class Movie extends Equatable {
   Movie({
     required this.adult,
@@ -27,13 +28,13 @@ class Movie extends Equatable {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
-  int id;
+  final int id;
   String? originalTitle;
-  String? overview;
+  final String? overview;
   double? popularity;
   String? posterPath;
   String? releaseDate;
-  String? title;
+  final String? title;
   bool? video;
   double? voteAverage;
   int? voteCount;

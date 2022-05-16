@@ -17,7 +17,11 @@ void main() {
 
       homeRobot = HomeRobot(tester);
 
-      await homeRobot.clickNavigationDrawerButton();
+//see popular movie
+      await homeRobot.clickShowPopularMovie();
+
+//see top rated movie
+      await homeRobot.clickShowTopRatedMovie();
     });
   });
 }

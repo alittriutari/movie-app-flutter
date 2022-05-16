@@ -15,10 +15,12 @@ class CustomDrawer extends StatelessWidget {
             accountName: Text('Movie App by Alit'),
             accountEmail: Text('gmail@alit.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/29432760?v=4'),
+              backgroundImage: NetworkImage(
+                  'https://avatars.githubusercontent.com/u/29432760?v=4'),
             ),
           ),
           ListTile(
+            key: Key('movie_menu'),
             leading: Icon(Icons.movie),
             title: Text('Movies'),
             onTap: () {
@@ -32,6 +34,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            key: Key('tv_menu'),
             leading: Icon(Icons.tv),
             title: Text('Tv Series'),
             onTap: () {
@@ -45,6 +48,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            key: Key('watchlist_menu'),
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist'),
             onTap: () {

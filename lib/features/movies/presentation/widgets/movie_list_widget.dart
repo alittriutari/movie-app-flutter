@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
 import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
-import 'package:flutter/material.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 
 class MovieList extends StatelessWidget {
@@ -20,6 +20,7 @@ class MovieList extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
             child: InkWell(
+              key: Key('show_movie_detail'),
               onTap: () {
                 Navigator.pushNamed(
                   context,

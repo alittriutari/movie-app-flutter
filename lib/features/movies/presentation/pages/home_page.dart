@@ -35,7 +35,8 @@ class HomeScreen extends StatelessWidget {
             appBar: PreferredSize(
               preferredSize: Size(screenSize.width, 100),
               child: Container(
-                color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
+                color:
+                    Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
                 child: SafeArea(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
@@ -44,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                         Row(
                           children: [
                             IconButton(
-                                key: Key('drawerButton'),
+                                key: Key('drawer_icon'),
                                 onPressed: () {
                                   _advancedDrawerController.showDrawer();
                                 },
@@ -59,25 +60,35 @@ class HomeScreen extends StatelessWidget {
                             Icon(Icons.camera_outdoor),
                             Expanded(child: SizedBox()),
                             IconButton(
+                                key: Key('search_icon'),
                                 onPressed: () {
                                   Navigator.pushNamed(
                                     context,
                                     SearchPage.ROUTE_NAME,
-                                    arguments: DefaultTabController.of(context)!.index,
+                                    arguments:
+                                        DefaultTabController.of(context)!.index,
                                   );
                                 },
                                 icon: Icon(Icons.search))
                           ],
                         ),
                         Spacer(),
-                        TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
+                        TabBar(indicatorColor: Colors.transparent, tabs: [
+                          Text('Movie'),
+                          Text('Tv Series'),
+                          Text('Watchlist')
+                        ])
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
+            body: TabBarView(children: [
+              HomeMoviePage(),
+              HomeTvSeriesPage(),
+              WatchlistPage()
+            ]),
           );
         }),
       ),
