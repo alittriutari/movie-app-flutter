@@ -20,12 +20,15 @@ import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_d
 import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repository.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_on_the_air_tv_series.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_status.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
@@ -67,8 +70,11 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   GetWatchListStatus,
   GetTvWatchlistStatus,
   GetWatchListTv,
+  GetTvEpisode,
   TvSeriesDetailNotifier,
-  TvEpisodeNotifier
+  TvEpisodeNotifier,
+  PopularTvSeriesNotifier,
+  OnAirTvSeriesNotifier
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])
