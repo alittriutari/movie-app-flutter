@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_app/common/state_enum.dart';
+import 'package:movie_app/features/tv_series/domain/entities/episode.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
@@ -40,6 +41,8 @@ void main() {
     when(mockNotifier.recommendationState).thenReturn(RequestState.Loaded);
     when(mockNotifier.tvSeriesRecommendation).thenReturn(<TvSeries>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
+    when(mockEpisodeNotifier.episodeState).thenReturn(RequestState.Loaded);
+    when(mockEpisodeNotifier.episode).thenReturn(<Episode>[]);
 
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
@@ -55,6 +58,9 @@ void main() {
     when(mockNotifier.tvSeriesRecommendation).thenReturn(<TvSeries>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(true);
 
+    when(mockEpisodeNotifier.episodeState).thenReturn(RequestState.Loaded);
+    when(mockEpisodeNotifier.episode).thenReturn(<Episode>[]);
+
     final watchlistButtonIcon = find.byIcon(Icons.check);
 
     await tester.pumpWidget(_makeTestableWidget(TvSeriesDetailPage(id: 1)));
@@ -69,6 +75,9 @@ void main() {
     when(mockNotifier.tvSeriesRecommendation).thenReturn(<TvSeries>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
     when(mockNotifier.watchlistMessage).thenReturn('Added to Watchlist');
+
+    when(mockEpisodeNotifier.episodeState).thenReturn(RequestState.Loaded);
+    when(mockEpisodeNotifier.episode).thenReturn(<Episode>[]);
 
     final watchlistButton = find.byType(ElevatedButton);
 
@@ -90,6 +99,9 @@ void main() {
     when(mockNotifier.tvSeriesRecommendation).thenReturn(<TvSeries>[]);
     when(mockNotifier.isAddedToWatchlist).thenReturn(false);
     when(mockNotifier.watchlistMessage).thenReturn('Failed');
+
+    when(mockEpisodeNotifier.episodeState).thenReturn(RequestState.Loaded);
+    when(mockEpisodeNotifier.episode).thenReturn(<Episode>[]);
 
     final watchlistButton = find.byType(ElevatedButton);
 
