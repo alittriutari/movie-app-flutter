@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
-import 'package:flutter/material.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 
 class TvSeriesCard extends StatelessWidget {
   final TvSeries tvSeries;
@@ -14,11 +15,11 @@ class TvSeriesCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: InkWell(
         onTap: () {
-          // Navigator.pushNamed(
-          //   context,
-          //   MovieDetailPage.ROUTE_NAME,
-          //   arguments: movie.id,
-          // );
+          Navigator.pushNamed(
+            context,
+            TvSeriesDetailPage.ROUTE_NAME,
+            arguments: tvSeries.id,
+          );
         },
         child: Stack(
           alignment: Alignment.bottomLeft,
