@@ -28,10 +28,11 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
     super.initState();
     _controller = ScrollController();
 
-    Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)
-      ..fetchOnAirTvSeries()
-      ..fetchPopularTvSeries()
-      ..fetchTopRatedTvSeries());
+    Future.microtask(
+        () => Provider.of<TvSeriesListNotifier>(context, listen: false)
+          ..fetchOnAirTvSeries()
+          ..fetchPopularTvSeries()
+          ..fetchTopRatedTvSeries());
   }
 
   @override
@@ -68,7 +69,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           child: Column(
             children: [
               SubHeadingWidget(
-                  key: Key('show_popular_tv'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+                  key: Key('show_popular_tv'),
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(
+                      context, PopularTvSeriesPage.ROUTE_NAME)),
               Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.popularTvSeriesState;
                 if (state == RequestState.Loading) {
@@ -96,7 +100,10 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           child: Column(
             children: [
               SubHeadingWidget(
-                  key: Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME)),
+                  key: Key('show_top_rated_tv'),
+                  title: 'Top Rated',
+                  onTap: () => Navigator.pushNamed(
+                      context, TopRatedTvSeriesPage.ROUTE_NAME)),
               Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedTvSeriesState;
                 if (state == RequestState.Loading) {
@@ -140,7 +147,8 @@ class TvSeriesList extends StatelessWidget {
             child: InkWell(
               key: Key('show_tv_detail'),
               onTap: () {
-                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: series.id);
+                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME,
+                    arguments: series.id);
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),

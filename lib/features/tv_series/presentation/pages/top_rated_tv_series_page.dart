@@ -15,7 +15,9 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<TopRatedTvSeriesNotifier>(context, listen: false).fetchTopRatedTvSeries());
+    Future.microtask(() =>
+        Provider.of<TopRatedTvSeriesNotifier>(context, listen: false)
+            .fetchTopRatedTvSeries());
   }
 
   @override

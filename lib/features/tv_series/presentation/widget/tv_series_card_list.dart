@@ -51,6 +51,7 @@ class TvSeriesCard extends StatelessWidget {
               ),
             ),
             Container(
+              key: Key('test'),
               margin: const EdgeInsets.only(
                 left: 16,
                 bottom: 16,

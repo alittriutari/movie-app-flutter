@@ -89,7 +89,10 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => TvSeriesListNotifier(getOnAirTvSeries: locator(), getPopularTvSeries: locator(), getTopRatedTv: locator()),
+    () => TvSeriesListNotifier(
+        getOnAirTvSeries: locator(),
+        getPopularTvSeries: locator(),
+        getTopRatedTv: locator()),
   );
 
   locator.registerFactory(
@@ -157,20 +160,31 @@ void init() {
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(remoteDataSource: locator(), localDataSource: locator(), networkInfo: locator()),
+    () => MovieRepositoryImpl(
+        remoteDataSource: locator(),
+        localDataSource: locator(),
+        networkInfo: locator()),
   );
   locator.registerLazySingleton<TvSeriesRepository>(
-    () => TvSeriesRepositoryImpl(remoteDataSource: locator(), localDataSource: locator(), networkInfo: locator()),
+    () => TvSeriesRepositoryImpl(
+        remoteDataSource: locator(),
+        localDataSource: locator(),
+        networkInfo: locator()),
   );
 
   // data sources
-  locator.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(client: locator()));
-  locator.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<TvSeriesRemoteDataSource>(() => TvSeriesRemoteDataSourceImpl(client: locator()));
-  locator.registerLazySingleton<TvLocalDataSource>(() => TvLocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<MovieLocalDataSource>(
+      () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<TvSeriesRemoteDataSource>(
+      () => TvSeriesRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<TvLocalDataSource>(
+      () => TvLocalDataSourceImpl(databaseHelper: locator()));
 
   // helper
-  locator.registerLazySingleton<MovieDatabaseHelper>(() => MovieDatabaseHelper());
+  locator
+      .registerLazySingleton<MovieDatabaseHelper>(() => MovieDatabaseHelper());
   locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
   //network info
