@@ -155,6 +155,31 @@ void main() {
     });
   });
 
+  group('Top Rated Tv Series', () {
+    setUp(() {
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+    });
+    test('should return tv series list when call to data source is success', () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedTvSeries()).thenAnswer((_) async => tTvModelList);
+      // act
+      final result = await repository.getTopRatedTvSeries();
+      // assert
+
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tTvSeriesList);
+    });
+
+    test('should return server failure when call to data source is unsuccessful', () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedTvSeries()).thenThrow(ServerException());
+      // act
+      final result = await repository.getTopRatedTvSeries();
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
+  });
+
   group('Get Tv Series Detail', () {
     final tId = 1;
     final tTvResponse = TvSeriesDetailResponse(

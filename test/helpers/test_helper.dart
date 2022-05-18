@@ -20,6 +20,7 @@ import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_d
 import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repository.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_on_the_air_tv_series.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_top_rated_tv.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
@@ -63,6 +64,7 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   TvDatabaseHelper,
   GetPopularTvSeries,
   GetOnAirTvSeries,
+  GetTopRatedTv,
   GetTvSeriesDetail,
   GetTvSeriesRecommendation,
   SaveTvWatchlist,

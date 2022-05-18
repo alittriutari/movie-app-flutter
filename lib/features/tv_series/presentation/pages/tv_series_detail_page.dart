@@ -26,6 +26,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     super.initState();
     Future.microtask(() {
       Provider.of<TvSeriesDetailNotifier>(context, listen: false).fetchTvSeriesDetail(widget.id);
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false).loadWatchlistStatus(widget.id);
       Provider.of<TvEpisodeNotifier>(context, listen: false).fetchEpisode(widget.id, 1);
     });
   }
@@ -41,12 +42,11 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
             );
           } else if (provider.tvSeriesState == RequestState.Loaded) {
             final tvSeries = provider.tvSeries;
-            final recommendation = provider.tvSeriesRecommendation;
             final season = tvSeries.numberOfSeasons;
             return SafeArea(
               child: DetailTvSeriesContent(
                 tvSeries: tvSeries,
-                recommendations: recommendation,
+                recommendations: provider.tvSeriesRecommendation,
                 isAddedWatchlist: provider.isAddedToWatchlist,
                 seasons: season,
               ),

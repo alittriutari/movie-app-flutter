@@ -3,8 +3,8 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i25;
-import 'dart:convert' as _i56;
-import 'dart:typed_data' as _i57;
+import 'dart:convert' as _i57;
+import 'dart:typed_data' as _i58;
 import 'dart:ui' as _i36;
 
 import 'package:dartz/dartz.dart' as _i3;
@@ -72,6 +72,8 @@ import 'package:movie_app/features/tv_series/domain/usecases/get_on_the_air_tv_s
     as _i23;
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series.dart'
     as _i22;
+import 'package:movie_app/features/tv_series/domain/usecases/get_top_rated_tv.dart'
+    as _i51;
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart'
     as _i21;
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart'
@@ -81,19 +83,19 @@ import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_recom
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_status.dart'
     as _i17;
 import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart'
-    as _i51;
+    as _i52;
 import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart'
     as _i19;
 import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart'
     as _i18;
 import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart'
-    as _i55;
+    as _i56;
 import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart'
-    as _i54;
+    as _i55;
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart'
-    as _i53;
+    as _i54;
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart'
-    as _i52;
+    as _i53;
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart'
     as _i40;
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart'
@@ -812,6 +814,14 @@ class MockTvSeriesRepository extends _i1.Mock
                       _FakeEither_1<_i26.Failure, List<_i43.TvSeries>>()))
           as _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>);
   @override
+  _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>
+      getTopRatedTvSeries() => (super.noSuchMethod(
+              Invocation.method(#getTopRatedTvSeries, []),
+              returnValue:
+                  Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>.value(
+                      _FakeEither_1<_i26.Failure, List<_i43.TvSeries>>()))
+          as _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>);
+  @override
   _i25.Future<_i3.Either<_i26.Failure, _i20.TvSeriesDetail>> getTvSeriesDetail(
           int? id) =>
       (super.noSuchMethod(Invocation.method(#getTvSeriesDetail, [id]),
@@ -901,6 +911,12 @@ class MockTvSeriesRemoteDataSource extends _i1.Mock
   @override
   _i25.Future<List<_i46.TvSeriesModel>> getPopularTvSeries() =>
       (super.noSuchMethod(Invocation.method(#getPopularTvSeries, []),
+              returnValue: Future<List<_i46.TvSeriesModel>>.value(
+                  <_i46.TvSeriesModel>[]))
+          as _i25.Future<List<_i46.TvSeriesModel>>);
+  @override
+  _i25.Future<List<_i46.TvSeriesModel>> getTopRatedTvSeries() =>
+      (super.noSuchMethod(Invocation.method(#getTopRatedTvSeries, []),
               returnValue: Future<List<_i46.TvSeriesModel>>.value(
                   <_i46.TvSeriesModel>[]))
           as _i25.Future<List<_i46.TvSeriesModel>>);
@@ -1009,6 +1025,27 @@ class MockGetPopularTvSeries extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockGetOnAirTvSeries extends _i1.Mock implements _i23.GetOnAirTvSeries {
   MockGetOnAirTvSeries() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i14.TvSeriesRepository get repository => (super.noSuchMethod(
+      Invocation.getter(#repository),
+      returnValue: _FakeTvSeriesRepository_12()) as _i14.TvSeriesRepository);
+  @override
+  _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>> execute() =>
+      (super.noSuchMethod(Invocation.method(#execute, []),
+              returnValue:
+                  Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>.value(
+                      _FakeEither_1<_i26.Failure, List<_i43.TvSeries>>()))
+          as _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>);
+}
+
+/// A class which mocks [GetTopRatedTv].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetTopRatedTv extends _i1.Mock implements _i51.GetTopRatedTv {
+  MockGetTopRatedTv() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -1151,7 +1188,7 @@ class MockGetTvWatchlistStatus extends _i1.Mock
 /// A class which mocks [GetWatchListTv].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetWatchListTv extends _i1.Mock implements _i51.GetWatchListTv {
+class MockGetWatchListTv extends _i1.Mock implements _i52.GetWatchListTv {
   MockGetWatchListTv() {
     _i1.throwOnMissingStub(this);
   }
@@ -1191,7 +1228,7 @@ class MockGetTvEpisode extends _i1.Mock implements _i21.GetTvEpisode {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvSeriesDetailNotifier extends _i1.Mock
-    implements _i52.TvSeriesDetailNotifier {
+    implements _i53.TvSeriesDetailNotifier {
   MockTvSeriesDetailNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -1292,7 +1329,7 @@ class MockTvSeriesDetailNotifier extends _i1.Mock
 /// A class which mocks [TvEpisodeNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvEpisodeNotifier extends _i1.Mock implements _i53.TvEpisodeNotifier {
+class MockTvEpisodeNotifier extends _i1.Mock implements _i54.TvEpisodeNotifier {
   MockTvEpisodeNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -1344,7 +1381,7 @@ class MockTvEpisodeNotifier extends _i1.Mock implements _i53.TvEpisodeNotifier {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockPopularTvSeriesNotifier extends _i1.Mock
-    implements _i54.PopularTvSeriesNotifier {
+    implements _i55.PopularTvSeriesNotifier {
   MockPopularTvSeriesNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -1394,7 +1431,7 @@ class MockPopularTvSeriesNotifier extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockOnAirTvSeriesNotifier extends _i1.Mock
-    implements _i55.OnAirTvSeriesNotifier {
+    implements _i56.OnAirTvSeriesNotifier {
   MockOnAirTvSeriesNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -1462,7 +1499,7 @@ class MockHttpClient extends _i1.Mock implements _i24.Client {
   _i25.Future<_i24.Response> post(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i56.Encoding? encoding}) =>
+          _i57.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#post, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -1472,7 +1509,7 @@ class MockHttpClient extends _i1.Mock implements _i24.Client {
   _i25.Future<_i24.Response> put(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i56.Encoding? encoding}) =>
+          _i57.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#put, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -1482,7 +1519,7 @@ class MockHttpClient extends _i1.Mock implements _i24.Client {
   _i25.Future<_i24.Response> patch(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i56.Encoding? encoding}) =>
+          _i57.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#patch, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -1492,7 +1529,7 @@ class MockHttpClient extends _i1.Mock implements _i24.Client {
   _i25.Future<_i24.Response> delete(Uri? url,
           {Map<String, String>? headers,
           Object? body,
-          _i56.Encoding? encoding}) =>
+          _i57.Encoding? encoding}) =>
       (super.noSuchMethod(
               Invocation.method(#delete, [url],
                   {#headers: headers, #body: body, #encoding: encoding}),
@@ -1503,12 +1540,12 @@ class MockHttpClient extends _i1.Mock implements _i24.Client {
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
           returnValue: Future<String>.value('')) as _i25.Future<String>);
   @override
-  _i25.Future<_i57.Uint8List> readBytes(Uri? url,
+  _i25.Future<_i58.Uint8List> readBytes(Uri? url,
           {Map<String, String>? headers}) =>
       (super.noSuchMethod(
               Invocation.method(#readBytes, [url], {#headers: headers}),
-              returnValue: Future<_i57.Uint8List>.value(_i57.Uint8List(0)))
-          as _i25.Future<_i57.Uint8List>);
+              returnValue: Future<_i58.Uint8List>.value(_i58.Uint8List(0)))
+          as _i25.Future<_i58.Uint8List>);
   @override
   _i25.Future<_i24.StreamedResponse> send(_i24.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]),

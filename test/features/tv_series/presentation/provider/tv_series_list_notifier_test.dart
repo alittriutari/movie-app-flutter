@@ -12,16 +12,19 @@ void main() {
   late TvSeriesListNotifier provider;
   late MockGetOnAirTvSeries mockGetOnAirTvSeries;
   late MockGetPopularTvSeries mockGetPopularTvSeries;
+  late MockGetTopRatedTv mockGetTopRatedTv;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetOnAirTvSeries = MockGetOnAirTvSeries();
     mockGetPopularTvSeries = MockGetPopularTvSeries();
-    provider = TvSeriesListNotifier(getOnAirTvSeries: mockGetOnAirTvSeries, getPopularTvSeries: mockGetPopularTvSeries)
-      ..addListener(() {
-        listenerCallCount += 1;
-      });
+    mockGetTopRatedTv = MockGetTopRatedTv();
+    provider =
+        TvSeriesListNotifier(getOnAirTvSeries: mockGetOnAirTvSeries, getPopularTvSeries: mockGetPopularTvSeries, getTopRatedTv: mockGetTopRatedTv)
+          ..addListener(() {
+            listenerCallCount += 1;
+          });
   });
 
   final tTvSeries = TvSeries(
@@ -116,6 +119,39 @@ void main() {
       await provider.fetchPopularTvSeries();
       // assert
       expect(provider.popularTvSeriesState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
+  });
+
+  group('top rated tv series', () {
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvSeriesList));
+      // act
+      provider.fetchTopRatedTvSeries();
+      // assert
+      expect(provider.topRatedTvSeriesState, RequestState.Loading);
+    });
+
+    test('should change tv series data when data is gotten successfully', () async {
+      // arrange
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Right(tTvSeriesList));
+      // act
+      await provider.fetchTopRatedTvSeries();
+      // assert
+      expect(provider.topRatedTvSeriesState, RequestState.Loaded);
+      expect(provider.topRatedTvSeries, tTvSeriesList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetTopRatedTv.execute()).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchTopRatedTvSeries();
+      // assert
+      expect(provider.topRatedTvSeriesState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

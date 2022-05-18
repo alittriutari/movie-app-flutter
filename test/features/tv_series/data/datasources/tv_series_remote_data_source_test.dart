@@ -65,6 +65,29 @@ void main() {
     });
   });
 
+  group('get top rated tv series', () {
+    final tTvSeriesList = TvSeriesResponse.fromJson(json.decode(readJson('dummy_data/top_rated_tv.json'))).tvSeriesList;
+
+    test('should return list of tv series when response is success (200)', () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesTopRated)))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/top_rated_tv.json'), 200));
+      // act
+      final result = await dataSource.getTopRatedTvSeries();
+      // assert
+      expect(result, tTvSeriesList);
+    });
+
+    test('should throw a ServerException when the response code is 404 or other', () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse(ApiUrl.tvSeriesTopRated))).thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getTopRatedTvSeries();
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
   group('get tv series detail', () {
     final tId = 1;
     final tTvSeriesDetail = TvSeriesDetailResponse.fromJson(json.decode(readJson('dummy_data/tv_detail.json')));
