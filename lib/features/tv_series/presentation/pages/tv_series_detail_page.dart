@@ -120,7 +120,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                     ),
                   ),
                   Positioned(
-                    bottom: 100,
+                    bottom: 120,
                     child: SizedBox(
                         width: 250,
                         child: Text(
@@ -136,6 +136,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                     child: Center(
                       child: Text(
                         _showGenres(widget.tvSeries.genres),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -378,15 +379,18 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                                 width: 100,
                               ),
                               SizedBox(width: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(data.episode[index].name),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(padding: EdgeInsets.all(5), color: kDavysGrey, child: Text(data.episode[index].voteAverage.toString())),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(data.episode[index].name),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(padding: EdgeInsets.all(5), color: kDavysGrey, child: Text(data.episode[index].voteAverage.toString())),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

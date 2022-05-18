@@ -73,11 +73,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.popularMoviesState;
                 if (state == RequestState.Loading) {
-                  return Center(
-                    child: PlaceholderWidget(
-                      height: 150,
-                      width: 90,
-                    ),
+                  return Row(
+                    children: List.generate(
+                        3,
+                        (index) => PlaceholderWidget(
+                              height: 150,
+                              width: 90,
+                            )),
                   );
                 } else if (state == RequestState.Loaded) {
                   return MovieList(data.popularMovies);
@@ -90,11 +92,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedMoviesState;
                 if (state == RequestState.Loading) {
-                  return Center(
-                    child: PlaceholderWidget(
-                      height: 150,
-                      width: 90,
-                    ),
+                  return Row(
+                    children: List.generate(
+                        3,
+                        (index) => PlaceholderWidget(
+                              height: 150,
+                              width: 90,
+                            )),
                   );
                 } else if (state == RequestState.Loaded) {
                   return MovieList(data.topRatedMovies);

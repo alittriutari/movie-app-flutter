@@ -4,6 +4,7 @@ import 'package:movie_app/features/movies/presentation/widgets/custom_cache_imag
 import 'package:movie_app/features/movies/presentation/widgets/sub_heading_widget.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/popular_tv_series_page.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/widget/carrousel_tv_series_widget.dart';
@@ -29,7 +30,8 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
 
     Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)
       ..fetchOnAirTvSeries()
-      ..fetchPopularTvSeries());
+      ..fetchPopularTvSeries()
+      ..fetchTopRatedTvSeries());
   }
 
   @override
@@ -70,14 +72,44 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
               Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
                 final state = data.popularTvSeriesState;
                 if (state == RequestState.Loading) {
-                  return Center(
-                    child: PlaceholderWidget(
-                      height: 150,
-                      width: 90,
-                    ),
+                  return Row(
+                    children: List.generate(
+                        3,
+                        (index) => PlaceholderWidget(
+                              height: 150,
+                              width: 90,
+                            )),
                   );
                 } else if (state == RequestState.Loaded) {
                   return TvSeriesList(data.popularTvSeries);
+                } else {
+                  return Text('Failed');
+                }
+              }),
+            ],
+          ),
+        ),
+      ),
+      SliverToBoxAdapter(
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              SubHeadingWidget(
+                  key: Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME)),
+              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
+                final state = data.topRatedTvSeriesState;
+                if (state == RequestState.Loading) {
+                  return Row(
+                    children: List.generate(
+                        3,
+                        (index) => PlaceholderWidget(
+                              height: 150,
+                              width: 90,
+                            )),
+                  );
+                } else if (state == RequestState.Loaded) {
+                  return TvSeriesList(data.topRatedTvSeries);
                 } else {
                   return Text('Failed');
                 }

@@ -16,9 +16,11 @@ import 'package:movie_app/features/search/presentation/provider/movie_search_not
 import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/popular_tv_series_page.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/top_rated_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
@@ -65,6 +67,9 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<PopularTvSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
+          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
+        ),
+        ChangeNotifierProvider(
           create: (_) => di.locator<TvSeriesDetailNotifier>(),
         ),
         ChangeNotifierProvider(
@@ -109,6 +114,8 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => OnAirTvSeriesPage());
             case PopularTvSeriesPage.ROUTE_NAME:
               return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
+            case TopRatedTvSeriesPage.ROUTE_NAME:
+              return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
             case TvSeriesDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return CupertinoPageRoute(

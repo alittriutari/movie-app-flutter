@@ -96,7 +96,7 @@ class DetailContent extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 100,
+                    bottom: 120,
                     child: SizedBox(
                         width: 250,
                         child: Text(
@@ -112,6 +112,7 @@ class DetailContent extends StatelessWidget {
                     child: Center(
                       child: Text(
                         _showGenres(movie.genres),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),

@@ -6,13 +6,16 @@ class PlaceholderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-      child: Image.asset(
-        'assets/loading.gif',
-        fit: BoxFit.cover,
-        height: height,
-        width: width,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        child: Image.asset(
+          'assets/loading.gif',
+          fit: BoxFit.cover,
+          height: height,
+          width: width,
+        ),
       ),
     );
   }

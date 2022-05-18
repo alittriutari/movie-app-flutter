@@ -4,7 +4,8 @@ import 'package:movie_app/common/constants.dart';
 class SubHeadingWidget extends StatelessWidget {
   final String title;
   final Function() onTap;
-  const SubHeadingWidget({Key? key, required this.title, required this.onTap}) : super(key: key);
+  const SubHeadingWidget({Key? key, required this.title, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
