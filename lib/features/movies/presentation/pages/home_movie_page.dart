@@ -4,6 +4,7 @@ import 'package:movie_app/features/movies/presentation/pages/popular_movies_page
 import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
 import 'package:movie_app/features/movies/presentation/widgets/carrousel_movie_widget.dart';
+import 'package:movie_app/features/movies/presentation/widgets/placeholder_widget.dart';
 import 'package:movie_app/features/movies/presentation/widgets/sub_heading_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +50,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           final state = data.nowPlayingState;
           if (state == RequestState.Loading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: PlaceholderWidget(
+                height: 400,
+                width: double.infinity,
+              ),
             );
           } else if (state == RequestState.Loaded) {
             return CarrouselMovieWidget(
@@ -73,8 +77,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.popularMoviesState;
                 if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Row(
+                    children: List.generate(
+                        3,
+                        (index) => PlaceholderWidget(
+                              height: 150,
+                              width: 90,
+                            )),
                   );
                 } else if (state == RequestState.Loaded) {
                   return MovieList(data.popularMovies);
@@ -90,8 +99,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               Consumer<MovieListNotifier>(builder: (context, data, child) {
                 final state = data.topRatedMoviesState;
                 if (state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Row(
+                    children: List.generate(
+                        3,
+                        (index) => PlaceholderWidget(
+                              height: 150,
+                              width: 90,
+                            )),
                   );
                 } else if (state == RequestState.Loaded) {
                   return MovieList(data.topRatedMovies);

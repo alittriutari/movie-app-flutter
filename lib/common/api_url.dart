@@ -10,6 +10,9 @@ class ApiUrl {
   static const String tvSeriesPopular =
       '$BASE_URL/tv/popular?$API_KEY&$NETWORK';
 
+  static const String tvSeriesTopRated =
+      '$BASE_URL/tv/top_rated?$API_KEY&$NETWORK';
+
   static String tvSeriesDetail(int id) => '$BASE_URL/tv/$id?$API_KEY';
 
   static String tvSeriesRecommendation(int id) =>

@@ -7,6 +7,7 @@ import 'package:movie_app/features/tv_series/domain/entities/tv_series_detail.da
 abstract class TvSeriesRepository {
   Future<Either<Failure, List<TvSeries>>> getOnAirTvSeries();
   Future<Either<Failure, List<TvSeries>>> getPopularTvSeries();
+  Future<Either<Failure, List<TvSeries>>> getTopRatedTvSeries();
   Future<Either<Failure, TvSeriesDetail>> getTvSeriesDetail(int id);
   Future<Either<Failure, List<TvSeries>>> getTvSeriesRecommendation(int id);
 

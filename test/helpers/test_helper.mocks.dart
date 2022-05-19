@@ -73,6 +73,8 @@ import 'package:movie_app/features/tv_series/domain/usecases/get_on_the_air_tv_s
     as _i23;
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series.dart'
     as _i22;
+import 'package:movie_app/features/tv_series/domain/usecases/get_top_rated_tv.dart'
+    as _i51;
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart'
     as _i21;
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart'
@@ -818,7 +820,19 @@ class MockTvSeriesRepository extends _i1.Mock
                       _FakeEither_1<_i27.Failure, List<_i44.TvSeries>>()))
           as _i26.Future<_i3.Either<_i27.Failure, List<_i44.TvSeries>>>);
   @override
+<<<<<<< HEAD
   _i26.Future<_i3.Either<_i27.Failure, _i20.TvSeriesDetail>> getTvSeriesDetail(
+=======
+  _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>
+      getTopRatedTvSeries() => (super.noSuchMethod(
+              Invocation.method(#getTopRatedTvSeries, []),
+              returnValue:
+                  Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>.value(
+                      _FakeEither_1<_i26.Failure, List<_i43.TvSeries>>()))
+          as _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>);
+  @override
+  _i25.Future<_i3.Either<_i26.Failure, _i20.TvSeriesDetail>> getTvSeriesDetail(
+>>>>>>> origin/submission-1
           int? id) =>
       (super.noSuchMethod(Invocation.method(#getTvSeriesDetail, [id]),
               returnValue:
@@ -911,7 +925,17 @@ class MockTvSeriesRemoteDataSource extends _i1.Mock
                   <_i47.TvSeriesModel>[]))
           as _i26.Future<List<_i47.TvSeriesModel>>);
   @override
+<<<<<<< HEAD
   _i26.Future<List<_i47.TvSeriesModel>> searchTvSeries(String? query) =>
+=======
+  _i25.Future<List<_i46.TvSeriesModel>> getTopRatedTvSeries() =>
+      (super.noSuchMethod(Invocation.method(#getTopRatedTvSeries, []),
+              returnValue: Future<List<_i46.TvSeriesModel>>.value(
+                  <_i46.TvSeriesModel>[]))
+          as _i25.Future<List<_i46.TvSeriesModel>>);
+  @override
+  _i25.Future<List<_i46.TvSeriesModel>> searchTvSeries(String? query) =>
+>>>>>>> origin/submission-1
       (super.noSuchMethod(Invocation.method(#searchTvSeries, [query]),
               returnValue: Future<List<_i47.TvSeriesModel>>.value(
                   <_i47.TvSeriesModel>[]))
@@ -1029,6 +1053,27 @@ class MockGetOnAirTvSeries extends _i1.Mock implements _i23.GetOnAirTvSeries {
                   Future<_i3.Either<_i27.Failure, List<_i44.TvSeries>>>.value(
                       _FakeEither_1<_i27.Failure, List<_i44.TvSeries>>()))
           as _i26.Future<_i3.Either<_i27.Failure, List<_i44.TvSeries>>>);
+}
+
+/// A class which mocks [GetTopRatedTv].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetTopRatedTv extends _i1.Mock implements _i51.GetTopRatedTv {
+  MockGetTopRatedTv() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i14.TvSeriesRepository get repository => (super.noSuchMethod(
+      Invocation.getter(#repository),
+      returnValue: _FakeTvSeriesRepository_12()) as _i14.TvSeriesRepository);
+  @override
+  _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>> execute() =>
+      (super.noSuchMethod(Invocation.method(#execute, []),
+              returnValue:
+                  Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>.value(
+                      _FakeEither_1<_i26.Failure, List<_i43.TvSeries>>()))
+          as _i25.Future<_i3.Either<_i26.Failure, List<_i43.TvSeries>>>);
 }
 
 /// A class which mocks [GetTvSeriesDetail].
@@ -1572,12 +1617,20 @@ class MockHttpClient extends _i1.Mock implements _i25.Client {
       (super.noSuchMethod(Invocation.method(#read, [url], {#headers: headers}),
           returnValue: Future<String>.value('')) as _i26.Future<String>);
   @override
+<<<<<<< HEAD
   _i26.Future<_i58.Uint8List> readBytes(Uri? url,
+=======
+  _i25.Future<_i58.Uint8List> readBytes(Uri? url,
+>>>>>>> origin/submission-1
           {Map<String, String>? headers}) =>
       (super.noSuchMethod(
               Invocation.method(#readBytes, [url], {#headers: headers}),
               returnValue: Future<_i58.Uint8List>.value(_i58.Uint8List(0)))
+<<<<<<< HEAD
           as _i26.Future<_i58.Uint8List>);
+=======
+          as _i25.Future<_i58.Uint8List>);
+>>>>>>> origin/submission-1
   @override
   _i26.Future<_i25.StreamedResponse> send(_i25.BaseRequest? request) =>
       (super.noSuchMethod(Invocation.method(#send, [request]),

@@ -99,7 +99,7 @@ class DetailContent extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: 100,
+                    bottom: 120,
                     child: SizedBox(
                         width: 250,
                         child: Text(
@@ -115,14 +115,18 @@ class DetailContent extends StatelessWidget {
                     child: Center(
                       child: Text(
                         _showGenres(movie.genres),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   Positioned(
                     bottom: 20,
-                    right: 0,
-                    left: 0,
+                    right: 16,
+                    left: 16,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                      ),
                       onPressed: () async {
                         if (!isAddedWatchlist) {
                           await Provider.of<MovieDetailNotifier>(context,
@@ -153,14 +157,21 @@ class DetailContent extends StatelessWidget {
                               });
                         }
                       },
-                      child: Column(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           isAddedWatchlist
                               ? Icon(Icons.check)
                               : Icon(Icons.add),
+                          SizedBox(
+                            width: 5,
+                          ),
                           Text(
-                            'Watchlist',
-                            style: kBodyText,
+                            isAddedWatchlist
+                                ? 'Remove from watchlist'
+                                : 'Add to watchlist',
+                            style:
+                                kBodyText.copyWith(fontWeight: FontWeight.bold),
                           )
                         ],
                       ),

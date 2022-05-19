@@ -1,4 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:get_it/get_it.dart';
+import 'package:http/http.dart' as http;
 import 'package:movie_app/common/network_info.dart';
 import 'package:movie_app/features/movies/data/datasources/db/movie_database_helper.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart';
@@ -12,38 +14,38 @@ import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dar
 import 'package:movie_app/features/movies/domain/usecases/get_top_rated_movies.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
 import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
+import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
+import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
 import 'package:movie_app/features/search/domain/usecases/search_tv_series.dart';
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
+import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/data/datasources/db/tv_database_helper.dart';
 import 'package:movie_app/features/tv_series/data/datasources/tv_series_local_data_source.dart';
-import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart';
-import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_status.dart';
-import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
-import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart';
-import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
-import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
-import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
 import 'package:movie_app/features/tv_series/data/repositories/tv_series_repository_impl.dart';
 import 'package:movie_app/features/tv_series/domain/repositories/tv_series_repository.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_on_the_air_tv_series.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_popular_tv_series.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_top_rated_tv.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_detail.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_series_recommendation.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_status.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart';
+import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/top_rated_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
-import 'package:http/http.dart' as http;
-import 'package:get_it/get_it.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
+import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
+import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
 
 final locator = GetIt.instance;
@@ -88,7 +90,9 @@ void init() {
   );
   locator.registerFactory(
     () => TvSeriesListNotifier(
-        getOnAirTvSeries: locator(), getPopularTvSeries: locator()),
+        getOnAirTvSeries: locator(),
+        getPopularTvSeries: locator(),
+        getTopRatedTv: locator()),
   );
 
   locator.registerFactory(
@@ -99,6 +103,12 @@ void init() {
 
   locator.registerFactory(
     () => PopularTvSeriesNotifier(
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+    () => TopRatedTvSeriesNotifier(
       locator(),
     ),
   );
@@ -137,6 +147,7 @@ void init() {
   locator.registerLazySingleton(() => RemoveWatchlist(locator()));
   locator.registerLazySingleton(() => GetWatchlistMovies(locator()));
   locator.registerLazySingleton(() => GetOnAirTvSeries(locator()));
+  locator.registerLazySingleton(() => GetTopRatedTv(locator()));
   locator.registerLazySingleton(() => GetTvSeriesDetail(locator()));
   locator.registerLazySingleton(() => GetTvSeriesRecommendation(locator()));
   locator.registerLazySingleton(() => GetPopularTvSeries(locator()));

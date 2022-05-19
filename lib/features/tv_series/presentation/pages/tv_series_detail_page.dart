@@ -27,6 +27,8 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     Future.microtask(() {
       Provider.of<TvSeriesDetailNotifier>(context, listen: false)
           .fetchTvSeriesDetail(widget.id);
+      Provider.of<TvSeriesDetailNotifier>(context, listen: false)
+          .loadWatchlistStatus(widget.id);
       Provider.of<TvEpisodeNotifier>(context, listen: false)
           .fetchEpisode(widget.id, 1);
     });
@@ -43,12 +45,11 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
             );
           } else if (provider.tvSeriesState == RequestState.Loaded) {
             final tvSeries = provider.tvSeries;
-            final recommendation = provider.tvSeriesRecommendation;
             final season = tvSeries.numberOfSeasons;
             return SafeArea(
               child: DetailTvSeriesContent(
                 tvSeries: tvSeries,
-                recommendations: recommendation,
+                recommendations: provider.tvSeriesRecommendation,
                 isAddedWatchlist: provider.isAddedToWatchlist,
                 seasons: season,
               ),
@@ -128,7 +129,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent>
                     ),
                   ),
                   Positioned(
-                    bottom: 100,
+                    bottom: 120,
                     child: SizedBox(
                         width: 250,
                         child: Text(
@@ -144,14 +145,18 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent>
                     child: Center(
                       child: Text(
                         _showGenres(widget.tvSeries.genres),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                   Positioned(
                       bottom: 20,
-                      right: 0,
-                      left: 0,
+                      right: 16,
+                      left: 16,
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                        ),
                         onPressed: () async {
                           if (!widget.isAddedWatchlist) {
                             await Provider.of<TvSeriesDetailNotifier>(context,
@@ -182,14 +187,21 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent>
                                 });
                           }
                         },
-                        child: Column(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             widget.isAddedWatchlist
                                 ? Icon(Icons.check)
                                 : Icon(Icons.add),
+                            SizedBox(
+                              width: 5,
+                            ),
                             Text(
-                              'Watchlist',
-                              style: kBodyText,
+                              widget.isAddedWatchlist
+                                  ? 'Remove from watchlist'
+                                  : 'Add to watchlist',
+                              style: kBodyText.copyWith(
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -402,20 +414,23 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent>
                                 width: 100,
                               ),
                               SizedBox(width: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(data.episode[index].name),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                      padding: EdgeInsets.all(5),
-                                      color: kDavysGrey,
-                                      child: Text(data
-                                          .episode[index].voteAverage
-                                          .toString())),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(data.episode[index].name),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Container(
+                                        padding: EdgeInsets.all(5),
+                                        color: kDavysGrey,
+                                        child: Text(data
+                                            .episode[index].voteAverage
+                                            .toString())),
+                                  ],
+                                ),
                               ),
                             ],
                           ),

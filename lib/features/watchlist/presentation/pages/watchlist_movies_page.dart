@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/common/utils.dart';
 import 'package:movie_app/features/movies/presentation/widgets/movie_list_with_title.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {

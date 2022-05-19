@@ -11,45 +11,51 @@ class TVSeriesListGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisSpacing: 8.0,
-        childAspectRatio: 0.47,
-        crossAxisCount: 3,
-      ),
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        final tv = tvSeries[index];
-        return InkWell(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              TvSeriesDetailPage.ROUTE_NAME,
-              arguments: tv.id,
-            );
-          },
-          child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomCacheImage(
-                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
-                  width: 100,
-                  height: 180,
-                ),
-                Text(
-                  tv.name ?? '',
-                  maxLines: 2,
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                )
-              ],
+    return tvSeries.isEmpty
+        ? Center(
+            child: Text(
+            'Your watchlist is empty',
+            style: kSubtitle,
+          ))
+        : GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 8.0,
+              childAspectRatio: 0.47,
+              crossAxisCount: 3,
             ),
-          ),
-        );
-      },
-      itemCount: tvSeries.length,
-    );
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              final tv = tvSeries[index];
+              return InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    TvSeriesDetailPage.ROUTE_NAME,
+                    arguments: tv.id,
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CustomCacheImage(
+                        imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                        width: 100,
+                        height: 180,
+                      ),
+                      Text(
+                        tv.name ?? '',
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+            itemCount: tvSeries.length,
+          );
   }
 }
