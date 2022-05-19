@@ -1,15 +1,15 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:flutter/material.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/presentation/pages/on_air_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
-import 'package:flutter/material.dart';
 
 class CarrouselTvSeriesWidget extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries})
-      : super(key: key);
+  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
                 ),
               ),
               Positioned(
-                bottom: 90,
+                bottom: 110,
                 child: SizedBox(
                     width: 250,
                     child: Text(
@@ -65,15 +65,24 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
                     )),
               ),
               Positioned(
-                bottom: 40,
+                bottom: 60,
                 child: Container(
                     width: 100,
                     padding: EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.redAccent),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
                     child: Text('On Airing')),
+              ),
+              Positioned(
+                bottom: 20,
+                child: InkWell(
+                  onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
+                  child: Text(
+                    'See more on airing ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.bold),
+                  ),
+                ),
               )
             ]),
           );

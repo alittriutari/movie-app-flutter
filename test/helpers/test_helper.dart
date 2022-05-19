@@ -31,6 +31,7 @@ import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist
 import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
+import 'package:movie_app/features/tv_series/presentation/providers/top_rated_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
@@ -78,7 +79,8 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   TvEpisodeNotifier,
   PopularTvSeriesNotifier,
   OnAirTvSeriesNotifier,
-  DataConnectionChecker
+  DataConnectionChecker,
+  TopRatedTvSeriesNotifier
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])

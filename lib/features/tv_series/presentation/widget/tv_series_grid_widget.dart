@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
-import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
+
+import '../pages/tv_series_detail_page.dart';
 
 class TVSeriesListGrid extends StatelessWidget {
   final List<TvSeries> tvSeries;
@@ -27,13 +28,11 @@ class TVSeriesListGrid extends StatelessWidget {
             itemBuilder: (context, index) {
               final tv = tvSeries[index];
               return InkWell(
-                onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    TvSeriesDetailPage.ROUTE_NAME,
-                    arguments: tv.id,
-                  );
-                },
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  TvSeriesDetailPage.ROUTE_NAME,
+                  arguments: tv.id,
+                ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   child: Column(
