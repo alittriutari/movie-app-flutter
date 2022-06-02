@@ -9,6 +9,7 @@
 .history
 .svn/
 .coverage/
+.coverage/html
 .genhtml.perl
 
 # IntelliJ related
