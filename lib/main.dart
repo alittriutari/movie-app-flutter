@@ -29,7 +29,7 @@ import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_
 import 'package:movie_app/injection.dart' as di;
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
   di.init();
   runApp(MyApp());
 }
