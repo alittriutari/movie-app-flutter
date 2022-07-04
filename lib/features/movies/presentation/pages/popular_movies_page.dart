@@ -1,7 +1,8 @@
-import 'package:movie_app/common/state_enum.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/features/movies/presentation/bloc/popular_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
 import 'package:movie_app/features/movies/presentation/widgets/movie_card_list.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PopularMoviesPage extends StatefulWidget {
@@ -15,9 +16,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularMoviesNotifier>(context, listen: false)
-            .fetchPopularMovies());
+    Future.microtask(() => Provider.of<PopularMoviesNotifier>(context, listen: false).fetchPopularMovies());
   }
 
   @override
@@ -28,26 +27,30 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.movies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.movies.length,
-              );
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+        child: BlocBuilder<PopularMovieBloc, PopularMovieState>(
+          builder: (context, state) {
+            switch (state.runtimeType) {
+              case PopularMovieLoading:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case PopularMovieFailure:
+                final _msg = (state as PopularMovieFailure).failure;
+                return Center(
+                  key: Key('error_message'),
+                  child: Text(_msg.toString()),
+                );
+              case PopularMovieLoaded:
+                final _data = (state as PopularMovieLoaded).data;
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    final movie = _data[index];
+                    return MovieCard(movie);
+                  },
+                  itemCount: _data.length,
+                );
             }
+            return SizedBox.shrink();
           },
         ),
       ),
