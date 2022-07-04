@@ -15,8 +15,7 @@ class CustomDrawer extends StatelessWidget {
             accountName: Text('Movie App by Alit'),
             accountEmail: Text('gmail@alit.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://avatars.githubusercontent.com/u/29432760?v=4'),
+              backgroundImage: NetworkImage('https://avatars.githubusercontent.com/u/29432760?v=4'),
             ),
           ),
           ListTile(

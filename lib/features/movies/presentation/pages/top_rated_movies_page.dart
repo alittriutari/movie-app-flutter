@@ -1,24 +1,10 @@
-import 'package:movie_app/common/state_enum.dart';
-import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:movie_app/features/movies/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/features/movies/presentation/bloc/top_rated_movie_bloc.dart';
+import 'package:movie_app/features/movies/presentation/widgets/movie_card_list.dart';
 
-class TopRatedMoviesPage extends StatefulWidget {
+class TopRatedMoviesPage extends StatelessWidget {
   static const ROUTE_NAME = '/top-rated-movie';
-
-  @override
-  _TopRatedMoviesPageState createState() => _TopRatedMoviesPageState();
-}
-
-class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
-  @override
-  void initState() {
-    super.initState();
-    Future.microtask(() =>
-        Provider.of<TopRatedMoviesNotifier>(context, listen: false)
-            .fetchTopRatedMovies());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +14,48 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TopRatedMoviesNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.state == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final movie = data.movies[index];
-                  return MovieCard(movie);
-                },
-                itemCount: data.movies.length,
-              );
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+        child: BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
+          builder: (context, state) {
+            switch (state.runtimeType) {
+              case TopRatedMovieLoading:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case TopRatedMovieFailure:
+                final _msg = (state as TopRatedMovieFailure).failure;
+                return Center(
+                  key: Key('error_message'),
+                  child: Text(_msg.toString()),
+                );
+              case TopRatedMovieLoaded:
+                final _data = (state as TopRatedMovieLoaded).data;
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    final movie = _data[index];
+                    return MovieCard(movie);
+                  },
+                  itemCount: _data.length,
+                );
             }
+            return SizedBox.shrink();
+            // if (data.state == RequestState.Loading) {
+            //   return Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // } else if (data.state == RequestState.Loaded) {
+            //   return ListView.builder(
+            //     itemBuilder: (context, index) {
+            //       final movie = data.movies[index];
+            //       return MovieCard(movie);
+            //     },
+            //     itemCount: data.movies.length,
+            //   );
+            // } else {
+            //   return Center(
+            //     key: Key('error_message'),
+            //     child: Text(data.message),
+            //   );
+            // }
           },
         ),
       ),
