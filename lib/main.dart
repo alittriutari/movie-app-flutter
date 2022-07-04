@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/common/constants.dart';
 import 'package:movie_app/common/utils.dart';
+import 'package:movie_app/features/movies/presentation/bloc/now_playing_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/popular_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/top_rated_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/pages/about_page.dart';
@@ -84,8 +85,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<TvEpisodeNotifier>(),
         ),
-        BlocProvider(create: (_) => di.locator<PopularMovieBloc>()..add(GetPopularMovieList())),
-        BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieList()))
+        BlocProvider(create: (_) => di.locator<PopularMovieBloc>()..add(GetPopularMovieEvent())),
+        BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieList())),
+        BlocProvider(create: (_) => di.locator<NowPlayingMovieBloc>()..add(GetNowPlayingMovieEvent()))
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
