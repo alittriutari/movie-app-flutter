@@ -12,6 +12,7 @@ import 'package:movie_app/features/movies/domain/usecases/get_movie_recommendati
 import 'package:movie_app/features/movies/domain/usecases/get_now_playing_movies.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_top_rated_movies.dart';
+import 'package:movie_app/features/movies/presentation/bloc/movie_detail_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/now_playing_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/popular_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/top_rated_movie_bloc.dart';
@@ -138,6 +139,7 @@ void init() {
   locator.registerFactory(() => PopularMovieBloc(locator()));
   locator.registerFactory(() => TopRatedMovieBloc(locator()));
   locator.registerFactory(() => NowPlayingMovieBloc(locator()));
+  locator.registerFactory(() => MovieDetailBloc(getMovieDetail: locator(), getMovieRecommendations: locator()));
 
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

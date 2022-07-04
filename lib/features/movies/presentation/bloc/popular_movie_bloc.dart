@@ -5,8 +5,8 @@ import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dar
 
 import '../../domain/entities/movie.dart';
 
-part 'popular_movie_event.dart';
-part 'popular_movie_state.dart';
+part 'event/popular_movie_event.dart';
+part 'state/popular_movie_state.dart';
 
 class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
   final GetPopularMovies _getPopularMovies;

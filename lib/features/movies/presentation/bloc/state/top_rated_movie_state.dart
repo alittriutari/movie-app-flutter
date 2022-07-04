@@ -1,4 +1,4 @@
-part of 'top_rated_movie_bloc.dart';
+part of '../top_rated_movie_bloc.dart';
 
 abstract class TopRatedMovieState extends Equatable {
   const TopRatedMovieState();

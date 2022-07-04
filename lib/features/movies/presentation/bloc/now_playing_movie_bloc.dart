@@ -4,8 +4,8 @@ import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_now_playing_movies.dart';
 
-part 'now_playing_movie_event.dart';
-part 'now_playing_movie_state.dart';
+part 'event/now_playing_movie_event.dart';
+part 'state/now_playing_movie_state.dart';
 
 class NowPlayingMovieBloc extends Bloc<NowPlayingMovieEvent, NowPlayingMovieState> {
   final GetNowPlayingMovies _getNowPlayingMovies;
