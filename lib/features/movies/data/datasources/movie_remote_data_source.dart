@@ -29,11 +29,12 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getNowPlayingMovies() async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
+    // HttpClient client = HttpClient(context: await globalContext);
+    // client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    // IOClient ioClient = IOClient(client);
 
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY'));
+    // final response = await ioClient.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY'));
+    final response = await http.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY'));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
@@ -59,11 +60,12 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getMovieRecommendations(int id) async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
+    // HttpClient client = HttpClient(context: await globalContext);
+    // client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    // IOClient ioClient = IOClient(client);
 
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/$id/recommendations?$API_KEY'));
+    // final response = await ioClient.get(Uri.parse('$BASE_URL/movie/$id/recommendations?$API_KEY'));
+    final response = await http.get(Uri.parse('$BASE_URL/movie/$id/recommendations?$API_KEY'));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
