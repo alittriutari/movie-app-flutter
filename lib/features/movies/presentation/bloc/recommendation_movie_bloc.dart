@@ -4,8 +4,8 @@ import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/features/movies/domain/entities/movie.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_movie_recommendations.dart';
 
-part 'recommendation_movie_event.dart';
-part 'recommendation_movie_state.dart';
+part 'event/recommendation_movie_event.dart';
+part 'state/recommendation_movie_state.dart';
 
 class RecommendationMovieBloc extends Bloc<RecommendationMovieEvent, RecommendationMovieState> {
   final GetMovieRecommendations _getMovieRecommendations;

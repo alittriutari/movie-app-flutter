@@ -1,4 +1,4 @@
-part of 'recommendation_movie_bloc.dart';
+part of '../recommendation_movie_bloc.dart';
 
 abstract class RecommendationMovieState extends Equatable {
   const RecommendationMovieState();

@@ -4,8 +4,8 @@ import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/features/movies/domain/entities/movie_detail.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_movie_detail.dart';
 
-part 'movie_detail_event.dart';
-part 'movie_detail_state.dart';
+part 'event/movie_detail_event.dart';
+part 'state/movie_detail_state.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final GetMovieDetail getMovieDetail;
