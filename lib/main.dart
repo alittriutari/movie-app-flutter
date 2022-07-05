@@ -8,6 +8,7 @@ import 'package:movie_app/features/movies/presentation/bloc/now_playing_movie_bl
 import 'package:movie_app/features/movies/presentation/bloc/popular_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/recommendation_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/bloc/top_rated_movie_bloc.dart';
+import 'package:movie_app/features/movies/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:movie_app/features/movies/presentation/pages/about_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/home_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
@@ -91,7 +92,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieList())),
         BlocProvider(create: (_) => di.locator<NowPlayingMovieBloc>()..add(GetNowPlayingMovieEvent())),
         BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
-        BlocProvider(create: (_) => di.locator<RecommendationMovieBloc>())
+        BlocProvider(create: (_) => di.locator<RecommendationMovieBloc>()),
+        BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
