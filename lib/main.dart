@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TvEpisodeNotifier>(),
         ),
         BlocProvider(create: (_) => di.locator<PopularMovieBloc>()..add(GetPopularMovieEvent())),
-        BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieList())),
+        BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieListEvent())),
         BlocProvider(create: (_) => di.locator<NowPlayingMovieBloc>()..add(GetNowPlayingMovieEvent())),
         BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (_) => di.locator<RecommendationMovieBloc>()),

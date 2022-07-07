@@ -8,8 +8,8 @@ import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_statu
 import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
 
-part 'watchlist_movie_event.dart';
-part 'watchlist_movie_state.dart';
+part 'event/watchlist_movie_event.dart';
+part 'state/watchlist_movie_state.dart';
 
 class WatchlistMovieBloc extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
   final GetWatchListStatus getWatchListStatus;

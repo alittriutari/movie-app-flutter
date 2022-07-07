@@ -1,4 +1,4 @@
-part of 'watchlist_movie_bloc.dart';
+part of '../watchlist_movie_bloc.dart';
 
 abstract class WatchlistMovieEvent extends Equatable {
   const WatchlistMovieEvent();

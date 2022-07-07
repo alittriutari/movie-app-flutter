@@ -10,7 +10,7 @@ part 'state/top_rated_movie_state.dart';
 class TopRatedMovieBloc extends Bloc<TopRatedMovieEvent, TopRatedMovieState> {
   final GetTopRatedMovies _getTopRatedMovies;
   TopRatedMovieBloc(this._getTopRatedMovies) : super(TopRatedMovieInitial()) {
-    on<GetTopRatedMovieList>((event, emit) async {
+    on<GetTopRatedMovieListEvent>((event, emit) async {
       emit(TopRatedMovieLoading());
       final result = await _getTopRatedMovies.execute();
       result.fold((failure) {
