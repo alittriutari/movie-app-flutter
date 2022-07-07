@@ -68,13 +68,27 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   }
 }
 
-class DetailContent extends StatelessWidget {
+// ignore: must_be_immutable
+class DetailContent extends StatefulWidget {
   final MovieDetail movie;
-  final bool isAddedWatchlist;
+  bool isAddedWatchlist;
   DetailContent(this.movie, this.isAddedWatchlist);
 
   @override
+  State<DetailContent> createState() => _DetailContentState();
+}
+
+class _DetailContentState extends State<DetailContent> {
+  @override
   Widget build(BuildContext context) {
+    final message = context.select<WatchlistMovieBloc, String>((value) => (value.state is WatchlistMovieChanged)
+        ? (value.state as WatchlistMovieChanged).status == false
+            ? watchlistAddSuccessMessage
+            : watchlistRemoveSuccessMessage
+        : !widget.isAddedWatchlist
+            ? watchlistAddSuccessMessage
+            : watchlistRemoveSuccessMessage);
+
     return CustomScrollView(
       physics: BouncingScrollPhysics(),
       slivers: [
@@ -89,7 +103,7 @@ class DetailContent extends StatelessWidget {
                   Container(
                     height: 400,
                     child: CustomCacheImage(
-                      imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                      imageUrl: 'https://image.tmdb.org/t/p/w500${widget.movie.posterPath}',
                       height: 400,
                       boxFit: BoxFit.cover,
                       width: double.infinity,
@@ -110,7 +124,7 @@ class DetailContent extends StatelessWidget {
                     child: SizedBox(
                         width: 250,
                         child: Text(
-                          movie.title,
+                          widget.movie.title,
                           textAlign: TextAlign.center,
                           style: kHeading5,
                         )),
@@ -121,61 +135,58 @@ class DetailContent extends StatelessWidget {
                     right: 0,
                     child: Center(
                       child: Text(
-                        _showGenres(movie.genres),
+                        _showGenres(widget.movie.genres),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 20,
-                    right: 16,
-                    left: 16,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white,
-                      ),
-                      onPressed: () async {
-                        if (!isAddedWatchlist) {
-                          context.read<WatchlistMovieBloc>().add(AddWatchlistMovieEvent(movie));
-                        } else {
-                          context.read<WatchlistMovieBloc>().add(RemoveWatchlistMovieEvent(movie));
-                        }
+                  Builder(builder: (context) {
+                    return Positioned(
+                      bottom: 20,
+                      right: 16,
+                      left: 16,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                        ),
+                        onPressed: () {
+                          if (!widget.isAddedWatchlist) {
+                            context.read<WatchlistMovieBloc>().add(AddWatchlistMovieEvent(widget.movie));
+                          } else {
+                            context.read<WatchlistMovieBloc>().add(RemoveWatchlistMovieEvent(widget.movie));
+                          }
 
-                        final message = context.select<WatchlistMovieBloc, String>((value) => (value.state is WatchlistMovieChanged)
-                            ? (value.state as WatchlistMovieChanged).status == false
-                                ? watchlistAddSuccessMessage
-                                : watchlistRemoveSuccessMessage
-                            : !isAddedWatchlist
-                                ? watchlistAddSuccessMessage
-                                : watchlistRemoveSuccessMessage);
-
-                        if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-                        } else {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  content: Text(message),
-                                );
-                              });
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            isAddedWatchlist ? 'Remove from watchlist' : 'Add to watchlist',
-                            style: kBodyText.copyWith(fontWeight: FontWeight.bold),
-                          )
-                        ],
+                          if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    content: Text(message),
+                                  );
+                                });
+                          }
+                          setState(() {
+                            widget.isAddedWatchlist = !widget.isAddedWatchlist;
+                          });
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            widget.isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              widget.isAddedWatchlist ? 'Remove from watchlist' : 'Add to watchlist',
+                              style: kBodyText.copyWith(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                  )
+                    );
+                  })
                 ],
               ),
             ),
@@ -194,7 +205,7 @@ class DetailContent extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     RatingBarIndicator(
-                      rating: movie.voteAverage / 2,
+                      rating: widget.movie.voteAverage / 2,
                       itemCount: 5,
                       itemBuilder: (context, index) => Icon(
                         Icons.star,
@@ -209,7 +220,7 @@ class DetailContent extends StatelessWidget {
                         color: kDavysGrey,
                         padding: EdgeInsets.all(5),
                         child: Text(
-                          _showDuration(movie.runtime),
+                          _showDuration(widget.movie.runtime),
                         )),
                   ],
                 ),
@@ -219,7 +230,7 @@ class DetailContent extends StatelessWidget {
                   style: kHeading6,
                 ),
                 Text(
-                  movie.overview,
+                  widget.movie.overview,
                 ),
                 SizedBox(height: 16),
                 Text(
