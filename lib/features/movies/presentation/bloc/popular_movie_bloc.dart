@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movie_app/common/failure.dart';
@@ -16,7 +14,7 @@ class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
     on<GetPopularMovieEvent>((event, emit) async {
       emit(PopularMovieLoading());
       final result = await getPopularMovies.execute();
-      log(result.toString());
+
       result.fold((failure) {
         emit(PopularMovieFailure(failure: failure));
       }, (data) {

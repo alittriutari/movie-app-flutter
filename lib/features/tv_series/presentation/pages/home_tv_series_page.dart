@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/common/state_enum.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/features/movies/presentation/widgets/custom_cache_image.dart';
 import 'package:movie_app/features/movies/presentation/widgets/sub_heading_widget.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
+import 'package:movie_app/features/tv_series/presentation/bloc/on_air_tv_bloc.dart';
+import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_bloc.dart';
+import 'package:movie_app/features/tv_series/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/popular_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/widget/carrousel_tv_series_widget.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../common/constants.dart';
 import '../../../movies/presentation/widgets/placeholder_widget.dart';
@@ -27,11 +28,6 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   void initState() {
     super.initState();
     _controller = ScrollController();
-
-    Future.microtask(() => Provider.of<TvSeriesListNotifier>(context, listen: false)
-      ..fetchOnAirTvSeries()
-      ..fetchPopularTvSeries()
-      ..fetchTopRatedTvSeries());
   }
 
   @override
@@ -44,22 +40,28 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   Widget build(BuildContext context) {
     return CustomScrollView(controller: _controller, slivers: [
       SliverToBoxAdapter(
-        child: Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-          final state = data.onAirState;
-          if (state == RequestState.Loading) {
-            return Center(
-              child: PlaceholderWidget(
-                height: 400,
-                width: double.infinity,
-              ),
-            );
-          } else if (state == RequestState.Loaded) {
-            return CarrouselTvSeriesWidget(
-              tvSeries: data.onAirTvSeries,
-            );
-          } else {
-            return Text('Failed');
+        child: BlocBuilder<OnAirTvBloc, OnAirTvState>(builder: (context, state) {
+          switch (state.runtimeType) {
+            case OnAirTvLoading:
+              return Center(
+                child: PlaceholderWidget(
+                  height: 400,
+                  width: double.infinity,
+                ),
+              );
+            case OnAirTvFailure:
+              final _msg = (state as OnAirTvFailure).failure;
+              return Center(
+                key: Key('error_message'),
+                child: Text(_msg.toString()),
+              );
+            case OnAirTvLoaded:
+              final _data = (state as OnAirTvLoaded).data;
+              return CarrouselTvSeriesWidget(
+                tvSeries: _data,
+              );
           }
+          return SizedBox.shrink();
         }),
       ),
       SliverToBoxAdapter(
@@ -67,23 +69,30 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: Key('show_popular_tv'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.popularTvSeriesState;
-                if (state == RequestState.Loading) {
-                  return Row(
-                    children: List.generate(
-                        3,
-                        (index) => PlaceholderWidget(
-                              height: 150,
-                              width: 90,
-                            )),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return TvSeriesList(data.popularTvSeries);
-                } else {
-                  return Text('Failed');
+              SubHeadingWidget(
+                  key: Key('show_popular_tv'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+              BlocBuilder<PopularTvBloc, PopularTvState>(builder: (context, state) {
+                switch (state.runtimeType) {
+                  case PopularTvLoading:
+                    return Row(
+                      children: List.generate(
+                          3,
+                          (index) => PlaceholderWidget(
+                                height: 150,
+                                width: 90,
+                              )),
+                    );
+                  case PopularTvFailure:
+                    final _msg = (state as PopularTvFailure).failure;
+                    return Center(
+                      key: Key('error_message'),
+                      child: Text(_msg.toString()),
+                    );
+                  case PopularTvLoaded:
+                    final _data = (state as PopularTvLoaded).data;
+                    return TvSeriesList(_data);
                 }
+                return SizedBox.shrink();
               }),
             ],
           ),
@@ -94,23 +103,30 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME)),
-              Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-                final state = data.topRatedTvSeriesState;
-                if (state == RequestState.Loading) {
-                  return Row(
-                    children: List.generate(
-                        3,
-                        (index) => PlaceholderWidget(
-                              height: 150,
-                              width: 90,
-                            )),
-                  );
-                } else if (state == RequestState.Loaded) {
-                  return TvSeriesList(data.topRatedTvSeries);
-                } else {
-                  return Text('Failed');
+              SubHeadingWidget(
+                  key: Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME)),
+              BlocBuilder<TopRatedTvBloc, TopRatedTvState>(builder: (context, state) {
+                switch (state.runtimeType) {
+                  case TopRatedTvLoading:
+                    return Row(
+                      children: List.generate(
+                          3,
+                          (index) => PlaceholderWidget(
+                                height: 150,
+                                width: 90,
+                              )),
+                    );
+                  case TopRatedTvFailure:
+                    final _msg = (state as TopRatedTvFailure).failure;
+                    return Center(
+                      key: Key('error_message'),
+                      child: Text(_msg.toString()),
+                    );
+                  case TopRatedTvLoaded:
+                    final _data = (state as TopRatedTvLoaded).data;
+                    return TvSeriesList(_data);
                 }
+                return SizedBox.shrink();
               }),
             ],
           ),

@@ -42,10 +42,13 @@ import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_st
 import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
+import 'package:movie_app/features/tv_series/presentation/bloc/episode_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/on_air_tv_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/popular_tv_bloc.dart';
+import 'package:movie_app/features/tv_series/presentation/bloc/recommendation_tv_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/tv_detail_bloc.dart';
+import 'package:movie_app/features/tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
 import 'package:movie_app/features/tv_series/presentation/providers/top_rated_tv_series_notifier.dart';
@@ -78,8 +81,11 @@ Future init() async {
   locator.registerFactory(() => PopularTvBloc(getPopularTvSeries: locator()));
   locator.registerFactory(() => TopRatedTvBloc(getTopRatedTv: locator()));
   locator.registerFactory(() => TvDetailBloc(getTvSeriesDetail: locator()));
-  // locator.registerFactory(
-  //     () => WatchlistMovieBloc(getWatchListStatus: locator(), getWatchlistMovies: locator(), removeWatchlist: locator(), saveWatchlist: locator()));
+  locator.registerFactory(() => RecommendationTvBloc(getTvSeriesRecommendation: locator()));
+
+  locator.registerFactory(
+      () => WatchlistTvBloc(getTvWatchlistStatus: locator(), getWatchlistTv: locator(), removeTvWatchlist: locator(), saveTvWatchlist: locator()));
+  locator.registerFactory(() => EpisodeBloc(getTvEpisode: locator()));
 
   // provider
   locator.registerFactory(
