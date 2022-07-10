@@ -1,6 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:movie_app/common/network_info.dart';
 import 'package:movie_app/features/movies/data/datasources/db/movie_database_helper.dart';
 import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart';
@@ -53,10 +54,22 @@ import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.da
 import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:movie_app/ssl_helper.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future init() async {
+  IOClient ioClient = await SSLHelper.ioClient;
+
+  //bloc
+  locator.registerFactory(() => NowPlayingMovieBloc(getNowPlayingMovies: locator()));
+  locator.registerFactory(() => PopularMovieBloc(getPopularMovies: locator()));
+  locator.registerFactory(() => TopRatedMovieBloc(getTopRatedMovies: locator()));
+  locator.registerFactory(() => RecommendationMovieBloc(getMovieRecommendations: locator()));
+  locator.registerFactory(() => MovieDetailBloc(getMovieDetail: locator()));
+  locator.registerFactory(
+      () => WatchlistMovieBloc(getWatchListStatus: locator(), getWatchlistMovies: locator(), removeWatchlist: locator(), saveWatchlist: locator()));
+
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
@@ -138,14 +151,6 @@ void init() {
     () => TvEpisodeNotifier(getTvEpisode: locator()),
   );
 
-  locator.registerFactory(() => PopularMovieBloc(locator()));
-  locator.registerFactory(() => TopRatedMovieBloc(locator()));
-  locator.registerFactory(() => NowPlayingMovieBloc(locator()));
-  locator.registerFactory(() => MovieDetailBloc(locator()));
-  locator.registerFactory(() => RecommendationMovieBloc(locator()));
-  locator.registerFactory(
-      () => WatchlistMovieBloc(getWatchListStatus: locator(), getWatchlistMovies: locator(), removeWatchlist: locator(), saveWatchlist: locator()));
-
   // use case
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
   locator.registerLazySingleton(() => GetPopularMovies(locator()));
@@ -178,9 +183,9 @@ void init() {
   );
 
   // data sources
-  locator.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(ioClient: locator()));
   locator.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<TvSeriesRemoteDataSource>(() => TvSeriesRemoteDataSourceImpl(client: locator()));
+  locator.registerLazySingleton<TvSeriesRemoteDataSource>(() => TvSeriesRemoteDataSourceImpl(ioClient: locator()));
   locator.registerLazySingleton<TvLocalDataSource>(() => TvLocalDataSourceImpl(databaseHelper: locator()));
 
   // helper
@@ -193,4 +198,5 @@ void init() {
   // external
   locator.registerLazySingleton(() => http.Client());
   locator.registerLazySingleton(() => DataConnectionChecker());
+  locator.registerLazySingleton(() => ioClient);
 }

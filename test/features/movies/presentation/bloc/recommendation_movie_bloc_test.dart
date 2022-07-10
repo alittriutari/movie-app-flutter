@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockGetMovieRecommendations = MockGetMovieRecommendations();
-    recommendationMovieBloc = RecommendationMovieBloc(mockGetMovieRecommendations);
+    recommendationMovieBloc = RecommendationMovieBloc(getMovieRecommendations: mockGetMovieRecommendations);
   });
 
   const tId = 1;

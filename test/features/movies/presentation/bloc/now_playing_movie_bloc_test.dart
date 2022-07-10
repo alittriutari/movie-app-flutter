@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockGetNowPlayingMovies = MockGetNowPlayingMovies();
-    nowPlayingMovieBloc = NowPlayingMovieBloc(mockGetNowPlayingMovies);
+    nowPlayingMovieBloc = NowPlayingMovieBloc(getNowPlayingMovies: mockGetNowPlayingMovies);
   });
 
   test(

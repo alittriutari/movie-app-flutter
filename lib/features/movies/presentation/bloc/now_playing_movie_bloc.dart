@@ -8,11 +8,11 @@ part 'event/now_playing_movie_event.dart';
 part 'state/now_playing_movie_state.dart';
 
 class NowPlayingMovieBloc extends Bloc<NowPlayingMovieEvent, NowPlayingMovieState> {
-  final GetNowPlayingMovies _getNowPlayingMovies;
-  NowPlayingMovieBloc(this._getNowPlayingMovies) : super(NowPlayingMovieInitial()) {
+  final GetNowPlayingMovies getNowPlayingMovies;
+  NowPlayingMovieBloc({required this.getNowPlayingMovies}) : super(NowPlayingMovieInitial()) {
     on<GetNowPlayingMovieEvent>((event, emit) async {
       emit(NowPlayingMovieLoading());
-      final result = await _getNowPlayingMovies.execute();
+      final result = await getNowPlayingMovies.execute();
       result.fold((failure) {
         emit(NowPlayingMovieFailure(failure: failure));
       }, (data) {

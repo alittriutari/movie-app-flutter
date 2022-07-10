@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockGetTopRatedMovies = MockGetTopRatedMovies();
-    topRatedMovieBloc = TopRatedMovieBloc(mockGetTopRatedMovies);
+    topRatedMovieBloc = TopRatedMovieBloc(getTopRatedMovies: mockGetTopRatedMovies);
   });
 
   test(

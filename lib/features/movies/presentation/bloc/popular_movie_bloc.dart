@@ -11,11 +11,11 @@ part 'event/popular_movie_event.dart';
 part 'state/popular_movie_state.dart';
 
 class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
-  final GetPopularMovies _getPopularMovies;
-  PopularMovieBloc(this._getPopularMovies) : super(PopularMovieInitial()) {
+  final GetPopularMovies getPopularMovies;
+  PopularMovieBloc({required this.getPopularMovies}) : super(PopularMovieInitial()) {
     on<GetPopularMovieEvent>((event, emit) async {
       emit(PopularMovieLoading());
-      final result = await _getPopularMovies.execute();
+      final result = await getPopularMovies.execute();
       log(result.toString());
       result.fold((failure) {
         emit(PopularMovieFailure(failure: failure));

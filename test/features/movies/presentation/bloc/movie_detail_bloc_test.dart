@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockGetMovieDetail = MockGetMovieDetail();
-    movieDetailBloc = MovieDetailBloc(mockGetMovieDetail);
+    movieDetailBloc = MovieDetailBloc(getMovieDetail: mockGetMovieDetail);
   });
 
   const tId = 1;

@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +38,11 @@ import 'package:movie_app/injection.dart' as di;
 import 'package:provider/provider.dart';
 
 void main() async {
-  di.init();
-  HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  await di.init();
+
   runApp(MyApp());
 }
 

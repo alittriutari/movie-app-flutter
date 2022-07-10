@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     mockGetPopularMovies = MockGetPopularMovies();
-    popularMovieBloc = PopularMovieBloc(mockGetPopularMovies);
+    popularMovieBloc = PopularMovieBloc(getPopularMovies: mockGetPopularMovies);
   });
 
   test(
