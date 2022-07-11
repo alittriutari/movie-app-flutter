@@ -14,15 +14,13 @@ import 'package:movie/presentation/pages/home_page.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:movie/presentation/pages/top_rated_movies_page.dart';
-import 'package:movie_app/features/search/presentation/bloc/movie_search_bloc.dart';
-import 'package:movie_app/features/search/presentation/bloc/tv_search_bloc.dart';
-import 'package:movie_app/features/search/presentation/pages/search_page.dart';
-import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
-import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:movie_app/injection.dart' as di;
 import 'package:provider/provider.dart';
+import 'package:search/presentation/bloc/movie_search_bloc.dart';
+import 'package:search/presentation/bloc/tv_search_bloc.dart';
+import 'package:search/presentation/pages/search_page.dart';
 import 'package:tv_series/presentation/bloc/episode_bloc.dart';
 import 'package:tv_series/presentation/bloc/on_air_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
@@ -50,13 +48,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => di.locator<SearchMovieNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SearchTvSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),

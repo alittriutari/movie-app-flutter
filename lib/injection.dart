@@ -13,12 +13,6 @@ import 'package:movie/presentation/bloc/popular_movie_bloc.dart';
 import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
-import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
-import 'package:movie_app/features/search/domain/usecases/search_tv_series.dart';
-import 'package:movie_app/features/search/presentation/bloc/movie_search_bloc.dart';
-import 'package:movie_app/features/search/presentation/bloc/tv_search_bloc.dart';
-import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
-import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
@@ -26,6 +20,9 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:movie_app/ssl_helper.dart';
+import 'package:search/domain/usecases/search_movies.dart';
+import 'package:search/domain/usecases/search_tv_series.dart';
+import 'package:search/search.dart';
 import 'package:tv_series/data/datasources/db/tv_database_helper.dart';
 import 'package:tv_series/domain/usecases/get_tv_watchlist_status.dart';
 import 'package:tv_series/domain/usecases/get_watchlist_tv.dart';
@@ -70,19 +67,9 @@ Future init() async {
   // provider
 
   locator.registerFactory(
-    () => SearchMovieNotifier(
-      searchMovies: locator(),
-    ),
-  );
-
-  locator.registerFactory(
     () => WatchlistMovieNotifier(
       getWatchlistMovies: locator(),
     ),
-  );
-
-  locator.registerFactory(
-    () => SearchTvSeriesNotifier(searchTvSeries: locator()),
   );
 
   locator.registerFactory(
