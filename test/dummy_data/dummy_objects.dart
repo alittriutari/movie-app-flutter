@@ -1,7 +1,7 @@
-import 'package:movie_app/features/movies/data/models/movie_table.dart';
-import 'package:movie_app/features/movies/domain/entities/genre.dart';
-import 'package:movie_app/features/movies/domain/entities/movie.dart';
-import 'package:movie_app/features/movies/domain/entities/movie_detail.dart';
+import 'package:movie/data/models/movie_table.dart';
+import 'package:movie/domain/entities/genre.dart';
+import 'package:movie/domain/entities/movie.dart';
+import 'package:movie/domain/entities/movie_detail.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_table.dart';
 import 'package:movie_app/features/tv_series/domain/entities/episode.dart';
 import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';

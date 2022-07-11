@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movie/data/models/genre_model.dart';
 import 'package:movie_app/common/exception.dart';
 import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/common/network_info.dart';
-import 'package:movie_app/features/movies/data/models/genre_model.dart';
 import 'package:movie_app/features/tv_series/data/models/episode_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_detail_model.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_model.dart';
@@ -60,26 +60,8 @@ void main() {
       posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
       voteAverage: 8.659,
       voteCount: 601);
-  final tEpisodeModel = EpisodeModel(
-      airDate: 'airDate',
-      episodeNumber: 1,
-      id: 1,
-      name: 'name',
-      overview: 'overview',
-      seasonNumber: 1,
-      stillPath: 'stillPath',
-      voteAverage: 1.0,
-      voteCount: 1);
-  final tEpisode = Episode(
-      airDate: 'airDate',
-      episodeNumber: 1,
-      id: 1,
-      name: 'name',
-      overview: 'overview',
-      seasonNumber: 1,
-      stillPath: 'stillPath',
-      voteAverage: 1.0,
-      voteCount: 1);
+  final tEpisodeModel = EpisodeModel(airDate: 'airDate', episodeNumber: 1, id: 1, name: 'name', overview: 'overview', seasonNumber: 1, stillPath: 'stillPath', voteAverage: 1.0, voteCount: 1);
+  final tEpisode = Episode(airDate: 'airDate', episodeNumber: 1, id: 1, name: 'name', overview: 'overview', seasonNumber: 1, stillPath: 'stillPath', voteAverage: 1.0, voteCount: 1);
 
   final tTvModelList = <TvSeriesModel>[tTvModel];
   final tTvSeriesList = <TvSeries>[tTvSeries];

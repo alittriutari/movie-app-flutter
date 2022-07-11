@@ -1,7 +1,7 @@
-import 'package:movie_app/common/exception.dart';
-import 'package:movie_app/features/movies/data/datasources/movie_local_data_source.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movie/data/datasources/movie_local_data_source.dart';
+import 'package:movie_app/common/exception.dart';
 
 import '../../../../dummy_data/dummy_objects.dart';
 import '../../../../helpers/test_helper.mocks.dart';

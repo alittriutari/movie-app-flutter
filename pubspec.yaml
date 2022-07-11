@@ -49,6 +49,15 @@ dependencies:
       url: https://github.com/chornthorn/data_connection_checker.git
       ref: master
 
+  movie:
+    path: movie
+  watchlist:
+    path: watchlist
+  tv_series:
+    path: tv_series
+  search:
+    path: search
+
 dev_dependencies:
   mockito: ^5.0.8
   build_runner: ^2.0.4

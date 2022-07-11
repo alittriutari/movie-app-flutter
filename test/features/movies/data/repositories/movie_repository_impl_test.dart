@@ -1,19 +1,19 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
-import 'package:movie_app/features/movies/data/models/genre_model.dart';
-import 'package:movie_app/features/movies/data/models/movie_detail_model.dart';
-import 'package:movie_app/features/movies/data/models/movie_model.dart';
-import 'package:movie_app/features/movies/data/models/movie_table.dart';
-import 'package:movie_app/features/movies/data/repositories/movie_repository_impl.dart';
-import 'package:movie_app/common/exception.dart';
-import 'package:movie_app/common/failure.dart';
-import 'package:movie_app/features/movies/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:movie/data/models/genre_model.dart';
+import 'package:movie/data/models/movie_detail_model.dart';
+import 'package:movie/data/models/movie_model.dart';
+import 'package:movie/data/models/movie_table.dart';
+import 'package:movie/data/repositories/movie_repository_impl.dart';
+import 'package:movie/domain/entities/movie.dart';
+import 'package:movie_app/common/exception.dart';
+import 'package:movie_app/common/failure.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
 import '../../../../dummy_data/dummy_objects.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MovieRepositoryImpl repository;
@@ -39,8 +39,7 @@ void main() {
     genreIds: [14, 28],
     id: 557,
     originalTitle: 'Spider-Man',
-    overview:
-        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+    overview: 'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     popularity: 60.441,
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     releaseDate: '2002-05-01',
@@ -56,8 +55,7 @@ void main() {
     genreIds: [14, 28],
     id: 557,
     originalTitle: 'Spider-Man',
-    overview:
-        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+    overview: 'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     popularity: 60.441,
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     releaseDate: '2002-05-01',
@@ -69,8 +67,7 @@ void main() {
 
   final testMovieCache = MovieTable(
     id: 557,
-    overview:
-        'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
+    overview: 'After being bitten by a genetically altered spider, nerdy high school student Peter Parker is endowed with amazing powers to become the Amazing superhero known as Spider-Man.',
     posterPath: '/rweIrveL43TaxUN0akQEaAXL6x0.jpg',
     title: 'Spider-Man',
   );
