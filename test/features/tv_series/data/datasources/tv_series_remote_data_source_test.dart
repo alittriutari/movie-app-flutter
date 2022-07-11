@@ -5,10 +5,10 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:movie_app/common/api_url.dart';
 import 'package:movie_app/common/exception.dart';
-import 'package:movie_app/features/tv_series/data/datasources/tv_series_remote_data_source.dart';
-import 'package:movie_app/features/tv_series/data/models/episode_response.dart';
-import 'package:movie_app/features/tv_series/data/models/tv_series_detail_model.dart';
-import 'package:movie_app/features/tv_series/data/models/tv_series_response.dart';
+import 'package:tv_series/data/datasources/tv_series_remote_data_source.dart';
+import 'package:tv_series/data/models/episode_response.dart';
+import 'package:tv_series/data/models/tv_series_detail_model.dart';
+import 'package:tv_series/data/models/tv_series_response.dart';
 
 import '../../../../helpers/test_helper.mocks.dart';
 import '../../../../json_reader.dart';

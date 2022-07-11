@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/common/state_enum.dart';
 import 'package:movie_app/common/utils.dart';
-import 'package:movie_app/features/tv_series/presentation/widget/tv_series_grid_widget.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/widget/tv_series_grid_widget.dart';
 
 class WatchlistTvPage extends StatefulWidget {
   const WatchlistTvPage({Key? key}) : super(key: key);
@@ -16,9 +16,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
-            .fetchWatchlistTv());
+    Future.microtask(() => Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv());
   }
 
   @override

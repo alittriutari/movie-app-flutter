@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_app/features/tv_series/data/models/episode_model.dart';
-import 'package:movie_app/features/tv_series/data/models/episode_response.dart';
+import 'package:tv_series/data/models/episode_model.dart';
+import 'package:tv_series/data/models/episode_response.dart';
 
 import '../../../../json_reader.dart';
 

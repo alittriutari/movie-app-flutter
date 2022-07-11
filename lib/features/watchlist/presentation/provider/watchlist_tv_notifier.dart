@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movie_app/common/state_enum.dart';
-import 'package:movie_app/features/tv_series/domain/entities/tv_series.dart';
-import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
+import 'package:tv_series/domain/usecases/get_watchlist_tv.dart';
 
 class WatchlistTvNotifier extends ChangeNotifier {
   var _watchlistTv = <TvSeries>[];
