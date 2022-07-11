@@ -1,5 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:movie_app/common/network_info.dart';
 import 'package:movie_app/features/movies/data/datasources/db/movie_database_helper.dart';
@@ -80,7 +81,8 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   PopularTvSeriesNotifier,
   OnAirTvSeriesNotifier,
   DataConnectionChecker,
-  TopRatedTvSeriesNotifier
+  TopRatedTvSeriesNotifier,
+  IOClient
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)
 ])

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
+import 'package:http/io_client.dart';
 import 'package:movie_app/common/api_url.dart';
 import 'package:movie_app/common/exception.dart';
 import 'package:movie_app/features/tv_series/data/models/tv_series_detail_model.dart';
@@ -22,18 +22,13 @@ abstract class TvSeriesRemoteDataSource {
 }
 
 class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
-  final http.Client client;
+  final IOClient ioClient;
 
-  TvSeriesRemoteDataSourceImpl({required this.client});
+  TvSeriesRemoteDataSourceImpl({required this.ioClient});
 
   @override
   Future<List<TvSeriesModel>> getOnAirTvSeries() async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesOnAir));
-    // HttpClient client = HttpClient(context: await globalContext);
-    // client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
-    // IOClient ioClient = IOClient(client);
-
-    // final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesOnAir));
+    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesOnAir));
 
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
@@ -44,7 +39,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<TvSeriesDetailResponse> getTvSeriesDetail(int id) async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesDetail(id)));
+    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesDetail(id)));
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesDetailResponse.fromJson(jsonDecode(response.body));
     } else {
@@ -54,7 +49,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getTvSeriesRecommendation(int id) async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesRecommendation(id)));
+    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesRecommendation(id)));
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
     } else {
@@ -64,7 +59,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getPopularTvSeries() async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesPopular));
+    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesPopular));
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
     } else {
@@ -74,7 +69,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getTopRatedTvSeries() async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesTopRated));
+    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesTopRated));
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
     } else {
@@ -84,7 +79,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
-    final response = await client.get(Uri.parse(ApiUrl.searchTvSeries(query)));
+    final response = await ioClient.get(Uri.parse(ApiUrl.searchTvSeries(query)));
 
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
@@ -95,7 +90,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<EpisodeModel>> getTvEpisode(int id, int seasonNumber) async {
-    final response = await client.get(Uri.parse(ApiUrl.tvSeriesSeason(id, seasonNumber)));
+    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesSeason(id, seasonNumber)));
 
     if (response.statusCode == HttpStatus.ok) {
       return EpisodeResponse.fromJson(jsonDecode(response.body)).episodes;

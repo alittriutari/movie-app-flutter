@@ -19,7 +19,7 @@ class EpisodeModel extends Equatable {
   final int id;
   final String name;
   final String overview;
-  final int seasonNumber;
+  final int? seasonNumber;
   final String stillPath;
   final double voteAverage;
   final int voteCount;
@@ -30,7 +30,7 @@ class EpisodeModel extends Equatable {
         id: json["id"],
         name: json["name"],
         overview: json["overview"],
-        seasonNumber: json["season_number"],
+        seasonNumber: json["season_number"] ?? 0,
         stillPath: json["still_path"],
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
