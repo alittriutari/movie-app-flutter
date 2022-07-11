@@ -12,9 +12,6 @@ import 'package:movie_app/features/movies/domain/usecases/get_movie_recommendati
 import 'package:movie_app/features/movies/domain/usecases/get_now_playing_movies.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_popular_movies.dart';
 import 'package:movie_app/features/movies/domain/usecases/get_top_rated_movies.dart';
-import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:movie_app/features/search/domain/usecases/search_movies.dart';
 import 'package:movie_app/features/tv_series/data/datasources/db/tv_database_helper.dart';
 import 'package:movie_app/features/tv_series/data/datasources/tv_series_local_data_source.dart';
@@ -30,11 +27,6 @@ import 'package:movie_app/features/tv_series/domain/usecases/get_tv_watchlist_st
 import 'package:movie_app/features/tv_series/domain/usecases/get_watchlist_tv.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/remove_tv_watchlist.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/save_tv_watchlist.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/top_rated_tv_series_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_movies.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/get_watchlist_status.dart';
 import 'package:movie_app/features/watchlist/domain/usecases/remove_watchlist.dart';
@@ -52,9 +44,6 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   MovieRemoteDataSource,
   MovieLocalDataSource,
   MovieDatabaseHelper,
-  MovieDetailNotifier,
-  PopularMoviesNotifier,
-  TopRatedMoviesNotifier,
   GetNowPlayingMovies,
   GetPopularMovies,
   GetTopRatedMovies,
@@ -76,12 +65,7 @@ import 'package:movie_app/features/watchlist/domain/usecases/save_watchlist.dart
   GetTvWatchlistStatus,
   GetWatchListTv,
   GetTvEpisode,
-  TvSeriesDetailNotifier,
-  TvEpisodeNotifier,
-  PopularTvSeriesNotifier,
-  OnAirTvSeriesNotifier,
   DataConnectionChecker,
-  TopRatedTvSeriesNotifier,
   IOClient
 ], customMocks: [
   MockSpec<http.Client>(as: #MockHttpClient)

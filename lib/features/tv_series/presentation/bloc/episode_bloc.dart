@@ -4,8 +4,8 @@ import 'package:movie_app/common/failure.dart';
 import 'package:movie_app/features/tv_series/domain/entities/episode.dart';
 import 'package:movie_app/features/tv_series/domain/usecases/get_tv_episode.dart';
 
-part 'episode_event.dart';
-part 'episode_state.dart';
+part 'event/episode_event.dart';
+part 'state/episode_state.dart';
 
 class EpisodeBloc extends Bloc<EpisodeEvent, EpisodeState> {
   final GetTvEpisode getTvEpisode;

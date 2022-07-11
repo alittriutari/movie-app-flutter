@@ -15,10 +15,6 @@ import 'package:movie_app/features/movies/presentation/pages/home_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/movie_detail_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/popular_movies_page.dart';
 import 'package:movie_app/features/movies/presentation/pages/top_rated_movies_page.dart';
-import 'package:movie_app/features/movies/presentation/provider/movie_detail_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/movie_list_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/popular_movies_notifier.dart';
-import 'package:movie_app/features/movies/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:movie_app/features/search/presentation/pages/search_page.dart';
 import 'package:movie_app/features/search/presentation/provider/movie_search_notifier.dart';
 import 'package:movie_app/features/search/presentation/provider/tv_series_search_notifier.dart';
@@ -33,12 +29,6 @@ import 'package:movie_app/features/tv_series/presentation/pages/on_air_tv_series
 import 'package:movie_app/features/tv_series/presentation/pages/popular_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:movie_app/features/tv_series/presentation/pages/tv_series_detail_page.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/on_air_tv_series_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/popular_tv_series_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/top_rated_tv_series_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_episode_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_series_detail_notifier.dart';
-import 'package:movie_app/features/tv_series/presentation/providers/tv_series_list_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:movie_app/features/watchlist/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:movie_app/injection.dart' as di;
@@ -59,46 +49,16 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<SearchMovieNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<OnAirTvSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvSeriesNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesDetailNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<SearchTvSeriesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvEpisodeNotifier>(),
         ),
         BlocProvider(create: (_) => di.locator<PopularMovieBloc>()..add(GetPopularMovieEvent())),
         BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieListEvent())),

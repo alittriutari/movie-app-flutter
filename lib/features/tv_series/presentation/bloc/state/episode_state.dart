@@ -1,4 +1,4 @@
-part of 'episode_bloc.dart';
+part of '../episode_bloc.dart';
 
 abstract class EpisodeState extends Equatable {
   const EpisodeState();
