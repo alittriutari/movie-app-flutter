@@ -31,7 +31,7 @@ class EpisodeModel extends Equatable {
         name: json["name"],
         overview: json["overview"],
         seasonNumber: json["season_number"] ?? 0,
-        stillPath: json["still_path"],
+        stillPath: json["still_path"] ?? '',
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
       );
@@ -50,15 +50,7 @@ class EpisodeModel extends Equatable {
 
   Episode toEntity() {
     return Episode(
-        airDate: airDate,
-        episodeNumber: episodeNumber,
-        id: id,
-        name: name,
-        overview: overview,
-        seasonNumber: seasonNumber,
-        stillPath: stillPath,
-        voteAverage: voteAverage,
-        voteCount: voteCount);
+        airDate: airDate, episodeNumber: episodeNumber, id: id, name: name, overview: overview, seasonNumber: seasonNumber, stillPath: stillPath, voteAverage: voteAverage, voteCount: voteCount);
   }
 
   @override

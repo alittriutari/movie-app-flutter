@@ -10,18 +10,16 @@ part 'episode_state.dart';
 class EpisodeBloc extends Bloc<EpisodeEvent, EpisodeState> {
   final GetTvEpisode getTvEpisode;
   EpisodeBloc({required this.getTvEpisode}) : super(EpisodeInitial()) {
-    on<EpisodeEvent>((event, emit) {
-      on<GetEpisodeEvent>((event, emit) async {
-        final id = event.id;
-        final season = event.seasonNumber;
+    on<GetEpisodeEvent>((event, emit) async {
+      final id = event.id;
+      final season = event.seasonNumber;
 
-        emit(EpisodeLoading());
-        final result = await getTvEpisode.execute(id, season);
-        result.fold((failure) {
-          emit(EpisodeFailure(failure: failure));
-        }, (data) {
-          emit(EpisodeLoaded(data: data));
-        });
+      emit(EpisodeLoading());
+      final result = await getTvEpisode.execute(id, season);
+      result.fold((failure) {
+        emit(EpisodeFailure(failure: failure));
+      }, (data) {
+        emit(EpisodeLoaded(data: data));
       });
     });
   }

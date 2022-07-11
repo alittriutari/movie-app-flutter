@@ -9,7 +9,6 @@ import 'package:movie_app/features/tv_series/presentation/bloc/episode_bloc.dart
 import 'package:movie_app/features/tv_series/presentation/bloc/recommendation_tv_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/tv_detail_bloc.dart';
 import 'package:movie_app/features/tv_series/presentation/bloc/watchlist_tv_bloc.dart';
-import 'package:provider/provider.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/tv-series-detail';
@@ -28,8 +27,8 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     Future.microtask(() {
       context.read<TvDetailBloc>().add(GetTvDetailEvent(widget.id));
       context.read<RecommendationTvBloc>().add(GetRecommendationTvEvent(widget.id));
-
       context.read<WatchlistTvBloc>().add(LoadWatchlistTvEvent(widget.id));
+      context.read<EpisodeBloc>().add(GetEpisodeEvent(id: widget.id, seasonNumber: 1));
     });
   }
 
