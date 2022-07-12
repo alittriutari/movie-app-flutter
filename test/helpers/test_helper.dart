@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
@@ -26,6 +27,7 @@ import 'package:tv_series/domain/usecases/get_tv_watchlist_status.dart';
 import 'package:tv_series/domain/usecases/get_watchlist_tv.dart';
 import 'package:tv_series/domain/usecases/remove_tv_watchlist.dart';
 import 'package:tv_series/domain/usecases/save_tv_watchlist.dart';
+import 'package:watchlist/watchlist.dart';
 
 //TODO 3 daftarkan class yang ingin di mock pada sebuah fungsi main
 // taruh semua class mock dalam 1 berkas

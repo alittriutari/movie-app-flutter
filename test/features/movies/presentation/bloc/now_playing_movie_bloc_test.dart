@@ -3,12 +3,7 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-<<<<<<< HEAD
 import 'package:movie/presentation/bloc/now_playing_movie_bloc.dart';
-import 'package:movie_app/common/failure.dart';
-=======
-import 'package:movies/presentation/bloc/now_playing_movie_bloc.dart';
->>>>>>> 723ed042fd115a45c29e3650534c0ec73bbdb97a
 
 import '../../../../dummy_data/dummy_objects.dart';
 import '../../../../helpers/test_helper.mocks.dart';

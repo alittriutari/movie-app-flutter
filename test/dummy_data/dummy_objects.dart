@@ -1,7 +1,4 @@
-import 'package:movies/data/models/movie_table.dart';
-import 'package:movies/domain/entities/genre.dart';
-import 'package:movies/domain/entities/movie.dart';
-import 'package:movies/domain/entities/movie_detail.dart';
+import 'package:movie/movie.dart';
 import 'package:tv_series/data/models/tv_series_table.dart';
 import 'package:tv_series/domain/entities/episode.dart';
 import 'package:tv_series/domain/entities/tv_series.dart';
