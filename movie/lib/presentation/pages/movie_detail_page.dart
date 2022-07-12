@@ -2,12 +2,11 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie/domain/entities/genre.dart';
-import 'package:movie/domain/entities/movie_detail.dart';
+import 'package:movie/movie.dart';
 import 'package:movie/presentation/bloc/movie_detail_bloc.dart';
 import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
-import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:movie/presentation/widgets/custom_cache_image.dart';
+import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
 
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_app/features/tv_series/data/models/episode_model.dart';
-import 'package:movie_app/features/tv_series/domain/entities/episode.dart';
+import 'package:tv_series/data/models/episode_model.dart';
+import 'package:tv_series/domain/entities/episode.dart';
 
 void main() {
   final tEpisodeModel = EpisodeModel(

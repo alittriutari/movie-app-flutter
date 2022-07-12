@@ -1,7 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:watchlist/watchlist.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_series/presentation/widget/tv_series_grid_widget.dart';
+import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 
 class WatchlistTvPage extends StatefulWidget {
   const WatchlistTvPage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv());
+    // Future.microtask(() => Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv());
   }
 
   @override
@@ -25,31 +27,32 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
 
   @override
   void didPopNext() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
+    // Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
+    context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Consumer<WatchlistTvNotifier>(
-            builder: (context, data, child) {
-              if (data.watchlistState == RequestState.Loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (data.watchlistState == RequestState.Loaded) {
-                final tvSeries = data.watchlistTv;
-                return TVSeriesListGrid(tvSeries);
-              } else {
-                return Center(
-                  key: const Key('error_message'),
-                  child: Text(data.message),
-                );
-              }
-            },
-          )),
-    );
+        body: Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
+        builder: (context, state) {
+          switch (state.runtimeType) {
+            case WatchlistTvLoading:
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            case WatchlistTvFailure:
+              final _failure = (state as WatchlistTvFailure).failure;
+              return Center(child: Text(_failure.message));
+            case WatchlistTvLoaded:
+              final tv = (state as WatchlistTvLoaded).tv;
+              return TVSeriesListGrid(tv);
+          }
+          return const SizedBox.shrink();
+        },
+      ),
+    ));
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../tv_series.dart';
-import '../widget/tv_series_card_list.dart';
+import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
+import 'package:tv_series/presentation/widget/tv_series_card_list.dart';
 
 class PopularTvSeriesPage extends StatelessWidget {
   static const ROUTE_NAME = '/popular-tv-series';

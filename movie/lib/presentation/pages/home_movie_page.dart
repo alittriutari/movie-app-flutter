@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/bloc/now_playing_movie_bloc.dart';
 import 'package:movie/presentation/bloc/popular_movie_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
-import 'package:movie/presentation/pages/popular_movies_page.dart';
-import 'package:movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie/presentation/widgets/carrousel_movie_widget.dart';
 import 'package:movie/presentation/widgets/placeholder_widget.dart';
 import 'package:movie/presentation/widgets/sub_heading_widget.dart';
 
 import '../widgets/movie_list_widget.dart';
+import 'popular_movies_page.dart';
+import 'top_rated_movies_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
   const HomeMoviePage({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_series/presentation/bloc/on_air_tv_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_card_list.dart';
-import 'package:tv_series/tv_series.dart';
 
 class OnAirTvSeriesPage extends StatelessWidget {
   static const ROUTE_NAME = '/on-air-tv-series';

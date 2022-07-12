@@ -7,6 +7,9 @@ import 'package:movie/data/datasources/movie_remote_data_source.dart';
 import 'package:movie/data/models/movie_detail_model.dart';
 import 'package:movie/data/models/movie_response.dart';
 import 'package:movie_app/common/exception.dart';
+import 'package:movies/data/datasources/movie_remote_data_source.dart';
+import 'package:movies/data/models/movie_detail_model.dart';
+import 'package:movies/data/models/movie_response.dart';
 
 import '../../../../helpers/test_helper.mocks.dart';
 import '../../../../json_reader.dart';

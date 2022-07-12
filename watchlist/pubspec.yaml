@@ -2,6 +2,7 @@ name: watchlist
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
+publish_to: none
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
@@ -10,6 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  cupertino_icons: ^1.0.2
+  dartz: ^0.10.0-nullsafety.2
+  equatable: ^2.0.2
+  flutter_bloc: ^8.0.1
+  firebase_core: ^1.19.1
+  firebase_crashlytics: ^2.8.4
   
   movie:
     path: ../movie

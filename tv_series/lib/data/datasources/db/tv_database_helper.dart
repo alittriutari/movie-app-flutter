@@ -1,4 +1,5 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:tv_series/data/models/tv_series_table.dart';
 
 import '../../../tv_series.dart';
 

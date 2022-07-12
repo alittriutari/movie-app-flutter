@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movie/domain/entities/movie.dart';
-import 'package:movie/domain/entities/movie_detail.dart';
-import 'package:watchlist/watchlist.dart';
+import 'package:movie/movie.dart';
 
-part 'event/watchlist_movie_event.dart';
-part 'state/watchlist_movie_state.dart';
+import '../../watchlist.dart';
+
+part 'watchlist_movie_event.dart';
+part 'watchlist_movie_state.dart';
 
 class WatchlistMovieBloc extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
   final GetWatchListStatus getWatchListStatus;

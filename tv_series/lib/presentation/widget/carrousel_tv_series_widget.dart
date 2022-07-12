@@ -2,10 +2,9 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/presentation/widgets/custom_cache_image.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
 import 'package:tv_series/presentation/pages/on_air_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
-
-import '../../tv_series.dart';
 
 class CarrouselTvSeriesWidget extends StatelessWidget {
   final List<TvSeries> tvSeries;

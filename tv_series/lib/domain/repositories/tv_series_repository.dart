@@ -1,7 +1,8 @@
 import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../tv_series.dart';
+import 'package:tv_series/domain/entities/episode.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
+import 'package:tv_series/domain/entities/tv_series_detail.dart';
 
 abstract class TvSeriesRepository {
   Future<Either<Failure, List<TvSeries>>> getOnAirTvSeries();

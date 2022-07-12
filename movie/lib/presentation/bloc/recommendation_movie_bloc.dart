@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movie/domain/entities/movie.dart';
-import 'package:movie/domain/usecases/get_movie_recommendations.dart';
+import 'package:movie/movie.dart';
 
 part 'event/recommendation_movie_event.dart';
 part 'state/recommendation_movie_state.dart';

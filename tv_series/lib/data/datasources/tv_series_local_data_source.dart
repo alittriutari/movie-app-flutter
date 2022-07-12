@@ -1,7 +1,6 @@
 import 'package:core/core.dart';
-
-import '../../tv_series.dart';
-import 'db/tv_database_helper.dart';
+import 'package:tv_series/data/datasources/db/tv_database_helper.dart';
+import 'package:tv_series/data/models/tv_series_table.dart';
 
 abstract class TvLocalDataSource {
   Future<String> insertWatchlist(TvSeriesTable tvSeries);

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:movie/data/models/movie_table.dart';
+import 'package:movie/movie.dart';
 import 'package:sqflite/sqflite.dart';
 
 class MovieDatabaseHelper {

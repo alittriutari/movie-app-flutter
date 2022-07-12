@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/presentation/widgets/custom_cache_image.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
 
 import '../../tv_series.dart';
 import '../pages/tv_series_detail_page.dart';

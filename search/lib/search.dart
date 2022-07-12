@@ -1,5 +1,5 @@
 library search;
 
+export 'presentation/bloc/movie_search_bloc.dart';
+export 'presentation/bloc/tv_search_bloc.dart';
 export 'presentation/pages/search_page.dart';
-export 'presentation/provider/movie_search_notifier.dart';
-export 'presentation/provider/tv_series_search_notifier.dart';

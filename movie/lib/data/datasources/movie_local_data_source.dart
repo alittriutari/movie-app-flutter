@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:movie/data/models/movie_table.dart';
+import 'package:movie/movie.dart';
 
 import 'db/movie_database_helper.dart';
 

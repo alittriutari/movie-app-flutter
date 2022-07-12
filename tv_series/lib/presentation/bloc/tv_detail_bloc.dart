@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
-
-import '../../domain/usecases/get_tv_series_detail.dart';
-import '../../tv_series.dart';
+import 'package:tv_series/domain/entities/tv_series_detail.dart';
+import 'package:tv_series/domain/usecases/get_tv_series_detail.dart';
 
 part 'event/tv_detail_event.dart';
 part 'state/tv_detail_state.dart';

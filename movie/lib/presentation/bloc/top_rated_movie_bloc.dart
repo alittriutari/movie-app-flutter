@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movie/domain/entities/movie.dart';
-import 'package:movie/domain/usecases/get_top_rated_movies.dart';
+import 'package:movie/movie.dart';
 
 part 'event/top_rated_movie_event.dart';
 part 'state/top_rated_movie_state.dart';

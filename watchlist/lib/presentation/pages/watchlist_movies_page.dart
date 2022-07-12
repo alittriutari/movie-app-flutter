@@ -1,10 +1,12 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/widgets/movie_list_with_title.dart';
-import 'package:provider/provider.dart';
-import 'package:watchlist/watchlist.dart';
+import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
+  const WatchlistMoviesPage();
+
   @override
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
@@ -13,7 +15,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
   @override
   void initState() {
     super.initState();
-    Future.microtask(() => Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies());
+    // Future.microtask(() => Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies());
   }
 
   @override
@@ -24,7 +26,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
 
   @override
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false).fetchWatchlistMovies();
+    context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
   }
 
   @override
@@ -32,21 +34,21 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.watchlistState == RequestState.Loaded) {
-              final movie = data.watchlistMovies;
-              return MovieListGrid(movie);
-            } else {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(data.message),
-              );
+        child: BlocBuilder<WatchlistMovieBloc, WatchlistMovieState>(
+          builder: (context, state) {
+            switch (state.runtimeType) {
+              case WatchlistMovieLoading:
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              case WatchlistMovieFailure:
+                final _failure = (state as WatchlistMovieFailure).failure;
+                return Center(child: Text(_failure.message));
+              case WatchlistMovieLoaded:
+                final movie = (state as WatchlistMovieLoaded).movie;
+                return MovieListGrid(movie);
             }
+            return const SizedBox.shrink();
           },
         ),
       ),

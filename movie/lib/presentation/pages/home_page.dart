@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:movie/presentation/pages/home_movie_page.dart';
 import 'package:movie/presentation/widgets/custom_drawer.dart';
+import 'package:search/search.dart';
 import 'package:tv_series/presentation/pages/home_tv_series_page.dart';
 import 'package:watchlist/watchlist.dart';
 

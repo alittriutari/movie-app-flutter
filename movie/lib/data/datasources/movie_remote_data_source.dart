@@ -3,9 +3,7 @@ import 'dart:io';
 
 import 'package:core/core.dart';
 import 'package:http/io_client.dart';
-import 'package:movie/data/models/movie_detail_model.dart';
-import 'package:movie/data/models/movie_model.dart';
-import 'package:movie/data/models/movie_response.dart';
+import 'package:movie/movie.dart';
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();

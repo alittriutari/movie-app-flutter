@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/widgets/custom_cache_image.dart';
 import 'package:movie/presentation/widgets/placeholder_widget.dart';
 import 'package:movie/presentation/widgets/sub_heading_widget.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
+import 'package:tv_series/presentation/bloc/on_air_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
+import 'package:tv_series/presentation/pages/popular_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:tv_series/presentation/widget/carrousel_tv_series_widget.dart';
-
-import '../../tv_series.dart';
-import 'popular_tv_series_page.dart';
 
 class HomeTvSeriesPage extends StatefulWidget {
   const HomeTvSeriesPage({Key? key}) : super(key: key);

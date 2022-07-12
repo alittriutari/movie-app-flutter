@@ -7,5 +7,3 @@ export 'domain/usecases/save_watchlist.dart';
 export 'presentation/pages/watchlist_movies_page.dart';
 export 'presentation/pages/watchlist_page.dart';
 export 'presentation/pages/watchlist_tv_page.dart';
-export 'presentation/provider/watchlist_movie_notifier.dart';
-export 'presentation/provider/watchlist_tv_notifier.dart';

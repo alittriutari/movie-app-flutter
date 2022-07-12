@@ -1,9 +1,8 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/presentation/widgets/custom_cache_image.dart';
+import 'package:tv_series/domain/entities/tv_series.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
-
-import '../../tv_series.dart';
 
 class TvSeriesCard extends StatelessWidget {
   final TvSeries tvSeries;

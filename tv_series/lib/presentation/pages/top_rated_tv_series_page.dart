@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_card_list.dart';
-
-import '../../tv_series.dart';
 
 class TopRatedTvSeriesPage extends StatelessWidget {
   static const ROUTE_NAME = '/top-rated-tv-series';

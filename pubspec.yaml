@@ -51,12 +51,14 @@ dependencies:
 
   movie:
     path: movie
-  watchlist:
-    path: watchlist
+  core:
+    path: core
   tv_series:
     path: tv_series
   search:
     path: search
+  watchlist:
+    path: watchlist
 
 dev_dependencies:
   mockito: ^5.0.8

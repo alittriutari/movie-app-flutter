@@ -1,8 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:movie/domain/entities/movie.dart';
+import 'package:movie/movie.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
-import 'package:movie/presentation/widgets/custom_cache_image.dart';
+
+import 'custom_cache_image.dart';
 
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
