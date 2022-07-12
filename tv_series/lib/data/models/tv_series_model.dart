@@ -43,7 +43,7 @@ class TvSeriesModel extends Equatable {
         originalName: json["original_name"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
-        posterPath: json["poster_path"],
+        posterPath: json["poster_path"] ?? '',
         voteAverage: json["vote_average"].toDouble(),
         voteCount: json["vote_count"],
       );
