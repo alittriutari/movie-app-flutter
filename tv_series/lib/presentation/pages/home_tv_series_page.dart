@@ -42,7 +42,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
         child: BlocBuilder<OnAirTvBloc, OnAirTvState>(builder: (context, state) {
           switch (state.runtimeType) {
             case OnAirTvLoading:
-              return Center(
+              return const Center(
                 child: PlaceholderWidget(
                   height: 400,
                   width: double.infinity,
@@ -51,7 +51,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
             case OnAirTvFailure:
               final _msg = (state as OnAirTvFailure).failure;
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(_msg.toString()),
               );
             case OnAirTvLoaded:
@@ -60,7 +60,7 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                 tvSeries: _data,
               );
           }
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }),
       ),
       SliverToBoxAdapter(
@@ -68,14 +68,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: Key('show_popular_tv'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.ROUTE_NAME)),
+              SubHeadingWidget(key: const Key('show_popular_tv'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.routeName)),
               BlocBuilder<PopularTvBloc, PopularTvState>(builder: (context, state) {
                 switch (state.runtimeType) {
                   case PopularTvLoading:
                     return Row(
                       children: List.generate(
                           3,
-                          (index) => PlaceholderWidget(
+                          (index) => const PlaceholderWidget(
                                 height: 150,
                                 width: 90,
                               )),
@@ -83,14 +83,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   case PopularTvFailure:
                     final _msg = (state as PopularTvFailure).failure;
                     return Center(
-                      key: Key('error_message'),
+                      key: const Key('error_message'),
                       child: Text(_msg.toString()),
                     );
                   case PopularTvLoaded:
                     final _data = (state as PopularTvLoaded).data;
                     return TvSeriesList(_data);
                 }
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }),
             ],
           ),
@@ -101,14 +101,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.ROUTE_NAME)),
+              SubHeadingWidget(key: const Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.routeName)),
               BlocBuilder<TopRatedTvBloc, TopRatedTvState>(builder: (context, state) {
                 switch (state.runtimeType) {
                   case TopRatedTvLoading:
                     return Row(
                       children: List.generate(
                           3,
-                          (index) => PlaceholderWidget(
+                          (index) => const PlaceholderWidget(
                                 height: 150,
                                 width: 90,
                               )),
@@ -116,14 +116,14 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
                   case TopRatedTvFailure:
                     final _msg = (state as TopRatedTvFailure).failure;
                     return Center(
-                      key: Key('error_message'),
+                      key: const Key('error_message'),
                       child: Text(_msg.toString()),
                     );
                   case TopRatedTvLoaded:
                     final _data = (state as TopRatedTvLoaded).data;
                     return TvSeriesList(_data);
                 }
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }),
             ],
           ),
@@ -136,11 +136,11 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
 class TvSeriesList extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  TvSeriesList(this.tvSeries);
+  const TvSeriesList(this.tvSeries, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 150,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -149,14 +149,14 @@ class TvSeriesList extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
-              key: Key('show_tv_detail'),
+              key: const Key('show_tv_detail'),
               onTap: () {
-                Navigator.pushNamed(context, TvSeriesDetailPage.ROUTE_NAME, arguments: series.id);
+                Navigator.pushNamed(context, TvSeriesDetailPage.routeName, arguments: series.id);
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CustomCacheImage(
-                  imageUrl: '$BASE_IMAGE_URL${series.posterPath}',
+                  imageUrl: '$baseImageUrl${series.posterPath}',
                   width: 90,
                 ),
               ),

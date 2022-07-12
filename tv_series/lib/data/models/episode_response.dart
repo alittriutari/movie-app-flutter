@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:tv_series/data/models/episode_model.dart';
 
 class EpisodeResponse extends Equatable {
-  EpisodeResponse({
+  const EpisodeResponse({
     required this.id,
     required this.airDate,
     required this.episodes,

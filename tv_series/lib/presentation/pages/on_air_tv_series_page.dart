@@ -4,13 +4,15 @@ import 'package:tv_series/presentation/bloc/on_air_tv_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_card_list.dart';
 
 class OnAirTvSeriesPage extends StatelessWidget {
-  static const ROUTE_NAME = '/on-air-tv-series';
+  static const routeName = '/on-air-tv-series';
+
+  const OnAirTvSeriesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('On Airing Tv Series'),
+        title: const Text('On Airing Tv Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -18,13 +20,13 @@ class OnAirTvSeriesPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.runtimeType) {
               case OnAirTvLoading:
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               case OnAirTvFailure:
                 final _msg = (state as OnAirTvFailure).failure;
                 return Center(
-                  key: Key('error_message'),
+                  key: const Key('error_message'),
                   child: Text(_msg.toString()),
                 );
               case OnAirTvLoaded:
@@ -37,7 +39,7 @@ class OnAirTvSeriesPage extends StatelessWidget {
                   itemCount: _data.length,
                 );
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ),

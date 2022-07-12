@@ -14,7 +14,7 @@ class EpisodeLoading extends EpisodeState {}
 class EpisodeLoaded extends EpisodeState {
   final List<Episode> data;
 
-  EpisodeLoaded({required this.data});
+  const EpisodeLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class EpisodeLoaded extends EpisodeState {
 class EpisodeFailure extends EpisodeState {
   final Failure failure;
 
-  EpisodeFailure({required this.failure});
+  const EpisodeFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

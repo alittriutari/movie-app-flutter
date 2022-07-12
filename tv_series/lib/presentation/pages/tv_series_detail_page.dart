@@ -11,10 +11,10 @@ import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
 import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/tv-series-detail';
+  static const routeName = '/tv-series-detail';
   final int id;
 
-  TvSeriesDetailPage({required this.id});
+  const TvSeriesDetailPage({Key? key, required this.id}) : super(key: key);
 
   @override
   State<TvSeriesDetailPage> createState() => _TvSeriesDetailPageState();
@@ -47,7 +47,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case TvDetailLoading:
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             case TvDetailFailure:
@@ -65,7 +65,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
               );
           }
 
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         },
       ),
     );
@@ -78,7 +78,7 @@ class DetailTvSeriesContent extends StatefulWidget {
   final int seasons;
   bool isAddedWatchlist;
 
-  DetailTvSeriesContent({required this.tvSeries, required this.isAddedWatchlist, required this.seasons});
+  DetailTvSeriesContent({Key? key, required this.tvSeries, required this.isAddedWatchlist, required this.seasons}) : super(key: key);
 
   @override
   State<DetailTvSeriesContent> createState() => _DetailTvSeriesContentState();
@@ -109,7 +109,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
             : watchlistRemoveSuccessMessage);
 
     return CustomScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           expandedHeight: 400,
@@ -119,7 +119,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 400,
                     child: CustomCacheImage(
                       imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
@@ -192,8 +192,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            widget.isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
-                            SizedBox(
+                            widget.isAddedWatchlist ? const Icon(Icons.check) : const Icon(Icons.add),
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
@@ -223,24 +223,24 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                     RatingBarIndicator(
                       rating: widget.tvSeries.voteAverage / 2,
                       itemCount: 5,
-                      itemBuilder: (context, index) => Icon(
+                      itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: kMikadoYellow,
                       ),
                       itemSize: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
                       children: [
                         Text('${widget.tvSeries.numberOfSeasons} Season'),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Container(
                             color: kDavysGrey,
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             child: Text(
                               widget.tvSeries.episodeRunTime.isEmpty ? '0' : _showDuration(widget.tvSeries.episodeRunTime.first),
                             ))
@@ -248,7 +248,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'Overview',
                   style: kHeading6,
@@ -297,7 +297,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
       builder: (context, state) {
         switch (state.runtimeType) {
           case RecommendationTvLoading:
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           case RecommendationTvFailure:
@@ -307,7 +307,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
             );
           case RecommendationTvLoaded:
             final _data = (state as RecommendationTvLoaded).data;
-            return Container(
+            return SizedBox(
               height: 150,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -319,12 +319,12 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                       onTap: () {
                         Navigator.pushReplacementNamed(
                           context,
-                          TvSeriesDetailPage.ROUTE_NAME,
+                          TvSeriesDetailPage.routeName,
                           arguments: tv.id,
                         );
                       },
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(
+                        borderRadius: const BorderRadius.all(
                           Radius.circular(8),
                         ),
                         child: CustomCacheImage(
@@ -339,7 +339,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
               ),
             );
         }
-        return SizedBox.shrink();
+        return const SizedBox.shrink();
       },
     );
   }
@@ -351,13 +351,13 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
         Container(
           height: MediaQuery.of(context).size.height * 0.06,
           width: double.infinity,
-          margin: EdgeInsets.symmetric(vertical: 16),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 5),
+          margin: const EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
           decoration: BoxDecoration(color: kDavysGrey, borderRadius: BorderRadius.circular(10)),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<int>(
                 value: currentSeason,
-                hint: Text('Select season'),
+                hint: const Text('Select season'),
                 isExpanded: true,
                 items: _seasonList
                     .map((e) => DropdownMenuItem<int>(
@@ -376,17 +376,17 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
         BlocBuilder<EpisodeBloc, EpisodeState>(builder: (context, state) {
           switch (state.runtimeType) {
             case EpisodeLoading:
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             case EpisodeFailure:
               final _msg = (state as EpisodeFailure).failure;
               return Text(_msg.toString());
             case EpisodeLoaded:
               final data = (state as EpisodeLoaded).data;
               if (data.isEmpty) {
-                return Container(height: 50, child: Center(child: Text('Not Available')));
+                return const SizedBox(height: 50, child: Center(child: Text('Not Available')));
               } else {
                 return ListView.separated(
-                  separatorBuilder: (context, index) => SizedBox(
+                  separatorBuilder: (context, index) => const SizedBox(
                     height: 8,
                   ),
                   shrinkWrap: true,
@@ -398,21 +398,21 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             CustomCacheImage(
-                              imageUrl: BASE_IMAGE_URL + data[index].stillPath,
+                              imageUrl: baseImageUrl + data[index].stillPath,
                               height: 80,
                               width: 100,
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Expanded(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(data[index].name),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 5,
                                   ),
-                                  Container(padding: EdgeInsets.all(5), color: kDavysGrey, child: Text(data[index].voteAverage.toString())),
+                                  Container(padding: const EdgeInsets.all(5), color: kDavysGrey, child: Text(data[index].voteAverage.toString())),
                                 ],
                               ),
                             ),
@@ -429,7 +429,7 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                 );
               }
           }
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         })
       ]),
     );

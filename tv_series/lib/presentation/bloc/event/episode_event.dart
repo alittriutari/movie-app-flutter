@@ -11,7 +11,7 @@ class GetEpisodeEvent extends EpisodeEvent {
   final int id;
   final int seasonNumber;
 
-  GetEpisodeEvent({required this.id, required this.seasonNumber});
+  const GetEpisodeEvent({required this.id, required this.seasonNumber});
 
   @override
   List<Object> get props => [id];

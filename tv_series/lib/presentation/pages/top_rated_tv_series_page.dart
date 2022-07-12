@@ -4,13 +4,15 @@ import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_card_list.dart';
 
 class TopRatedTvSeriesPage extends StatelessWidget {
-  static const ROUTE_NAME = '/top-rated-tv-series';
+  static const routeName = '/top-rated-tv-series';
+
+  const TopRatedTvSeriesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated Tv Series'),
+        title: const Text('Top Rated Tv Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -18,13 +20,13 @@ class TopRatedTvSeriesPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.runtimeType) {
               case TopRatedTvLoading:
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               case TopRatedTvFailure:
                 final _msg = (state as TopRatedTvFailure).failure;
                 return Center(
-                  key: Key('error_message'),
+                  key: const Key('error_message'),
                   child: Text(_msg.toString()),
                 );
               case TopRatedTvLoaded:
@@ -37,7 +39,7 @@ class TopRatedTvSeriesPage extends StatelessWidget {
                   itemCount: _data.length,
                 );
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ),

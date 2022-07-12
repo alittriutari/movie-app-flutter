@@ -14,7 +14,7 @@ class TvDetailLoading extends TvDetailState {}
 class TvDetailLoaded extends TvDetailState {
   final TvSeriesDetail data;
 
-  TvDetailLoaded({required this.data});
+  const TvDetailLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class TvDetailLoaded extends TvDetailState {
 class TvDetailFailure extends TvDetailState {
   final Failure failure;
 
-  TvDetailFailure({required this.failure});
+  const TvDetailFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

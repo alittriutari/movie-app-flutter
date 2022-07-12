@@ -14,7 +14,7 @@ class RecommendationTvLoading extends RecommendationTvState {}
 class RecommendationTvLoaded extends RecommendationTvState {
   final List<TvSeries> data;
 
-  RecommendationTvLoaded({required this.data});
+  const RecommendationTvLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class RecommendationTvLoaded extends RecommendationTvState {
 class RecommendationTvFailure extends RecommendationTvState {
   final Failure failure;
 
-  RecommendationTvFailure({required this.failure});
+  const RecommendationTvFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

@@ -3,7 +3,7 @@ import 'package:movie/movie.dart';
 import 'package:tv_series/domain/entities/tv_series_detail.dart';
 
 class TvSeriesDetailResponse extends Equatable {
-  TvSeriesDetailResponse({
+  const TvSeriesDetailResponse({
     required this.posterPath,
     required this.backdropPath,
     required this.episodeRunTime,

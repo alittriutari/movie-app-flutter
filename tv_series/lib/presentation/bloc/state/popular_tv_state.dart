@@ -14,7 +14,7 @@ class PopularTvLoading extends PopularTvState {}
 class PopularTvLoaded extends PopularTvState {
   final List<TvSeries> data;
 
-  PopularTvLoaded({required this.data});
+  const PopularTvLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class PopularTvLoaded extends PopularTvState {
 class PopularTvFailure extends PopularTvState {
   final Failure failure;
 
-  PopularTvFailure({required this.failure});
+  const PopularTvFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

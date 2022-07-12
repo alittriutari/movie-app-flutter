@@ -9,7 +9,7 @@ import '../pages/tv_series_detail_page.dart';
 class TVSeriesListGrid extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  TVSeriesListGrid(this.tvSeries);
+  const TVSeriesListGrid(this.tvSeries, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class TVSeriesListGrid extends StatelessWidget {
             style: kSubtitle,
           ))
         : GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 8.0,
               childAspectRatio: 0.47,
               crossAxisCount: 3,
@@ -31,16 +31,16 @@ class TVSeriesListGrid extends StatelessWidget {
               return InkWell(
                 onTap: () => Navigator.pushNamed(
                   context,
-                  TvSeriesDetailPage.ROUTE_NAME,
+                  TvSeriesDetailPage.routeName,
                   arguments: tv.id,
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomCacheImage(
-                        imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                        imageUrl: '$baseImageUrl${tv.posterPath}',
                         width: 100,
                         height: 180,
                       ),

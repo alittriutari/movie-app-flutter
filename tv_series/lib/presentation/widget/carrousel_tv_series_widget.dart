@@ -26,15 +26,15 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                TvSeriesDetailPage.ROUTE_NAME,
+                TvSeriesDetailPage.routeName,
                 arguments: tv.id,
               );
             },
             child: Stack(alignment: Alignment.center, children: [
-              Container(
+              SizedBox(
                 height: 500,
                 child: CustomCacheImage(
-                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
+                  imageUrl: '$baseImageUrl${tv.posterPath}',
                   boxFit: BoxFit.cover,
                   height: 500,
                   width: double.infinity,
@@ -68,16 +68,16 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
                 bottom: 60,
                 child: Container(
                     width: 100,
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
-                    child: Text('On Airing')),
+                    child: const Text('On Airing')),
               ),
               Positioned(
                 bottom: 20,
                 child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.ROUTE_NAME),
-                  child: Text(
+                  onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.routeName),
+                  child: const Text(
                     'See more on airing ',
                     textAlign: TextAlign.center,
                     style: TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.bold),

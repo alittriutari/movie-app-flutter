@@ -14,7 +14,7 @@ class OnAirTvLoading extends OnAirTvState {}
 class OnAirTvLoaded extends OnAirTvState {
   final List<TvSeries> data;
 
-  OnAirTvLoaded({required this.data});
+  const OnAirTvLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class OnAirTvLoaded extends OnAirTvState {
 class OnAirTvFailure extends OnAirTvState {
   final Failure failure;
 
-  OnAirTvFailure({required this.failure});
+  const OnAirTvFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];
