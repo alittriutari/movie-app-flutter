@@ -29,11 +29,15 @@ class SearchPage extends StatelessWidget {
                   case 0:
                     // Provider.of<SearchMovieNotifier>(context, listen: false)
                     //     .fetchMovieSearch(query);
-                    context.read<MovieSearchBloc>().add(GetMovieSearchEvent(query: query));
+                    context
+                        .read<MovieSearchBloc>()
+                        .add(GetMovieSearchEvent(query: query));
                     break;
                   case 1:
                     // Provider.of<SearchTvSeriesNotifier>(context, listen: false).fetchTvSeriesSearch(query);
-                    context.read<TvSearchBloc>().add(GetTvSearchEvent(query: query));
+                    context
+                        .read<TvSearchBloc>()
+                        .add(GetTvSearchEvent(query: query));
                     break;
                   default:
                 }
