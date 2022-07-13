@@ -9,7 +9,8 @@ import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 class CarrouselTvSeriesWidget extends StatelessWidget {
   final List<TvSeries> tvSeries;
 
-  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries}) : super(key: key);
+  const CarrouselTvSeriesWidget({Key? key, required this.tvSeries})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,17 +71,22 @@ class CarrouselTvSeriesWidget extends StatelessWidget {
                     width: 100,
                     padding: const EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.redAccent),
                     child: const Text('On Airing')),
               ),
               Positioned(
                 bottom: 20,
                 child: InkWell(
-                  onTap: () => Navigator.pushNamed(context, OnAirTvSeriesPage.routeName),
+                  onTap: () =>
+                      Navigator.pushNamed(context, OnAirTvSeriesPage.routeName),
                   child: const Text(
                     'See more on airing ',
                     textAlign: TextAlign.center,
-                    style: TextStyle(decoration: TextDecoration.underline, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               )

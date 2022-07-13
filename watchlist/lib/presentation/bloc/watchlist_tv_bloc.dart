@@ -15,7 +15,12 @@ class WatchlistTvBloc extends Bloc<WatchlistTvEvent, WatchlistTvState> {
   final GetWatchListTv getWatchlistTv;
   final SaveTvWatchlist saveTvWatchlist;
   final RemoveTvWatchlist removeTvWatchlist;
-  WatchlistTvBloc({required this.getTvWatchlistStatus, required this.getWatchlistTv, required this.saveTvWatchlist, required this.removeTvWatchlist}) : super(WatchlistTvInitial()) {
+  WatchlistTvBloc(
+      {required this.getTvWatchlistStatus,
+      required this.getWatchlistTv,
+      required this.saveTvWatchlist,
+      required this.removeTvWatchlist})
+      : super(WatchlistTvInitial()) {
     on<GetWatchlistTvEvent>((event, emit) async {
       emit(WatchlistTvLoading());
       final result = await getWatchlistTv.execute();

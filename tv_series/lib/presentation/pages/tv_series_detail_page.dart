@@ -26,9 +26,13 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     super.initState();
     Future.microtask(() {
       context.read<TvDetailBloc>().add(GetTvDetailEvent(widget.id));
-      context.read<RecommendationTvBloc>().add(GetRecommendationTvEvent(widget.id));
+      context
+          .read<RecommendationTvBloc>()
+          .add(GetRecommendationTvEvent(widget.id));
       context.read<WatchlistTvBloc>().add(LoadWatchlistTvEvent(widget.id));
-      context.read<EpisodeBloc>().add(GetEpisodeEvent(id: widget.id, seasonNumber: 1));
+      context
+          .read<EpisodeBloc>()
+          .add(GetEpisodeEvent(id: widget.id, seasonNumber: 1));
     });
   }
 
@@ -78,13 +82,19 @@ class DetailTvSeriesContent extends StatefulWidget {
   final int seasons;
   bool isAddedWatchlist;
 
-  DetailTvSeriesContent({Key? key, required this.tvSeries, required this.isAddedWatchlist, required this.seasons}) : super(key: key);
+  DetailTvSeriesContent(
+      {Key? key,
+      required this.tvSeries,
+      required this.isAddedWatchlist,
+      required this.seasons})
+      : super(key: key);
 
   @override
   State<DetailTvSeriesContent> createState() => _DetailTvSeriesContentState();
 }
 
-class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with SingleTickerProviderStateMixin {
+class _DetailTvSeriesContentState extends State<DetailTvSeriesContent>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
   final List<int> _seasonList = [];
   int currentSeason = 1;
@@ -100,13 +110,14 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
 
   @override
   Widget build(BuildContext context) {
-    final message = context.select<WatchlistTvBloc, String>((value) => (value.state is WatchlistTvChanged)
-        ? (value.state as WatchlistTvChanged).status == false
-            ? watchlistAddSuccessMessage
-            : watchlistRemoveSuccessMessage
-        : !widget.isAddedWatchlist
-            ? watchlistAddSuccessMessage
-            : watchlistRemoveSuccessMessage);
+    final message = context.select<WatchlistTvBloc, String>(
+        (value) => (value.state is WatchlistTvChanged)
+            ? (value.state as WatchlistTvChanged).status == false
+                ? watchlistAddSuccessMessage
+                : watchlistRemoveSuccessMessage
+            : !widget.isAddedWatchlist
+                ? watchlistAddSuccessMessage
+                : watchlistRemoveSuccessMessage);
 
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
@@ -122,7 +133,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                   SizedBox(
                     height: 400,
                     child: CustomCacheImage(
-                      imageUrl: 'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
+                      imageUrl:
+                          'https://image.tmdb.org/t/p/w500${widget.tvSeries.posterPath}',
                       height: 400,
                       boxFit: BoxFit.cover,
                       width: double.infinity,
@@ -169,13 +181,19 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                         ),
                         onPressed: () async {
                           if (!widget.isAddedWatchlist) {
-                            context.read<WatchlistTvBloc>().add(AddWatchlistTvEvent(widget.tvSeries));
+                            context
+                                .read<WatchlistTvBloc>()
+                                .add(AddWatchlistTvEvent(widget.tvSeries));
                           } else {
-                            context.read<WatchlistTvBloc>().add(RemoveWatchlistTvEvent(widget.tvSeries));
+                            context
+                                .read<WatchlistTvBloc>()
+                                .add(RemoveWatchlistTvEvent(widget.tvSeries));
                           }
 
-                          if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                          if (message == watchlistAddSuccessMessage ||
+                              message == watchlistRemoveSuccessMessage) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text(message)));
                           } else {
                             showDialog(
                                 context: context,
@@ -192,13 +210,18 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            widget.isAddedWatchlist ? const Icon(Icons.check) : const Icon(Icons.add),
+                            widget.isAddedWatchlist
+                                ? const Icon(Icons.check)
+                                : const Icon(Icons.add),
                             const SizedBox(
                               width: 5,
                             ),
                             Text(
-                              widget.isAddedWatchlist ? 'Remove from watchlist' : 'Add to watchlist',
-                              style: kBodyText.copyWith(fontWeight: FontWeight.bold),
+                              widget.isAddedWatchlist
+                                  ? 'Remove from watchlist'
+                                  : 'Add to watchlist',
+                              style: kBodyText.copyWith(
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -242,7 +265,10 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                             color: kDavysGrey,
                             padding: const EdgeInsets.all(5),
                             child: Text(
-                              widget.tvSeries.episodeRunTime.isEmpty ? '0' : _showDuration(widget.tvSeries.episodeRunTime.first),
+                              widget.tvSeries.episodeRunTime.isEmpty
+                                  ? '0'
+                                  : _showDuration(
+                                      widget.tvSeries.episodeRunTime.first),
                             ))
                       ],
                     ),
@@ -261,22 +287,26 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
           ),
         ),
         SliverToBoxAdapter(
-          child: TabBar(indicatorWeight: 3, indicatorColor: kMikadoYellow, controller: _tabController, tabs: [
-            Tab(
-              child: Align(
-                alignment: Alignment.center,
-                child: Text('Recommendations'.toUpperCase()),
-              ),
-            ),
-            Tab(
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Episode'.toUpperCase(),
+          child: TabBar(
+              indicatorWeight: 3,
+              indicatorColor: kMikadoYellow,
+              controller: _tabController,
+              tabs: [
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text('Recommendations'.toUpperCase()),
+                  ),
                 ),
-              ),
-            ),
-          ]),
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Episode'.toUpperCase(),
+                    ),
+                  ),
+                ),
+              ]),
         ),
         Builder(builder: (context) {
           _tabController.addListener(() {
@@ -286,7 +316,9 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
               });
             }
           });
-          return _selectedIndex == 0 ? SliverToBoxAdapter(child: _recommendationTvSeries()) : SliverToBoxAdapter(child: _episodeTvSeries(context));
+          return _selectedIndex == 0
+              ? SliverToBoxAdapter(child: _recommendationTvSeries())
+              : SliverToBoxAdapter(child: _episodeTvSeries(context));
         }),
       ],
     );
@@ -328,7 +360,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                           Radius.circular(8),
                         ),
                         child: CustomCacheImage(
-                          imageUrl: 'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                          imageUrl:
+                              'https://image.tmdb.org/t/p/w500${tv.posterPath}',
                           width: 90,
                         ),
                       ),
@@ -353,7 +386,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
           width: double.infinity,
           margin: const EdgeInsets.symmetric(vertical: 16),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-          decoration: BoxDecoration(color: kDavysGrey, borderRadius: BorderRadius.circular(10)),
+          decoration: BoxDecoration(
+              color: kDavysGrey, borderRadius: BorderRadius.circular(10)),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<int>(
                 value: currentSeason,
@@ -369,7 +403,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                   setState(() {
                     currentSeason = value!;
                   });
-                  context.read<EpisodeBloc>().add(GetEpisodeEvent(id: widget.tvSeries.id, seasonNumber: currentSeason));
+                  context.read<EpisodeBloc>().add(GetEpisodeEvent(
+                      id: widget.tvSeries.id, seasonNumber: currentSeason));
                 }),
           ),
         ),
@@ -383,7 +418,8 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
             case EpisodeLoaded:
               final data = (state as EpisodeLoaded).data;
               if (data.isEmpty) {
-                return const SizedBox(height: 50, child: Center(child: Text('Not Available')));
+                return const SizedBox(
+                    height: 50, child: Center(child: Text('Not Available')));
               } else {
                 return ListView.separated(
                   separatorBuilder: (context, index) => const SizedBox(
@@ -412,7 +448,11 @@ class _DetailTvSeriesContentState extends State<DetailTvSeriesContent> with Sing
                                   const SizedBox(
                                     height: 5,
                                   ),
-                                  Container(padding: const EdgeInsets.all(5), color: kDavysGrey, child: Text(data[index].voteAverage.toString())),
+                                  Container(
+                                      padding: const EdgeInsets.all(5),
+                                      color: kDavysGrey,
+                                      child: Text(
+                                          data[index].voteAverage.toString())),
                                 ],
                               ),
                             ),

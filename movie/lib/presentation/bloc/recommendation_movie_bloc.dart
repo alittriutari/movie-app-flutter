@@ -6,9 +6,11 @@ import 'package:movie/movie.dart';
 part 'event/recommendation_movie_event.dart';
 part 'state/recommendation_movie_state.dart';
 
-class RecommendationMovieBloc extends Bloc<RecommendationMovieEvent, RecommendationMovieState> {
+class RecommendationMovieBloc
+    extends Bloc<RecommendationMovieEvent, RecommendationMovieState> {
   final GetMovieRecommendations getMovieRecommendations;
-  RecommendationMovieBloc({required this.getMovieRecommendations}) : super(RecommendationMovieInitial()) {
+  RecommendationMovieBloc({required this.getMovieRecommendations})
+      : super(RecommendationMovieInitial()) {
     on<GetRecommendationMovieEvent>((event, emit) async {
       final id = event.id;
       emit(RecommendationMovieLoading());

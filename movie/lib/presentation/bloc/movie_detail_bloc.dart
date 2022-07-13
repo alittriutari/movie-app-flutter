@@ -9,7 +9,8 @@ part 'state/movie_detail_state.dart';
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailState> {
   final GetMovieDetail getMovieDetail;
 
-  MovieDetailBloc({required this.getMovieDetail}) : super(MovieDetailInitial()) {
+  MovieDetailBloc({required this.getMovieDetail})
+      : super(MovieDetailInitial()) {
     on<GetMovieDetailEvent>((event, emit) async {
       final id = event.id;
 

@@ -9,7 +9,8 @@ part 'state/popular_tv_state.dart';
 
 class PopularTvBloc extends Bloc<PopularTvEvent, PopularTvState> {
   final GetPopularTvSeries getPopularTvSeries;
-  PopularTvBloc({required this.getPopularTvSeries}) : super(PopularTvInitial()) {
+  PopularTvBloc({required this.getPopularTvSeries})
+      : super(PopularTvInitial()) {
     on<GetPopularTvListEvent>((event, emit) async {
       emit(PopularTvLoading());
       final result = await getPopularTvSeries.execute();

@@ -8,7 +8,8 @@ part 'state/popular_movie_state.dart';
 
 class PopularMovieBloc extends Bloc<PopularMovieEvent, PopularMovieState> {
   final GetPopularMovies getPopularMovies;
-  PopularMovieBloc({required this.getPopularMovies}) : super(PopularMovieInitial()) {
+  PopularMovieBloc({required this.getPopularMovies})
+      : super(PopularMovieInitial()) {
     on<GetPopularMovieEvent>((event, emit) async {
       emit(PopularMovieLoading());
       final result = await getPopularMovies.execute();

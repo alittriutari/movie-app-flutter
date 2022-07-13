@@ -43,7 +43,8 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getMovieRecommendations(int id) async {
-    final response = await ioClient.get(Uri.parse(ApiUrl.movieRecommencation(id)));
+    final response =
+        await ioClient.get(Uri.parse(ApiUrl.movieRecommencation(id)));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
