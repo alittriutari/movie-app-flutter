@@ -14,7 +14,7 @@ class TvSearchLoading extends TvSearchState {}
 class TvSearchLoaded extends TvSearchState {
   final List<TvSeries> data;
 
-  TvSearchLoaded({required this.data});
+  const TvSearchLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class TvSearchLoaded extends TvSearchState {
 class TvSearchFailure extends TvSearchState {
   final Failure failure;
 
-  TvSearchFailure({required this.failure});
+  const TvSearchFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

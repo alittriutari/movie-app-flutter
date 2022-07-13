@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:watchlist/watchlist.dart';
 
 class WatchlistPage extends StatelessWidget {
-  static const ROUTE_NAME = '/watchlist-page';
+  static const routeName = '/watchlist-page';
   const WatchlistPage({Key? key}) : super(key: key);
 
   @override
@@ -29,10 +29,10 @@ class WatchlistPage extends StatelessWidget {
                 ),
               ),
             ]),
-            body: TabBarView(
-              physics: const BouncingScrollPhysics(),
+            body: const TabBarView(
+              physics: BouncingScrollPhysics(),
               dragStartBehavior: DragStartBehavior.down,
-              children: [WatchlistMoviesPage(), const WatchlistTvPage()],
+              children: [WatchlistMoviesPage(), WatchlistTvPage()],
             ),
           ),
         ),

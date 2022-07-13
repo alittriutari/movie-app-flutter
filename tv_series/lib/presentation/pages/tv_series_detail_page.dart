@@ -8,7 +8,7 @@ import 'package:tv_series/domain/entities/tv_series_detail.dart';
 import 'package:tv_series/presentation/bloc/episode_bloc.dart';
 import 'package:tv_series/presentation/bloc/recommendation_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
+import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 
 class TvSeriesDetailPage extends StatefulWidget {
   static const routeName = '/tv-series-detail';

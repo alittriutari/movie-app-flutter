@@ -10,7 +10,7 @@ abstract class MovieSearchEvent extends Equatable {
 class GetMovieSearchEvent extends MovieSearchEvent {
   final String query;
 
-  GetMovieSearchEvent({required this.query});
+  const GetMovieSearchEvent({required this.query});
 
   @override
   List<Object> get props => [query];

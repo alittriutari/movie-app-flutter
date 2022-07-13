@@ -7,7 +7,7 @@ import 'package:search/presentation/bloc/tv_search_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_card_list.dart';
 
 class SearchPage extends StatelessWidget {
-  static const ROUTE_NAME = '/search';
+  static const routeName = '/search';
   final int index;
 
   const SearchPage({Key? key, required this.index}) : super(key: key);

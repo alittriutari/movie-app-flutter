@@ -5,6 +5,7 @@ import 'package:movie/presentation/widgets/movie_list_with_title.dart';
 import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
+  // ignore: use_key_in_widget_constructors
   const WatchlistMoviesPage();
 
   @override

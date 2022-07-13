@@ -24,12 +24,12 @@ import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/recommendation_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
 import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:tv_series/presentation/pages/on_air_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/popular_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/top_rated_tv_series_page.dart';
 import 'package:tv_series/presentation/pages/tv_series_detail_page.dart';
 import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -79,30 +79,30 @@ class MyApp extends StatelessWidget {
                   builder: (_) => HomeScreen(
                         selectedIndex: 0,
                       ));
-            case PopularMoviesPage.ROUTE_NAME:
+            case PopularMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-            case TopRatedMoviesPage.ROUTE_NAME:
+            case TopRatedMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case MovieDetailPage.ROUTE_NAME:
+            case MovieDetailPage.routeName:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case OnAirTvSeriesPage.ROUTE_NAME:
+            case OnAirTvSeriesPage.routeName:
               return CupertinoPageRoute(builder: (_) => OnAirTvSeriesPage());
-            case PopularTvSeriesPage.ROUTE_NAME:
+            case PopularTvSeriesPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularTvSeriesPage());
-            case TopRatedTvSeriesPage.ROUTE_NAME:
+            case TopRatedTvSeriesPage.routeName:
               return CupertinoPageRoute(builder: (_) => TopRatedTvSeriesPage());
-            case TvSeriesDetailPage.ROUTE_NAME:
+            case TvSeriesDetailPage.routeName:
               final id = settings.arguments as int;
               return CupertinoPageRoute(
                   builder: (_) => TvSeriesDetailPage(
                         id: id,
                       ),
                   settings: settings);
-            case SearchPage.ROUTE_NAME:
+            case SearchPage.routeName:
               // return CupertinoPageRoute(builder: (_) => SearchPage());
               final index = settings.arguments as int;
               return CupertinoPageRoute(
@@ -111,7 +111,7 @@ class MyApp extends StatelessWidget {
                       ),
                   settings: settings);
 
-            case AboutPage.ROUTE_NAME:
+            case AboutPage.routeName:
               return MaterialPageRoute(builder: (_) => AboutPage());
 
             default:

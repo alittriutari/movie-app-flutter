@@ -1,6 +1,7 @@
 name: core
 description: A new Flutter package project.
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -19,8 +20,10 @@ dependencies:
       ref: master
 
 dev_dependencies:
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 flutter:

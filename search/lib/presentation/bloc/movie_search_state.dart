@@ -14,7 +14,7 @@ class MovieSearchLoading extends MovieSearchState {}
 class MovieSearchLoaded extends MovieSearchState {
   final List<Movie> data;
 
-  MovieSearchLoaded({required this.data});
+  const MovieSearchLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class MovieSearchLoaded extends MovieSearchState {
 class MovieSearchFailure extends MovieSearchState {
   final Failure failure;
 
-  MovieSearchFailure({required this.failure});
+  const MovieSearchFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

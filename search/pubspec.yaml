@@ -1,6 +1,7 @@
 name: search
 description: A new Flutter package project.
 version: 0.0.1
+publish_to: none
 homepage:
 
 environment:
@@ -18,6 +19,10 @@ dependencies:
   flutter_bloc: ^8.0.1
   firebase_core: ^1.19.1
   firebase_crashlytics: ^2.8.4
+  data_connection_checker:
+    git:
+      url: https://github.com/chornthorn/data_connection_checker.git
+      ref: master
 
   core:
     path: ../core
@@ -27,9 +32,12 @@ dependencies:
     path: ../movie
 
 dev_dependencies:
+  mockito: ^5.0.8
+  build_runner: ^2.0.4
+  bloc_test: ^9.0.3
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^1.0.4
 
 
 flutter:
