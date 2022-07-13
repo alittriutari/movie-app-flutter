@@ -9,8 +9,8 @@ import 'package:tv_series/data/models/episode_response.dart';
 import 'package:tv_series/data/models/tv_series_detail_model.dart';
 import 'package:tv_series/data/models/tv_series_response.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
-import '../../../../json_reader.dart';
+import '../../helpers/test_helper.mocks.dart';
+import '../../json_reader.dart';
 
 void main() {
   late TvSeriesRemoteDataSourceImpl dataSource;
@@ -25,7 +25,8 @@ void main() {
     final tOnAirTvSeriesList = TvSeriesResponse.fromJson(jsonDecode(readJson('dummy_data/on_air_now_tv_series.json'))).tvSeriesList;
 
     test('should return list of Tv Series Model when the response code is 200', () async {
-      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesOnAir))).thenAnswer((_) async => http.Response(readJson('dummy_data/on_air_now_tv_series.json'), 200));
+      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesOnAir)))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/on_air_now_tv_series.json'), 200));
 
       final result = await dataSource.getOnAirTvSeries();
 
@@ -68,7 +69,8 @@ void main() {
 
     test('should return list of tv series when response is success (200)', () async {
       // arrange
-      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesTopRated))).thenAnswer((_) async => http.Response(readJson('dummy_data/top_rated_tv.json'), 200));
+      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesTopRated)))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/top_rated_tv.json'), 200));
       // act
       final result = await dataSource.getTopRatedTvSeries();
       // assert
@@ -91,7 +93,8 @@ void main() {
 
     test('should return tv series detail when the response code is 200', () async {
       // arrange
-      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesDetail(tId)))).thenAnswer((_) async => http.Response(readJson('dummy_data/tv_detail.json'), 200));
+      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesDetail(tId))))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/tv_detail.json'), 200));
       // act
       final result = await dataSource.getTvSeriesDetail(tId);
       // assert
@@ -114,7 +117,8 @@ void main() {
 
     test('should return list of tv series model when the response code is 200', () async {
       // arrange
-      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesRecommendation(tId)))).thenAnswer((_) async => http.Response(readJson('dummy_data/tv_recommendations.json'), 200));
+      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesRecommendation(tId))))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/tv_recommendations.json'), 200));
       // act
       final result = await dataSource.getTvSeriesRecommendation(tId);
       // assert
@@ -137,7 +141,8 @@ void main() {
 
     test('should return list of tv series when response code is 200', () async {
       // arrange
-      when(mockIOClient.get(Uri.parse(ApiUrl.searchTvSeries(tQuery)))).thenAnswer((_) async => http.Response(readJson('dummy_data/search_squid_game_tv.json'), 200));
+      when(mockIOClient.get(Uri.parse(ApiUrl.searchTvSeries(tQuery))))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/search_squid_game_tv.json'), 200));
       // act
       final result = await dataSource.searchTvSeries(tQuery);
       // assert
@@ -161,7 +166,8 @@ void main() {
 
     test('should return list of episode model when the response code is 200', () async {
       // arrange
-      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesSeason(tId, tSeasonNumber)))).thenAnswer((_) async => http.Response(readJson('dummy_data/episode.json'), 200));
+      when(mockIOClient.get(Uri.parse(ApiUrl.tvSeriesSeason(tId, tSeasonNumber))))
+          .thenAnswer((_) async => http.Response(readJson('dummy_data/episode.json'), 200));
       // act
       final result = await dataSource.getTvEpisode(tId, tSeasonNumber);
       // assert

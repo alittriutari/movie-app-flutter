@@ -10,8 +10,8 @@ import 'package:tv_series/data/repositories/tv_series_repository_impl.dart';
 import 'package:tv_series/domain/entities/episode.dart';
 import 'package:tv_series/domain/entities/tv_series.dart';
 
-import '../../../../dummy_data/dummy_objects.dart';
-import '../../../../helpers/test_helper.mocks.dart';
+import '../../dummy_data/dummy_objects.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late TvSeriesRepositoryImpl repository;
@@ -58,8 +58,26 @@ void main() {
       posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
       voteAverage: 8.659,
       voteCount: 601);
-  const tEpisodeModel = EpisodeModel(airDate: 'airDate', episodeNumber: 1, id: 1, name: 'name', overview: 'overview', seasonNumber: 1, stillPath: 'stillPath', voteAverage: 1.0, voteCount: 1);
-  const tEpisode = Episode(airDate: 'airDate', episodeNumber: 1, id: 1, name: 'name', overview: 'overview', seasonNumber: 1, stillPath: 'stillPath', voteAverage: 1.0, voteCount: 1);
+  const tEpisodeModel = EpisodeModel(
+      airDate: 'airDate',
+      episodeNumber: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      seasonNumber: 1,
+      stillPath: 'stillPath',
+      voteAverage: 1.0,
+      voteCount: 1);
+  const tEpisode = Episode(
+      airDate: 'airDate',
+      episodeNumber: 1,
+      id: 1,
+      name: 'name',
+      overview: 'overview',
+      seasonNumber: 1,
+      stillPath: 'stillPath',
+      voteAverage: 1.0,
+      voteCount: 1);
 
   final tTvModelList = <TvSeriesModel>[tTvModel];
   final tTvSeriesList = <TvSeries>[tTvSeries];

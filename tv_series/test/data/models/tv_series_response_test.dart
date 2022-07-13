@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tv_series/data/models/tv_series_model.dart';
 import 'package:tv_series/data/models/tv_series_response.dart';
 
-import '../../../../json_reader.dart';
+import '../../json_reader.dart';
 
 void main() {
   const tTvSeriesModel = TvSeriesModel(

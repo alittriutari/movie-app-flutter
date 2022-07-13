@@ -20,8 +20,11 @@ void main() {
     mockGetTvWatchlistStatus = MockGetTvWatchlistStatus();
     mockSaveTvWatchlist = MockSaveTvWatchlist();
     mockRemoveTvWatchlist = MockRemoveTvWatchlist();
-    watchlistTvBloc =
-        WatchlistTvBloc(getTvWatchlistStatus: mockGetTvWatchlistStatus, getWatchlistTv: mockGetWatchListTv, saveTvWatchlist: mockSaveTvWatchlist, removeTvWatchlist: mockRemoveTvWatchlist);
+    watchlistTvBloc = WatchlistTvBloc(
+        getTvWatchlistStatus: mockGetTvWatchlistStatus,
+        getWatchlistTv: mockGetWatchListTv,
+        saveTvWatchlist: mockSaveTvWatchlist,
+        removeTvWatchlist: mockRemoveTvWatchlist);
   });
 
   const tId = 1;

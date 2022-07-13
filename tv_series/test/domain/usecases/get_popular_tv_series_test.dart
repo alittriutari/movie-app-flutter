@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:tv_series/domain/entities/tv_series.dart';
 import 'package:tv_series/domain/usecases/get_popular_tv_series.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetPopularTvSeries usecase;

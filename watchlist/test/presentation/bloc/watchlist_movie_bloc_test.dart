@@ -20,8 +20,11 @@ void main() {
     mockGetWatchListStatus = MockGetWatchListStatus();
     mockSaveWatchlist = MockSaveWatchlist();
     mockRemoveWatchlist = MockRemoveWatchlist();
-    watchlistMovieBloc =
-        WatchlistMovieBloc(getWatchListStatus: mockGetWatchListStatus, getWatchlistMovies: mockGetWatchlistMovies, saveWatchlist: mockSaveWatchlist, removeWatchlist: mockRemoveWatchlist);
+    watchlistMovieBloc = WatchlistMovieBloc(
+        getWatchListStatus: mockGetWatchListStatus,
+        getWatchlistMovies: mockGetWatchlistMovies,
+        saveWatchlist: mockSaveWatchlist,
+        removeWatchlist: mockRemoveWatchlist);
   });
 
   const tId = 1;

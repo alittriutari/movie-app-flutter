@@ -19,6 +19,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   firebase_core: ^1.19.1
   firebase_crashlytics: ^2.8.4
+  path_provider: ^2.0.2
   data_connection_checker:
     git:
       url: https://github.com/chornthorn/data_connection_checker.git
@@ -39,6 +40,4 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^1.0.4
 
-
 flutter:
-

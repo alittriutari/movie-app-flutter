@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:tv_series/domain/entities/episode.dart';
 import 'package:tv_series/domain/usecases/get_tv_episode.dart';
 
-import '../../../../helpers/test_helper.mocks.dart';
+import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetTvEpisode usecase;
