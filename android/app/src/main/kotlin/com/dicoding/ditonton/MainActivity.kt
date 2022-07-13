@@ -1,4 +1,4 @@
-package com.dicoding.movie_app
+package com.alit.movieApp
 
 import io.flutter.embedding.android.FlutterActivity
 

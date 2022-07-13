@@ -11,6 +11,7 @@
 .coverage/
 .coverage/html
 .genhtml.perl
+.core/lib/utils/api_url.dart
 
 # IntelliJ related
 *.iml
