@@ -1,0 +1,30 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "adult": false,
+            "backdrop_path": "/eF3pfdinIPjXz3IXqezlGMFmkPL.jpg",
+            "genre_ids": [
+                80,
+                9648,
+                18
+            ],
+            "id": 99002,
+            "media_type": "tv",
+            "name": "Pieces of Her",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "Pieces of Her",
+            "overview": "An act of violence rocks a sleepy Georgia town as well as the bond between a mother and her daughter.",
+            "popularity": 11.969,
+            "poster_path": "/kk8YxDDVBdI9s8NzkC0tUNQcAHG.jpg",
+            "first_air_date": "2022-03-04",
+            "vote_average": 6.606,
+            "vote_count": 47
+        }
+    ],
+    "total_pages": 2,
+    "total_results": 40
+}
