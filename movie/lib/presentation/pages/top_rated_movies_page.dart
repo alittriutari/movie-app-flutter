@@ -4,13 +4,15 @@ import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/widgets/movie_card_list.dart';
 
 class TopRatedMoviesPage extends StatelessWidget {
-  static const ROUTE_NAME = '/top-rated-movie';
+  static const routeName = '/top-rated-movie';
+
+  const TopRatedMoviesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated Movies'),
+        title: const Text('Top Rated Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -18,13 +20,13 @@ class TopRatedMoviesPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.runtimeType) {
               case TopRatedMovieLoading:
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               case TopRatedMovieFailure:
                 final _msg = (state as TopRatedMovieFailure).failure;
                 return Center(
-                  key: Key('error_message'),
+                  key: const Key('error_message'),
                   child: Text(_msg.toString()),
                 );
               case TopRatedMovieLoaded:
@@ -37,7 +39,7 @@ class TopRatedMoviesPage extends StatelessWidget {
                   itemCount: _data.length,
                 );
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ),

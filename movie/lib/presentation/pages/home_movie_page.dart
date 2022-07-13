@@ -44,7 +44,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
         child: BlocBuilder<NowPlayingMovieBloc, NowPlayingMovieState>(builder: (context, state) {
           switch (state.runtimeType) {
             case NowPlayingMovieLoading:
-              return Center(
+              return const Center(
                 child: PlaceholderWidget(
                   height: 400,
                   width: double.infinity,
@@ -53,7 +53,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             case NowPlayingMovieFailure:
               final _msg = (state as NowPlayingMovieFailure).failure;
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(_msg.toString()),
               );
             case NowPlayingMovieLoaded:
@@ -62,7 +62,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 movies: _data,
               );
           }
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         }),
       ),
       SliverToBoxAdapter(
@@ -70,14 +70,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: Key('show_popular_movie'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME)),
+              SubHeadingWidget(key: const Key('show_popular_movie'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularMoviesPage.routeName)),
               BlocBuilder<PopularMovieBloc, PopularMovieState>(builder: (context, state) {
                 switch (state.runtimeType) {
                   case PopularMovieLoading:
                     return Row(
                       children: List.generate(
                           3,
-                          (index) => PlaceholderWidget(
+                          (index) => const PlaceholderWidget(
                                 height: 150,
                                 width: 90,
                               )),
@@ -85,23 +85,23 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   case PopularMovieFailure:
                     final _msg = (state as PopularMovieFailure).failure;
                     return Center(
-                      key: Key('error_message'),
+                      key: const Key('error_message'),
                       child: Text(_msg.toString()),
                     );
                   case PopularMovieLoaded:
                     final _data = (state as PopularMovieLoaded).data;
                     return MovieList(_data);
                 }
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }),
-              SubHeadingWidget(key: Key('show_top_rated_movie'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME)),
+              SubHeadingWidget(key: const Key('show_top_rated_movie'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.routeName)),
               BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(builder: (context, state) {
                 switch (state.runtimeType) {
                   case TopRatedMovieLoading:
                     return Row(
                       children: List.generate(
                           3,
-                          (index) => PlaceholderWidget(
+                          (index) => const PlaceholderWidget(
                                 height: 150,
                                 width: 90,
                               )),
@@ -109,14 +109,14 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   case TopRatedMovieFailure:
                     final _msg = (state as TopRatedMovieFailure).failure;
                     return Center(
-                      key: Key('error_message'),
+                      key: const Key('error_message'),
                       child: Text(_msg.toString()),
                     );
                   case TopRatedMovieLoaded:
                     final _data = (state as TopRatedMovieLoaded).data;
                     return MovieList(_data);
                 }
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }),
             ],
           ),

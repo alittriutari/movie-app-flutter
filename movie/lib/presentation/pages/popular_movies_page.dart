@@ -5,13 +5,15 @@ import 'package:movie/presentation/widgets/movie_card_list.dart';
 import '../bloc/popular_movie_bloc.dart';
 
 class PopularMoviesPage extends StatelessWidget {
-  static const ROUTE_NAME = '/popular-movie';
+  static const routeName = '/popular-movie';
+
+  const PopularMoviesPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: const Text('Popular Movies'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -19,13 +21,13 @@ class PopularMoviesPage extends StatelessWidget {
           builder: (context, state) {
             switch (state.runtimeType) {
               case PopularMovieLoading:
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               case PopularMovieFailure:
                 final _msg = (state as PopularMovieFailure).failure;
                 return Center(
-                  key: Key('error_message'),
+                  key: const Key('error_message'),
                   child: Text(_msg.toString()),
                 );
               case PopularMovieLoaded:
@@ -38,7 +40,7 @@ class PopularMoviesPage extends StatelessWidget {
                   itemCount: _data.length,
                 );
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ),

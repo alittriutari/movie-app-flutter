@@ -11,7 +11,7 @@ class CustomDrawer extends StatelessWidget {
       color: kDavysGrey,
       child: Column(
         children: [
-          UserAccountsDrawerHeader(
+          const UserAccountsDrawerHeader(
             accountName: Text('Movie App by Alit'),
             accountEmail: Text('gmail@alit.com'),
             currentAccountPicture: CircleAvatar(
@@ -19,43 +19,43 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            key: Key('movie_menu'),
-            leading: Icon(Icons.movie),
-            title: Text('Movies'),
+            key: const Key('movie_menu'),
+            leading: const Icon(Icons.movie),
+            title: const Text('Movies'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomeScreen(
+                      builder: (context) => const HomeScreen(
                             selectedIndex: 0,
                           )));
             },
           ),
           ListTile(
-            key: Key('tv_menu'),
-            leading: Icon(Icons.tv),
-            title: Text('Tv Series'),
+            key: const Key('tv_menu'),
+            leading: const Icon(Icons.tv),
+            title: const Text('Tv Series'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomeScreen(
+                      builder: (context) => const HomeScreen(
                             selectedIndex: 1,
                           )));
             },
           ),
           ListTile(
-            key: Key('watchlist_menu'),
-            leading: Icon(Icons.save_alt),
-            title: Text('Watchlist'),
+            key: const Key('watchlist_menu'),
+            leading: const Icon(Icons.save_alt),
+            title: const Text('Watchlist'),
             onTap: () {
               Navigator.pop(context);
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomeScreen(
+                      builder: (context) => const HomeScreen(
                             selectedIndex: 2,
                           )));
             },

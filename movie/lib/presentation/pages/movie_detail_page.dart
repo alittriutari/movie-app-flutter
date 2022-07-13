@@ -9,10 +9,10 @@ import 'package:movie/presentation/widgets/custom_cache_image.dart';
 import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
 
 class MovieDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/detail';
+  static const routeName = '/detail';
 
   final int id;
-  MovieDetailPage({required this.id});
+  const MovieDetailPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
@@ -44,7 +44,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case MovieDetailLoading:
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             case MovieDetailFailure:
@@ -60,7 +60,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               );
           }
 
-          return SizedBox.shrink();
+          return const SizedBox.shrink();
         },
       ),
     );
@@ -71,7 +71,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatefulWidget {
   final MovieDetail movie;
   bool isAddedWatchlist;
-  DetailContent(this.movie, this.isAddedWatchlist);
+  DetailContent(this.movie, this.isAddedWatchlist, {Key? key}) : super(key: key);
 
   @override
   State<DetailContent> createState() => _DetailContentState();
@@ -89,7 +89,7 @@ class _DetailContentState extends State<DetailContent> {
             : watchlistRemoveSuccessMessage);
 
     return CustomScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       slivers: [
         SliverAppBar(
           expandedHeight: 400,
@@ -99,7 +99,7 @@ class _DetailContentState extends State<DetailContent> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 400,
                     child: CustomCacheImage(
                       imageUrl: 'https://image.tmdb.org/t/p/w500${widget.movie.posterPath}',
@@ -173,8 +173,8 @@ class _DetailContentState extends State<DetailContent> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            widget.isAddedWatchlist ? Icon(Icons.check) : Icon(Icons.add),
-                            SizedBox(
+                            widget.isAddedWatchlist ? const Icon(Icons.check) : const Icon(Icons.add),
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
@@ -206,24 +206,24 @@ class _DetailContentState extends State<DetailContent> {
                     RatingBarIndicator(
                       rating: widget.movie.voteAverage / 2,
                       itemCount: 5,
-                      itemBuilder: (context, index) => Icon(
+                      itemBuilder: (context, index) => const Icon(
                         Icons.star,
                         color: kMikadoYellow,
                       ),
                       itemSize: 20,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Container(
                         color: kDavysGrey,
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         child: Text(
                           _showDuration(widget.movie.runtime),
                         )),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'Overview',
                   style: kHeading6,
@@ -231,7 +231,7 @@ class _DetailContentState extends State<DetailContent> {
                 Text(
                   widget.movie.overview,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Text(
                   'Recommendations',
                   style: kHeading6,
@@ -240,7 +240,7 @@ class _DetailContentState extends State<DetailContent> {
                   builder: (context, state) {
                     switch (state.runtimeType) {
                       case RecommendationMovieLoading:
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       case RecommendationMovieFailure:
@@ -250,7 +250,7 @@ class _DetailContentState extends State<DetailContent> {
                         );
                       case RecommendationMovieLoaded:
                         final _data = (state as RecommendationMovieLoaded).data;
-                        return Container(
+                        return SizedBox(
                           height: 150,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
@@ -262,12 +262,12 @@ class _DetailContentState extends State<DetailContent> {
                                   onTap: () {
                                     Navigator.pushReplacementNamed(
                                       context,
-                                      MovieDetailPage.ROUTE_NAME,
+                                      MovieDetailPage.routeName,
                                       arguments: movie.id,
                                     );
                                   },
                                   child: ClipRRect(
-                                    borderRadius: BorderRadius.all(
+                                    borderRadius: const BorderRadius.all(
                                       Radius.circular(8),
                                     ),
                                     child: CustomCacheImage(
@@ -282,7 +282,7 @@ class _DetailContentState extends State<DetailContent> {
                           ),
                         );
                     }
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   },
                 ),
               ],

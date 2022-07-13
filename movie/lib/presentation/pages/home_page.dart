@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
       animateChildDecoration: true,
       rtlOpening: false,
       disabledGestures: false,
-      drawer: CustomDrawer(),
+      drawer: const CustomDrawer(),
       child: DefaultTabController(
         initialIndex: selectedIndex,
         length: 3,
@@ -37,47 +37,47 @@ class HomeScreen extends StatelessWidget {
                 color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
                 child: SafeArea(
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 10, 20, 10),
+                    padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
                     child: Column(
                       children: [
                         Row(
                           children: [
                             IconButton(
-                                key: Key('drawer_icon'),
+                                key: const Key('drawer_icon'),
                                 onPressed: () {
                                   _advancedDrawerController.showDrawer();
                                 },
-                                icon: Icon(Icons.menu)),
-                            SizedBox(
+                                icon: const Icon(Icons.menu)),
+                            const SizedBox(
                               width: 10,
                             ),
-                            Text('Movie App'),
-                            SizedBox(
+                            const Text('Movie App'),
+                            const SizedBox(
                               width: 5,
                             ),
-                            Icon(Icons.camera_outdoor),
-                            Expanded(child: SizedBox()),
+                            const Icon(Icons.camera_outdoor),
+                            const Expanded(child: SizedBox()),
                             IconButton(
-                                key: Key('search_icon'),
+                                key: const Key('search_icon'),
                                 onPressed: () {
                                   Navigator.pushNamed(
                                     context,
-                                    SearchPage.ROUTE_NAME,
+                                    SearchPage.routeName,
                                     arguments: DefaultTabController.of(context)!.index,
                                   );
                                 },
-                                icon: Icon(Icons.search))
+                                icon: const Icon(Icons.search))
                           ],
                         ),
-                        Spacer(),
-                        TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
+                        const Spacer(),
+                        const TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            body: TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
+            body: const TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
           );
         }),
       ),

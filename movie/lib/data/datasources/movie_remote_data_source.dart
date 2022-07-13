@@ -15,16 +15,13 @@ abstract class MovieRemoteDataSource {
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
-  static const API_KEY = 'api_key=9c93c65e03d4ec78611e0ddd9fb55db3';
-  static const BASE_URL = 'https://api.themoviedb.org/3';
-
   final IOClient ioClient;
 
   MovieRemoteDataSourceImpl({required this.ioClient});
 
   @override
   Future<List<MovieModel>> getNowPlayingMovies() async {
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY'));
+    final response = await ioClient.get(Uri.parse(ApiUrl.movieNowPlaying));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
@@ -35,7 +32,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<MovieDetailResponse> getMovieDetail(int id) async {
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/$id?$API_KEY'));
+    final response = await ioClient.get(Uri.parse(ApiUrl.movieDetail(id)));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieDetailResponse.fromJson(json.decode(response.body));
@@ -46,7 +43,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getMovieRecommendations(int id) async {
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/$id/recommendations?$API_KEY'));
+    final response = await ioClient.get(Uri.parse(ApiUrl.movieRecommencation(id)));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
@@ -57,7 +54,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getPopularMovies() async {
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/popular?$API_KEY'));
+    final response = await ioClient.get(Uri.parse(ApiUrl.moviePopular));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
@@ -68,7 +65,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> getTopRatedMovies() async {
-    final response = await ioClient.get(Uri.parse('$BASE_URL/movie/top_rated?$API_KEY'));
+    final response = await ioClient.get(Uri.parse(ApiUrl.movieTopRated));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;
@@ -79,7 +76,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
 
   @override
   Future<List<MovieModel>> searchMovies(String query) async {
-    final response = await ioClient.get(Uri.parse('$BASE_URL/search/movie?$API_KEY&query=$query'));
+    final response = await ioClient.get(Uri.parse(ApiUrl.searchMovies(query)));
 
     if (response.statusCode == HttpStatus.ok) {
       return MovieResponse.fromJson(json.decode(response.body)).movieList;

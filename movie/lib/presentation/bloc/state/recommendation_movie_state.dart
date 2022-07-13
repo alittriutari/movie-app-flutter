@@ -14,7 +14,7 @@ class RecommendationMovieLoading extends RecommendationMovieState {}
 class RecommendationMovieLoaded extends RecommendationMovieState {
   final List<Movie> data;
 
-  RecommendationMovieLoaded({required this.data});
+  const RecommendationMovieLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class RecommendationMovieLoaded extends RecommendationMovieState {
 class RecommendationMovieFailure extends RecommendationMovieState {
   final Failure failure;
 
-  RecommendationMovieFailure({required this.failure});
+  const RecommendationMovieFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

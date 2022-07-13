@@ -14,7 +14,7 @@ class TopRatedMovieLoading extends TopRatedMovieState {}
 class TopRatedMovieLoaded extends TopRatedMovieState {
   final List<Movie> data;
 
-  TopRatedMovieLoaded({required this.data});
+  const TopRatedMovieLoaded({required this.data});
 
   @override
   List<Object> get props => [data];
@@ -23,7 +23,7 @@ class TopRatedMovieLoaded extends TopRatedMovieState {
 class TopRatedMovieFailure extends TopRatedMovieState {
   final Failure failure;
 
-  TopRatedMovieFailure({required this.failure});
+  const TopRatedMovieFailure({required this.failure});
 
   @override
   List<Object> get props => [failure];

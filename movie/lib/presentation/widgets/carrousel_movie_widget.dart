@@ -29,15 +29,15 @@ class CarrouselMovieWidget extends StatelessWidget {
             onTap: () {
               Navigator.pushNamed(
                 context,
-                MovieDetailPage.ROUTE_NAME,
+                MovieDetailPage.routeName,
                 arguments: movie.id,
               );
             },
             child: Stack(alignment: Alignment.center, children: [
-              Container(
+              SizedBox(
                   height: 500,
                   child: CustomCacheImage(
-                    imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                    imageUrl: '$baseImageUrl${movie.posterPath}',
                     height: 500,
                     boxFit: BoxFit.cover,
                     width: double.infinity,
@@ -70,10 +70,10 @@ class CarrouselMovieWidget extends StatelessWidget {
                 bottom: 40,
                 child: Container(
                     width: 100,
-                    padding: EdgeInsets.all(8),
+                    padding: const EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
-                    child: Text('Now Playing')),
+                    child: const Text('Now Playing')),
               )
             ]),
           );

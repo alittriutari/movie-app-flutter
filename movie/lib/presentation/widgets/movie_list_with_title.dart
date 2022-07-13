@@ -8,7 +8,7 @@ import 'custom_cache_image.dart';
 class MovieListGrid extends StatelessWidget {
   final List<Movie> movies;
 
-  MovieListGrid(this.movies);
+  const MovieListGrid(this.movies, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MovieListGrid extends StatelessWidget {
             style: kSubtitle,
           ))
         : GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 8.0,
               childAspectRatio: 0.47,
               crossAxisCount: 3,
@@ -31,17 +31,17 @@ class MovieListGrid extends StatelessWidget {
                 onTap: () {
                   Navigator.pushNamed(
                     context,
-                    MovieDetailPage.ROUTE_NAME,
+                    MovieDetailPage.routeName,
                     arguments: movie.id,
                   );
                 },
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomCacheImage(
-                        imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                        imageUrl: '$baseImageUrl${movie.posterPath}',
                         width: 100,
                         height: 180,
                       ),
