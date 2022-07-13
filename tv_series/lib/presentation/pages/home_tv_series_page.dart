@@ -39,7 +39,8 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
   Widget build(BuildContext context) {
     return CustomScrollView(controller: _controller, slivers: [
       SliverToBoxAdapter(
-        child: BlocBuilder<OnAirTvBloc, OnAirTvState>(builder: (context, state) {
+        child:
+            BlocBuilder<OnAirTvBloc, OnAirTvState>(builder: (context, state) {
           switch (state.runtimeType) {
             case OnAirTvLoading:
               return const Center(
@@ -68,8 +69,13 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: const Key('show_popular_tv'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularTvSeriesPage.routeName)),
-              BlocBuilder<PopularTvBloc, PopularTvState>(builder: (context, state) {
+              SubHeadingWidget(
+                  key: const Key('show_popular_tv'),
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(
+                      context, PopularTvSeriesPage.routeName)),
+              BlocBuilder<PopularTvBloc, PopularTvState>(
+                  builder: (context, state) {
                 switch (state.runtimeType) {
                   case PopularTvLoading:
                     return Row(
@@ -101,8 +107,13 @@ class _HomeTvSeriesPageState extends State<HomeTvSeriesPage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: const Key('show_top_rated_tv'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedTvSeriesPage.routeName)),
-              BlocBuilder<TopRatedTvBloc, TopRatedTvState>(builder: (context, state) {
+              SubHeadingWidget(
+                  key: const Key('show_top_rated_tv'),
+                  title: 'Top Rated',
+                  onTap: () => Navigator.pushNamed(
+                      context, TopRatedTvSeriesPage.routeName)),
+              BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+                  builder: (context, state) {
                 switch (state.runtimeType) {
                   case TopRatedTvLoading:
                     return Row(
@@ -151,7 +162,8 @@ class TvSeriesList extends StatelessWidget {
             child: InkWell(
               key: const Key('show_tv_detail'),
               onTap: () {
-                Navigator.pushNamed(context, TvSeriesDetailPage.routeName, arguments: series.id);
+                Navigator.pushNamed(context, TvSeriesDetailPage.routeName,
+                    arguments: series.id);
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),

@@ -24,9 +24,13 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     super.initState();
     Future.microtask(() {
       context.read<MovieDetailBloc>().add(GetMovieDetailEvent(widget.id));
-      context.read<RecommendationMovieBloc>().add(GetRecommendationMovieEvent(widget.id));
+      context
+          .read<RecommendationMovieBloc>()
+          .add(GetRecommendationMovieEvent(widget.id));
 
-      context.read<WatchlistMovieBloc>().add(LoadWatchlistMovieEvent(widget.id));
+      context
+          .read<WatchlistMovieBloc>()
+          .add(LoadWatchlistMovieEvent(widget.id));
     });
   }
 
@@ -71,7 +75,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 class DetailContent extends StatefulWidget {
   final MovieDetail movie;
   bool isAddedWatchlist;
-  DetailContent(this.movie, this.isAddedWatchlist, {Key? key}) : super(key: key);
+  DetailContent(this.movie, this.isAddedWatchlist, {Key? key})
+      : super(key: key);
 
   @override
   State<DetailContent> createState() => _DetailContentState();
@@ -80,13 +85,14 @@ class DetailContent extends StatefulWidget {
 class _DetailContentState extends State<DetailContent> {
   @override
   Widget build(BuildContext context) {
-    final message = context.select<WatchlistMovieBloc, String>((value) => (value.state is WatchlistMovieChanged)
-        ? (value.state as WatchlistMovieChanged).status == false
-            ? watchlistAddSuccessMessage
-            : watchlistRemoveSuccessMessage
-        : !widget.isAddedWatchlist
-            ? watchlistAddSuccessMessage
-            : watchlistRemoveSuccessMessage);
+    final message = context.select<WatchlistMovieBloc, String>(
+        (value) => (value.state is WatchlistMovieChanged)
+            ? (value.state as WatchlistMovieChanged).status == false
+                ? watchlistAddSuccessMessage
+                : watchlistRemoveSuccessMessage
+            : !widget.isAddedWatchlist
+                ? watchlistAddSuccessMessage
+                : watchlistRemoveSuccessMessage);
 
     return CustomScrollView(
       physics: const BouncingScrollPhysics(),
@@ -102,7 +108,8 @@ class _DetailContentState extends State<DetailContent> {
                   SizedBox(
                     height: 400,
                     child: CustomCacheImage(
-                      imageUrl: 'https://image.tmdb.org/t/p/w500${widget.movie.posterPath}',
+                      imageUrl:
+                          'https://image.tmdb.org/t/p/w500${widget.movie.posterPath}',
                       height: 400,
                       boxFit: BoxFit.cover,
                       width: double.infinity,
@@ -150,13 +157,19 @@ class _DetailContentState extends State<DetailContent> {
                         ),
                         onPressed: () {
                           if (!widget.isAddedWatchlist) {
-                            context.read<WatchlistMovieBloc>().add(AddWatchlistMovieEvent(widget.movie));
+                            context
+                                .read<WatchlistMovieBloc>()
+                                .add(AddWatchlistMovieEvent(widget.movie));
                           } else {
-                            context.read<WatchlistMovieBloc>().add(RemoveWatchlistMovieEvent(widget.movie));
+                            context
+                                .read<WatchlistMovieBloc>()
+                                .add(RemoveWatchlistMovieEvent(widget.movie));
                           }
 
-                          if (message == watchlistAddSuccessMessage || message == watchlistRemoveSuccessMessage) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                          if (message == watchlistAddSuccessMessage ||
+                              message == watchlistRemoveSuccessMessage) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text(message)));
                           } else {
                             showDialog(
                                 context: context,
@@ -173,13 +186,18 @@ class _DetailContentState extends State<DetailContent> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            widget.isAddedWatchlist ? const Icon(Icons.check) : const Icon(Icons.add),
+                            widget.isAddedWatchlist
+                                ? const Icon(Icons.check)
+                                : const Icon(Icons.add),
                             const SizedBox(
                               width: 5,
                             ),
                             Text(
-                              widget.isAddedWatchlist ? 'Remove from watchlist' : 'Add to watchlist',
-                              style: kBodyText.copyWith(fontWeight: FontWeight.bold),
+                              widget.isAddedWatchlist
+                                  ? 'Remove from watchlist'
+                                  : 'Add to watchlist',
+                              style: kBodyText.copyWith(
+                                  fontWeight: FontWeight.bold),
                             )
                           ],
                         ),
@@ -244,7 +262,8 @@ class _DetailContentState extends State<DetailContent> {
                           child: CircularProgressIndicator(),
                         );
                       case RecommendationMovieFailure:
-                        final msg = (state as RecommendationMovieFailure).failure;
+                        final msg =
+                            (state as RecommendationMovieFailure).failure;
                         return Center(
                           child: Text(msg.toString()),
                         );
@@ -271,7 +290,8 @@ class _DetailContentState extends State<DetailContent> {
                                       Radius.circular(8),
                                     ),
                                     child: CustomCacheImage(
-                                      imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                                      imageUrl:
+                                          'https://image.tmdb.org/t/p/w500${movie.posterPath}',
                                       width: 90,
                                     ),
                                   ),

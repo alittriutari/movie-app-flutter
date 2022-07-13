@@ -44,7 +44,8 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> getTvSeriesRecommendation(int id) async {
-    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesRecommendation(id)));
+    final response =
+        await ioClient.get(Uri.parse(ApiUrl.tvSeriesRecommendation(id)));
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(jsonDecode(response.body)).tvSeriesList;
     } else {
@@ -74,7 +75,8 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<TvSeriesModel>> searchTvSeries(String query) async {
-    final response = await ioClient.get(Uri.parse(ApiUrl.searchTvSeries(query)));
+    final response =
+        await ioClient.get(Uri.parse(ApiUrl.searchTvSeries(query)));
 
     if (response.statusCode == HttpStatus.ok) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
@@ -85,7 +87,8 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
 
   @override
   Future<List<EpisodeModel>> getTvEpisode(int id, int seasonNumber) async {
-    final response = await ioClient.get(Uri.parse(ApiUrl.tvSeriesSeason(id, seasonNumber)));
+    final response =
+        await ioClient.get(Uri.parse(ApiUrl.tvSeriesSeason(id, seasonNumber)));
 
     if (response.statusCode == HttpStatus.ok) {
       return EpisodeResponse.fromJson(jsonDecode(response.body)).episodes;

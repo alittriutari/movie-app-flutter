@@ -45,15 +45,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        BlocProvider(create: (_) => di.locator<PopularMovieBloc>()..add(GetPopularMovieEvent())),
-        BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()..add(GetTopRatedMovieListEvent())),
-        BlocProvider(create: (_) => di.locator<NowPlayingMovieBloc>()..add(GetNowPlayingMovieEvent())),
+        BlocProvider(
+            create: (_) =>
+                di.locator<PopularMovieBloc>()..add(GetPopularMovieEvent())),
+        BlocProvider(
+            create: (_) => di.locator<TopRatedMovieBloc>()
+              ..add(GetTopRatedMovieListEvent())),
+        BlocProvider(
+            create: (_) => di.locator<NowPlayingMovieBloc>()
+              ..add(GetNowPlayingMovieEvent())),
         BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (_) => di.locator<RecommendationMovieBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>()),
-        BlocProvider(create: (_) => di.locator<PopularTvBloc>()..add(GetPopularTvListEvent())),
-        BlocProvider(create: (_) => di.locator<TopRatedTvBloc>()..add(GetTopRatedTvListEvent())),
-        BlocProvider(create: (_) => di.locator<OnAirTvBloc>()..add(GetOnAirTvListEvent())),
+        BlocProvider(
+            create: (_) =>
+                di.locator<PopularTvBloc>()..add(GetPopularTvListEvent())),
+        BlocProvider(
+            create: (_) =>
+                di.locator<TopRatedTvBloc>()..add(GetTopRatedTvListEvent())),
+        BlocProvider(
+            create: (_) =>
+                di.locator<OnAirTvBloc>()..add(GetOnAirTvListEvent())),
         BlocProvider(create: (_) => di.locator<TvDetailBloc>()),
         BlocProvider(create: (_) => di.locator<RecommendationTvBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistTvBloc>()),

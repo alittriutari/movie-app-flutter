@@ -41,7 +41,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   Widget build(BuildContext context) {
     return CustomScrollView(controller: _controller, slivers: [
       SliverToBoxAdapter(
-        child: BlocBuilder<NowPlayingMovieBloc, NowPlayingMovieState>(builder: (context, state) {
+        child: BlocBuilder<NowPlayingMovieBloc, NowPlayingMovieState>(
+            builder: (context, state) {
           switch (state.runtimeType) {
             case NowPlayingMovieLoading:
               return const Center(
@@ -70,8 +71,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              SubHeadingWidget(key: const Key('show_popular_movie'), title: 'Popular', onTap: () => Navigator.pushNamed(context, PopularMoviesPage.routeName)),
-              BlocBuilder<PopularMovieBloc, PopularMovieState>(builder: (context, state) {
+              SubHeadingWidget(
+                  key: const Key('show_popular_movie'),
+                  title: 'Popular',
+                  onTap: () => Navigator.pushNamed(
+                      context, PopularMoviesPage.routeName)),
+              BlocBuilder<PopularMovieBloc, PopularMovieState>(
+                  builder: (context, state) {
                 switch (state.runtimeType) {
                   case PopularMovieLoading:
                     return Row(
@@ -94,8 +100,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 }
                 return const SizedBox.shrink();
               }),
-              SubHeadingWidget(key: const Key('show_top_rated_movie'), title: 'Top Rated', onTap: () => Navigator.pushNamed(context, TopRatedMoviesPage.routeName)),
-              BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(builder: (context, state) {
+              SubHeadingWidget(
+                  key: const Key('show_top_rated_movie'),
+                  title: 'Top Rated',
+                  onTap: () => Navigator.pushNamed(
+                      context, TopRatedMoviesPage.routeName)),
+              BlocBuilder<TopRatedMovieBloc, TopRatedMovieState>(
+                  builder: (context, state) {
                 switch (state.runtimeType) {
                   case TopRatedMovieLoading:
                     return Row(

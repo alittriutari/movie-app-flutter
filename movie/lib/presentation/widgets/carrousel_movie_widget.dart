@@ -72,7 +72,9 @@ class CarrouselMovieWidget extends StatelessWidget {
                     width: 100,
                     padding: const EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.redAccent),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.redAccent),
                     child: const Text('Now Playing')),
               )
             ]),

@@ -15,20 +15,24 @@ class WatchlistPage extends StatelessWidget {
         child: Container(
           margin: const EdgeInsets.all(8),
           child: Scaffold(
-            appBar: TabBar(indicatorColor: kMikadoYellow, unselectedLabelColor: Colors.white.withOpacity(0.5), indicatorWeight: 3, tabs: const [
-              Tab(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text('Movies'),
-                ),
-              ),
-              Tab(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text('Tv Series'),
-                ),
-              ),
-            ]),
+            appBar: TabBar(
+                indicatorColor: kMikadoYellow,
+                unselectedLabelColor: Colors.white.withOpacity(0.5),
+                indicatorWeight: 3,
+                tabs: const [
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('Movies'),
+                    ),
+                  ),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text('Tv Series'),
+                    ),
+                  ),
+                ]),
             body: const TabBarView(
               physics: BouncingScrollPhysics(),
               dragStartBehavior: DragStartBehavior.down,

@@ -34,20 +34,32 @@ Future init() async {
   IOClient ioClient = await SSLHelper.ioClient;
 
   //bloc
-  locator.registerFactory(() => NowPlayingMovieBloc(getNowPlayingMovies: locator()));
+  locator.registerFactory(
+      () => NowPlayingMovieBloc(getNowPlayingMovies: locator()));
   locator.registerFactory(() => PopularMovieBloc(getPopularMovies: locator()));
-  locator.registerFactory(() => TopRatedMovieBloc(getTopRatedMovies: locator()));
-  locator.registerFactory(() => RecommendationMovieBloc(getMovieRecommendations: locator()));
+  locator
+      .registerFactory(() => TopRatedMovieBloc(getTopRatedMovies: locator()));
+  locator.registerFactory(
+      () => RecommendationMovieBloc(getMovieRecommendations: locator()));
   locator.registerFactory(() => MovieDetailBloc(getMovieDetail: locator()));
-  locator.registerFactory(() => WatchlistMovieBloc(getWatchListStatus: locator(), getWatchlistMovies: locator(), removeWatchlist: locator(), saveWatchlist: locator()));
+  locator.registerFactory(() => WatchlistMovieBloc(
+      getWatchListStatus: locator(),
+      getWatchlistMovies: locator(),
+      removeWatchlist: locator(),
+      saveWatchlist: locator()));
 
   locator.registerFactory(() => OnAirTvBloc(getOnAirTvSeries: locator()));
   locator.registerFactory(() => PopularTvBloc(getPopularTvSeries: locator()));
   locator.registerFactory(() => TopRatedTvBloc(getTopRatedTv: locator()));
   locator.registerFactory(() => TvDetailBloc(getTvSeriesDetail: locator()));
-  locator.registerFactory(() => RecommendationTvBloc(getTvSeriesRecommendation: locator()));
+  locator.registerFactory(
+      () => RecommendationTvBloc(getTvSeriesRecommendation: locator()));
 
-  locator.registerFactory(() => WatchlistTvBloc(getTvWatchlistStatus: locator(), getWatchlistTv: locator(), removeTvWatchlist: locator(), saveTvWatchlist: locator()));
+  locator.registerFactory(() => WatchlistTvBloc(
+      getTvWatchlistStatus: locator(),
+      getWatchlistTv: locator(),
+      removeTvWatchlist: locator(),
+      saveTvWatchlist: locator()));
   locator.registerFactory(() => EpisodeBloc(getTvEpisode: locator()));
 
   locator.registerFactory(() => MovieSearchBloc(searchMovies: locator()));
@@ -78,20 +90,31 @@ Future init() async {
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
-    () => MovieRepositoryImpl(remoteDataSource: locator(), localDataSource: locator(), networkInfo: locator()),
+    () => MovieRepositoryImpl(
+        remoteDataSource: locator(),
+        localDataSource: locator(),
+        networkInfo: locator()),
   );
   locator.registerLazySingleton<TvSeriesRepository>(
-    () => TvSeriesRepositoryImpl(remoteDataSource: locator(), localDataSource: locator(), networkInfo: locator()),
+    () => TvSeriesRepositoryImpl(
+        remoteDataSource: locator(),
+        localDataSource: locator(),
+        networkInfo: locator()),
   );
 
   // data sources
-  locator.registerLazySingleton<MovieRemoteDataSource>(() => MovieRemoteDataSourceImpl(ioClient: locator()));
-  locator.registerLazySingleton<MovieLocalDataSource>(() => MovieLocalDataSourceImpl(databaseHelper: locator()));
-  locator.registerLazySingleton<TvSeriesRemoteDataSource>(() => TvSeriesRemoteDataSourceImpl(ioClient: locator()));
-  locator.registerLazySingleton<TvLocalDataSource>(() => TvLocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<MovieRemoteDataSource>(
+      () => MovieRemoteDataSourceImpl(ioClient: locator()));
+  locator.registerLazySingleton<MovieLocalDataSource>(
+      () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+  locator.registerLazySingleton<TvSeriesRemoteDataSource>(
+      () => TvSeriesRemoteDataSourceImpl(ioClient: locator()));
+  locator.registerLazySingleton<TvLocalDataSource>(
+      () => TvLocalDataSourceImpl(databaseHelper: locator()));
 
   // helper
-  locator.registerLazySingleton<MovieDatabaseHelper>(() => MovieDatabaseHelper());
+  locator
+      .registerLazySingleton<MovieDatabaseHelper>(() => MovieDatabaseHelper());
   locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
   //network info

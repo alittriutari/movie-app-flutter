@@ -31,7 +31,8 @@ class MovieList extends StatelessWidget {
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                child: CustomCacheImage(imageUrl: '$baseImageUrl${movie.posterPath}', width: 90),
+                child: CustomCacheImage(
+                    imageUrl: '$baseImageUrl${movie.posterPath}', width: 90),
               ),
             ),
           );

@@ -7,9 +7,11 @@ import 'package:tv_series/domain/usecases/get_tv_series_recommendation.dart';
 part 'event/recommendation_tv_event.dart';
 part 'state/recommendation_tv_state.dart';
 
-class RecommendationTvBloc extends Bloc<RecommendationTvEvent, RecommendationTvState> {
+class RecommendationTvBloc
+    extends Bloc<RecommendationTvEvent, RecommendationTvState> {
   final GetTvSeriesRecommendation getTvSeriesRecommendation;
-  RecommendationTvBloc({required this.getTvSeriesRecommendation}) : super(RecommendationTvInitial()) {
+  RecommendationTvBloc({required this.getTvSeriesRecommendation})
+      : super(RecommendationTvInitial()) {
     on<GetRecommendationTvEvent>((event, emit) async {
       final id = event.id;
       emit(RecommendationTvLoading());

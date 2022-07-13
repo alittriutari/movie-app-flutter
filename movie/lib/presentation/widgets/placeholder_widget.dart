@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class PlaceholderWidget extends StatelessWidget {
   final double height, width;
-  const PlaceholderWidget({Key? key, required this.height, required this.width}) : super(key: key);
+  const PlaceholderWidget({Key? key, required this.height, required this.width})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
