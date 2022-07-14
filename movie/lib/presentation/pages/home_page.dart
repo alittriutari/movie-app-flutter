@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:movie/presentation/pages/home_movie_page.dart';
@@ -34,8 +35,7 @@ class HomeScreen extends StatelessWidget {
             appBar: PreferredSize(
               preferredSize: Size(screenSize.width, 100),
               child: Container(
-                color:
-                    Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
+                color: Colors.black.withOpacity((scrollOffset / 350).clamp(0, 1)),
                 child: SafeArea(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(0, 10, 20, 10),
@@ -61,33 +61,25 @@ class HomeScreen extends StatelessWidget {
                             IconButton(
                                 key: const Key('search_icon'),
                                 onPressed: () {
+                                  FirebaseCrashlytics.instance.crash();
                                   Navigator.pushNamed(
                                     context,
                                     SearchPage.routeName,
-                                    arguments:
-                                        DefaultTabController.of(context)!.index,
+                                    arguments: DefaultTabController.of(context)!.index,
                                   );
                                 },
                                 icon: const Icon(Icons.search))
                           ],
                         ),
                         const Spacer(),
-                        const TabBar(indicatorColor: Colors.transparent, tabs: [
-                          Text('Movie'),
-                          Text('Tv Series'),
-                          Text('Watchlist')
-                        ])
+                        const TabBar(indicatorColor: Colors.transparent, tabs: [Text('Movie'), Text('Tv Series'), Text('Watchlist')])
                       ],
                     ),
                   ),
                 ),
               ),
             ),
-            body: const TabBarView(children: [
-              HomeMoviePage(),
-              HomeTvSeriesPage(),
-              WatchlistPage()
-            ]),
+            body: const TabBarView(children: [HomeMoviePage(), HomeTvSeriesPage(), WatchlistPage()]),
           );
         }),
       ),

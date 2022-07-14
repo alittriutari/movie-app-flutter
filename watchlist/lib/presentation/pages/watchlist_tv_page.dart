@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_grid_widget.dart';
-import 'package:watchlist/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:watchlist/presentation/bloc/watchlist_tv_bloc.dart';
 
 class WatchlistTvPage extends StatefulWidget {
@@ -16,7 +15,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    // Future.microtask(() => Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv());
+    context.read<WatchlistTvBloc>().add(GetWatchlistTvEvent());
   }
 
   @override
@@ -27,8 +26,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
 
   @override
   void didPopNext() {
-    // Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
-    context.read<WatchlistMovieBloc>().add(GetWatchlistMovieEvent());
+    context.read<WatchlistTvBloc>().add(GetWatchlistTvEvent());
   }
 
   @override
