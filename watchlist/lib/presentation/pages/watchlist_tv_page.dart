@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_grid_widget.dart';
@@ -26,7 +25,6 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
       padding: const EdgeInsets.all(8.0),
       child: BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
         builder: (context, state) {
-          log(state.runtimeType.toString());
           switch (state.runtimeType) {
             case WatchlistTvLoading:
               return const Center(
@@ -39,8 +37,11 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
               final tv = (state as WatchlistTvLoaded).tv;
               return TVSeriesListGrid(tv);
             case WatchlistTvInitial:
-              return const Center(
-                child: Text('Your watchlist is empty'),
+              return Center(
+                child: Text(
+                  'Your watchlist is empty',
+                  style: kSubtitle,
+                ),
               );
           }
           return const SizedBox.shrink();
