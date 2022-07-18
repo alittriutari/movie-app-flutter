@@ -7,7 +7,8 @@
         {
             "name": "movie-app-flutter",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main.dart"
         },
         {
             "name": "movie-app-flutter (profile mode)",

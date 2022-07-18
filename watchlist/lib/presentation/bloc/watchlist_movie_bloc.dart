@@ -8,18 +8,12 @@ import '../../watchlist.dart';
 part 'watchlist_movie_event.dart';
 part 'watchlist_movie_state.dart';
 
-class WatchlistMovieBloc
-    extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
+class WatchlistMovieBloc extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
   final GetWatchListStatus getWatchListStatus;
   final GetWatchlistMovies getWatchlistMovies;
   final SaveWatchlist saveWatchlist;
   final RemoveWatchlist removeWatchlist;
-  WatchlistMovieBloc(
-      {required this.getWatchListStatus,
-      required this.getWatchlistMovies,
-      required this.saveWatchlist,
-      required this.removeWatchlist})
-      : super(WatchlistMovieInitial()) {
+  WatchlistMovieBloc({required this.getWatchListStatus, required this.getWatchlistMovies, required this.saveWatchlist, required this.removeWatchlist}) : super(WatchlistMovieInitial()) {
     on<GetWatchlistMovieEvent>((event, emit) async {
       emit(WatchlistMovieLoading());
       final result = await getWatchlistMovies.execute();
@@ -27,7 +21,11 @@ class WatchlistMovieBloc
       result.fold((failure) {
         emit(WatchlistMovieFailure(failure: failure));
       }, (data) {
-        emit(WatchlistMovieLoaded(data));
+        if (data.isEmpty) {
+          emit(WatchlistMovieInitial());
+        } else {
+          emit(WatchlistMovieLoaded(data));
+        }
       });
     });
     on<AddWatchlistMovieEvent>((event, emit) async {

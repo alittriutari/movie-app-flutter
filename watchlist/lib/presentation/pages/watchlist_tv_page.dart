@@ -1,4 +1,5 @@
-import 'package:core/core.dart';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/presentation/widget/tv_series_grid_widget.dart';
@@ -19,23 +20,13 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context)!);
-  }
-
-  @override
-  void didPopNext() {
-    context.read<WatchlistTvBloc>().add(GetWatchlistTvEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.all(8.0),
       child: BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
         builder: (context, state) {
+          log(state.runtimeType.toString());
           switch (state.runtimeType) {
             case WatchlistTvLoading:
               return const Center(
@@ -47,6 +38,10 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
             case WatchlistTvLoaded:
               final tv = (state as WatchlistTvLoaded).tv;
               return TVSeriesListGrid(tv);
+            case WatchlistTvInitial:
+              return const Center(
+                child: Text('Your watchlist is empty'),
+              );
           }
           return const SizedBox.shrink();
         },

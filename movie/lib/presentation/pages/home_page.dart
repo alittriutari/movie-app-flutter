@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:movie/presentation/pages/home_movie_page.dart';
@@ -61,12 +60,15 @@ class HomeScreen extends StatelessWidget {
                             IconButton(
                                 key: const Key('search_icon'),
                                 onPressed: () {
-                                  FirebaseCrashlytics.instance.crash();
-                                  Navigator.pushNamed(
-                                    context,
-                                    SearchPage.routeName,
-                                    arguments: DefaultTabController.of(context)!.index,
-                                  );
+                                  if (DefaultTabController.of(context)!.index == 2) {
+                                    null;
+                                  } else {
+                                    Navigator.pushNamed(
+                                      context,
+                                      SearchPage.routeName,
+                                      arguments: DefaultTabController.of(context)!.index,
+                                    );
+                                  }
                                 },
                                 icon: const Icon(Icons.search))
                           ],

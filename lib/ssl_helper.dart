@@ -9,7 +9,8 @@ class SSLHelper {
     SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
     securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
     HttpClient client = HttpClient(context: securityContext);
-    client.badCertificateCallback = (X509Certificate cert, String host, int port) => false;
+    client.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => false;
     return IOClient(client);
   }
 }
