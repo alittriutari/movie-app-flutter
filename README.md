@@ -10,7 +10,7 @@
 Movie App Flutter is a Flutter app project that contains movie and tv series data. User can also search and add movie and tv series to watchlist. 
 The movies and tv series data is gotten from https://www.themoviedb.org/
 
-![alt text](assets/demo.mp4)
+https://user-images.githubusercontent.com/29432760/179441626-952ebdd4-36a3-4b25-b9f0-9b9734d8d5b9.mp4
 
 ## Core concepts this project used
 
