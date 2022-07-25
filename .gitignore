@@ -10,6 +10,10 @@
 .svn/
 .coverage/
 .coverage/html
+.coverage/movie/html
+.coverage/search/html
+.coverage/tv_series/html
+.coverage/watchlist/html
 .genhtml.perl
 .core/lib/utils/api_url.dart
 

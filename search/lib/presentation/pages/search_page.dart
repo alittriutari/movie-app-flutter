@@ -27,17 +27,10 @@ class SearchPage extends StatelessWidget {
               onSubmitted: (query) {
                 switch (index) {
                   case 0:
-                    // Provider.of<SearchMovieNotifier>(context, listen: false)
-                    //     .fetchMovieSearch(query);
-                    context
-                        .read<MovieSearchBloc>()
-                        .add(GetMovieSearchEvent(query: query));
+                    context.read<MovieSearchBloc>().add(GetMovieSearchEvent(query: query));
                     break;
                   case 1:
-                    // Provider.of<SearchTvSeriesNotifier>(context, listen: false).fetchTvSeriesSearch(query);
-                    context
-                        .read<TvSearchBloc>()
-                        .add(GetTvSearchEvent(query: query));
+                    context.read<TvSearchBloc>().add(GetTvSearchEvent(query: query));
                     break;
                   default:
                 }
@@ -91,31 +84,6 @@ class SearchPage extends StatelessWidget {
                   }
                 },
               )
-              // Consumer<SearchMovieNotifier>(
-              //   builder: (context, data, child) {
-              //     if (data.state == RequestState.Loading) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     } else if (data.state == RequestState.Loaded) {
-              // final result = data.searchResult;
-              // return Expanded(
-              //   child: ListView.builder(
-              //     padding: const EdgeInsets.all(8),
-              //     itemBuilder: (context, index) {
-              //       final movie = data.searchResult[index];
-              //       return MovieCard(movie);
-              //     },
-              //     itemCount: result.length,
-              //   ),
-              // );
-              //     } else {
-              // return Expanded(
-              //   child: Container(),
-              // );
-              //     }
-              //   },
-              // ),
             ] else if (index == 1) ...[
               BlocBuilder<TvSearchBloc, TvSearchState>(
                 builder: (context, state) {
@@ -145,31 +113,6 @@ class SearchPage extends StatelessWidget {
                   }
                 },
               )
-              // Consumer<SearchTvSeriesNotifier>(
-              //   builder: (context, data, child) {
-              //     if (data.state == RequestState.Loading) {
-              //       return Center(
-              //         child: CircularProgressIndicator(),
-              //       );
-              //     } else if (data.state == RequestState.Loaded) {
-              //       final result = data.searchResult;
-              //       return Expanded(
-              //         child: ListView.builder(
-              //           padding: const EdgeInsets.all(8),
-              //           itemBuilder: (context, index) {
-              //             final tv = data.searchResult[index];
-              //             return TvSeriesCard(tv);
-              //           },
-              //           itemCount: result.length,
-              //         ),
-              //       );
-              //     } else {
-              //       return Expanded(
-              //         child: Container(),
-              //       );
-              //     }
-              //   },
-              // ),
             ],
           ],
         ),
